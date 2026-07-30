@@ -161,9 +161,19 @@ function renderArchive() {
   const target = document.querySelector("#archive-grid");
   data.otherProjects.forEach((project) => {
     const article = element("article", "archive-item");
+    const title = element("h3");
+    if (project.links?.length) {
+      const link = element("a", "", `${project.title} ↗`);
+      link.href = project.links[0].href;
+      link.target = "_blank";
+      link.rel = "noreferrer";
+      title.append(link);
+    } else {
+      title.textContent = project.title;
+    }
     article.append(
       element("span", "archive-category", project.category),
-      element("h3", "", project.title),
+      title,
       element("time", "", project.period),
       element("p", "", project.result)
     );
@@ -192,22 +202,6 @@ renderArchive();
 renderCredentials();
 
 document.querySelector("#print-button").addEventListener("click", () => window.print());
-
-const observer = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
-      entry.target.classList.add("visible");
-      observer.unobserve(entry.target);
-    });
-  },
-  { threshold: 0.08, rootMargin: "0px 0px -40px" }
-);
-
-document.querySelectorAll("main > section").forEach((section) => {
-  section.classList.add("reveal");
-  observer.observe(section);
-});
 
 if (window.location.hash) {
   setTimeout(() => document.querySelector(window.location.hash)?.scrollIntoView(), 100);

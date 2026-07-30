@@ -576,6 +576,16 @@ button {
   font-size: 1rem;
 }
 
+.archive-item h3 a {
+  text-decoration-color: rgb(46 91 255 / 35%);
+  text-underline-offset: 5px;
+}
+
+.archive-item h3 a:hover {
+  color: var(--accent);
+  text-decoration-color: var(--accent);
+}
+
 .archive-item time {
   grid-column: 2;
   grid-row: 2;
@@ -645,19 +655,6 @@ button {
 .site-footer a {
   color: #fff;
   text-underline-offset: 5px;
-}
-
-.reveal {
-  opacity: 0;
-  transform: translateY(24px);
-  transition:
-    opacity 600ms ease,
-    transform 600ms ease;
-}
-
-.reveal.visible {
-  opacity: 1;
-  transform: none;
 }
 
 @media (max-width: 900px) {
@@ -871,11 +868,6 @@ button {
     scroll-behavior: auto;
   }
 
-  .reveal {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
 }
 
 @media print {
@@ -929,8 +921,4 @@ button {
     break-before: page;
   }
 
-  .reveal {
-    opacity: 1;
-    transform: none;
-  }
 }

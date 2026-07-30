@@ -44,7 +44,7 @@ window.PORTFOLIO_DATA = {
       status: "서비스 구축",
       media: {
         src: "./assets/projects/jobis-dashboard.png",
-        alt: "JOBIS 공공조달 공고 탐색 서비스 화면"
+        alt: "JOBIS 공공조달 공고 검토 워크스페이스 화면"
       },
       summary:
         "조달 공고의 참가자격을 추출하고 기업 정보와 대조하는 업무를 2-stage 에이전트와 실제 웹서비스로 구현했습니다.",
@@ -183,7 +183,9 @@ window.PORTFOLIO_DATA = {
         "IMS-APRM 2026과 한국통계학회에서 동일 연구를 포스터 발표했으며, 현재 논문을 보완 중입니다.",
       limitation:
         "아직 게재 전 연구로, 주장 범위와 재현 파이프라인을 추가 점검하고 있습니다.",
-      links: []
+      links: [
+        { label: "GitHub", href: "https://github.com/kiwibirdstrike/PolygramLCR" }
+      ]
     }
   ],
   timeline: [
@@ -205,7 +207,10 @@ window.PORTFOLIO_DATA = {
       title: "TVspline R 패키지",
       period: "2025.11 — 2026.05",
       category: "Research Software",
-      result: "6개 논문의 분석 코드를 단일 인터페이스와 S3 메서드로 통합하고 패키지 검사 0 ERROR, 0 WARNING을 확인했습니다."
+      result: "6개 논문의 분석 코드를 단일 인터페이스와 S3 메서드로 통합하고 패키지 검사 0 ERROR, 0 WARNING을 확인했습니다.",
+      links: [
+        { label: "GitHub", href: "https://github.com/kiwibirdstrike/TVspline" }
+      ]
     },
     {
       title: "디지털 바이오 데이터분석",
@@ -235,13 +240,19 @@ window.PORTFOLIO_DATA = {
       title: "공공체육시설 입지 시뮬레이션",
       period: "2025.09 — 2025.11",
       category: "Optimization",
-      result: "MCLP와 Trend Filtering을 결합한 정책 웹 도구로 우수상을 수상했습니다."
+      result: "MCLP와 Trend Filtering을 결합한 정책 웹 도구로 우수상을 수상했습니다.",
+      links: [
+        { label: "GitHub", href: "https://github.com/kiwibirdstrike/chungju" }
+      ]
     },
     {
       title: "연구실 미팅룸 예약 PWA",
       period: "2026.02 — 2026.04",
       category: "Workflow",
-      result: "수기 예약을 PWA와 Google Calendar 기반 공용 예약·충돌 방지 절차로 전환했습니다."
+      result: "수기 예약을 PWA와 Google Calendar 기반 공용 예약·충돌 방지 절차로 전환했습니다.",
+      links: [
+        { label: "GitHub", href: "https://github.com/kiwibirdstrike/lab-rooms-pwa" }
+      ]
     },
     {
       title: "언론 통계 분석 경진대회",
@@ -257,14 +268,9 @@ window.PORTFOLIO_DATA = {
       meta: "Scientific Reports · 공동저자 · 2025.07"
     },
     {
-      type: "국제학회",
+      type: "학회 발표",
       title: "ILR-Based Polygram Logistic Regression",
-      meta: "IMS-APRM 2026 · 포스터 발표 · 홍콩"
-    },
-    {
-      type: "학회",
-      title: "ILR 기반 Polygram 로지스틱 회귀",
-      meta: "2026 한국통계학회 하계학술대회 · 포스터 발표"
+      meta: "IMS-APRM 2026 홍콩 · 2026 한국통계학회 하계학술대회 · 포스터 발표"
     },
     {
       type: "자격",
