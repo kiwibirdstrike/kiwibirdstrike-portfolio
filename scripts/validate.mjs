@@ -1,7 +1,7 @@
 import { readFileSync, statSync } from "node:fs";
 import vm from "node:vm";
 
-const requiredFiles = ["index.html", "styles.css", "app.js", "data.js", ".nojekyll"];
+const requiredFiles = ["index.html", "styles.css", "app.js", "portfolio-data.js", ".nojekyll"];
 const requiredKeys = [
   "profile",
   "tracks",
@@ -28,7 +28,7 @@ for (const file of requiredFiles) {
 
 const context = { window: {} };
 vm.runInNewContext(
-  readFileSync(new URL("../data.js", import.meta.url), "utf8"),
+  readFileSync(new URL("../portfolio-data.js", import.meta.url), "utf8"),
   context
 );
 
