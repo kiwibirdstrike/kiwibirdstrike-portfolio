@@ -262,6 +262,7 @@ button {
 .projects-section,
 .archive-section {
   padding-block: clamp(88px, 10vw, 128px);
+  scroll-margin-top: 72px;
 }
 
 .section-heading,
@@ -440,7 +441,9 @@ button {
 .project-media img {
   display: block;
   width: 100%;
+  aspect-ratio: 16 / 9;
   border: 1px solid var(--line);
+  object-fit: contain;
 }
 
 .project-media figcaption {

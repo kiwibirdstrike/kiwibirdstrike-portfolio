@@ -83,7 +83,7 @@ function projectArticle(project, index) {
     const image = element("img");
     image.src = project.media.src;
     image.alt = project.media.alt;
-    image.loading = "lazy";
+    image.loading = "eager";
     figure.append(image, element("figcaption", "", project.media.alt));
     body.append(figure);
   }
@@ -217,6 +217,15 @@ renderCredentials();
 
 document.querySelector("#print-button").addEventListener("click", () => window.print());
 
+function scrollToCurrentHash() {
+  if (!window.location.hash) return;
+  document.querySelector(window.location.hash)?.scrollIntoView();
+}
+
 if (window.location.hash) {
-  setTimeout(() => document.querySelector(window.location.hash)?.scrollIntoView(), 100);
+  requestAnimationFrame(() => requestAnimationFrame(scrollToCurrentHash));
+  window.addEventListener("load", scrollToCurrentHash, { once: true });
+  document.querySelectorAll("img").forEach((image) => {
+    if (!image.complete) image.addEventListener("load", scrollToCurrentHash, { once: true });
+  });
 }
