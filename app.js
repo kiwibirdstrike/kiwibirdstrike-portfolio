@@ -193,3 +193,7 @@ renderArchive();
 renderCredentials();
 
 document.querySelector("#print-button").addEventListener("click", () => window.print());
+
+if (window.location.hash) {
+  setTimeout(() => document.querySelector(window.location.hash)?.scrollIntoView(), 100);
+}
