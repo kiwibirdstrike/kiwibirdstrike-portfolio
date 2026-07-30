@@ -184,18 +184,20 @@ window.PORTFOLIO_DATA = {
     }
   ],
   timeline: [
-    { date: "2024.08", title: "디지털 바이오 데이터분석", note: "940팀 중 29위 · 은상", track: "bio" },
-    { date: "2024.11", title: "취업박람회 부스 배치 최적화", note: "방문도 18% 개선 · 최우수상", track: "analytics" },
-    { date: "2025.01", title: "LH 공실률 분석", note: "71팀 중 3위 · 장려상", track: "analytics" },
-    { date: "2025.05", title: "와인연구소 통계 자문", note: "산업체 요구 기반 분류 모델", track: "bio" },
-    { date: "2025.06", title: "통계청 요양 방치 위험 분석", note: "계층적 시계열 · 정책 제안", track: "analytics" },
-    { date: "2025.06", title: "KHD 의료 데이터 대회", note: "26팀 중 5위 · 우수상", track: "bio" },
-    { date: "2025.09", title: "공공체육시설 입지 시뮬레이션", note: "MCLP · 웹 의사결정 도구", track: "analytics" },
-    { date: "2025.11", title: "TVspline R 패키지", note: "6개 연구 코드 통합 · 패키지 구조화", track: "analytics" },
-    { date: "2026.01", title: "Imputation 연구", note: "예측과 통계 추론 동시 평가", track: "bio" },
-    { date: "2026.03", title: "JOBIS · AutoResearch", note: "에이전트 기반 업무 구조화", track: "agent" },
-    { date: "2026.03", title: "Polygram · WorldQuant", note: "방법론 연구와 퀀트 모델링 확장", track: "agent" },
-    { date: "2026.06", title: "자동투자 포트폴리오", note: "검증·계좌·주문 계획 연결", track: "agent" }
+    { date: "2024.08", title: "디지털 바이오 데이터 분석", note: "유전체 변이 기반 암종 분류 모델 개발 · 은상", track: "bio" },
+    { date: "2024.11", title: "취업박람회 부스 배치 최적화", note: "방문 동선을 고려한 부스 배치 개선 · 최우수상", track: "analytics" },
+    { date: "2025.01", title: "LH 지식산업센터 공실률 분석", note: "입지와 비용 요인을 활용한 공실 위험 분석 · 장려상", track: "analytics" },
+    { date: "2025.05", title: "와인연구소 통계 자문", note: "산업체 데이터를 활용한 품질 분류 모델 개발", track: "bio" },
+    { date: "2025.06", title: "요양 방치 위험 분석", note: "지역별 위험 수준 추정과 정책 대안 제시", track: "analytics" },
+    { date: "2025.06", title: "KHD 의료 데이터 분석", note: "수면장애 분류 모델 개발 · 우수상", track: "bio" },
+    { date: "2025.09", title: "공공체육시설 입지 분석", note: "시설 접근성을 고려한 최적 입지 선정 · 우수상", track: "analytics" },
+    { date: "2025.11", title: "TVspline", note: "스플라인 R 패키지 제작 및 관리", track: "analytics" },
+    { date: "2026.01", title: "결측치 대치 방법론 연구", note: "예측 성능과 통계적 추론의 신뢰성 비교", track: "bio" },
+    { date: "2026.03", title: "JOBIS", note: "공공조달 공고 적격성 판정 서비스 설계 및 구축", track: "agent" },
+    { date: "2026.03", title: "AutoResearch", note: "실험 결과와 분석 지식을 재사용하는 연구 자동화 구조 설계", track: "agent" },
+    { date: "2026.03", title: "ILR Polygram", note: "조성자료를 위한 로지스틱 회귀 방법론 연구", track: "bio" },
+    { date: "2026.03", title: "WorldQuant", note: "퀀트 모델링과 알파 검증 방법 학습", track: "agent" },
+    { date: "2026.06", title: "자동투자 포트폴리오", note: "백테스트, 위험 관리와 주문 계획을 연결한 투자 시스템 구축", track: "agent" }
   ],
   otherProjects: [
     {
