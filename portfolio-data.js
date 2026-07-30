@@ -94,12 +94,7 @@ window.PORTFOLIO_DATA = {
         "구조물 안정성 대회 484팀 중 37위, 스마트 창고 출고 지연 대회 607팀 중 72위를 기록했습니다.",
       limitation:
         "에이전트의 상태·컨텍스트 구조별 기여도를 분리해 비교하지는 못했습니다. 이를 짧은 졸업논문 연구 후보로 확장하고 있습니다.",
-      links: [
-        {
-          label: "대회",
-          href: "https://dacon.io/competitions/official/236686/overview/description"
-        }
-      ]
+      links: []
     },
     {
       id: "quant-agent",
@@ -163,7 +158,7 @@ window.PORTFOLIO_DATA = {
       subtitle: "조성자료를 위한 국소 로지스틱 회귀 연구",
       period: "2026.03 — 현재",
       track: "bio",
-      status: "논문 보완 중",
+      status: "Under Review",
       media: null,
       summary:
         "세 성분 조성형 예측변수의 국소적·비선형 이진 반응 구조를 simplex 위에서 추정하고 해석하는 방법론을 연구합니다.",
@@ -180,11 +175,11 @@ window.PORTFOLIO_DATA = {
       validation:
         "전역 선형·국소 경계 시뮬레이션에서 로지스틱 회귀, GAM, SVM과 예측 및 경계 복원 성능을 비교했습니다.",
       result:
-        "IMS-APRM 2026과 한국통계학회에서 동일 연구를 포스터 발표했으며, 현재 논문을 보완 중입니다.",
+        "IMS-APRM 2026과 한국통계학회에서 동일 연구를 포스터 발표했으며, 현재 Under Review 중입니다.",
       limitation:
-        "아직 게재 전 연구로, 주장 범위와 재현 파이프라인을 추가 점검하고 있습니다.",
+        "심사 중인 연구로, 결과와 방법론의 최종 내용은 심사 결과에 따라 변경될 수 있습니다.",
       links: [
-        { label: "GitHub", href: "https://github.com/kiwibirdstrike/PolygramLCR" }
+        { label: "ILR Polygram GitHub", href: "https://github.com/kiwibirdstrike/PolygramLCR" }
       ]
     }
   ],
@@ -196,7 +191,7 @@ window.PORTFOLIO_DATA = {
     { date: "2025.06", title: "통계청 요양 방치 위험 분석", note: "계층적 시계열 · 정책 제안", track: "analytics" },
     { date: "2025.06", title: "KHD 의료 데이터 대회", note: "26팀 중 5위 · 우수상", track: "bio" },
     { date: "2025.09", title: "공공체육시설 입지 시뮬레이션", note: "MCLP · 웹 의사결정 도구", track: "analytics" },
-    { date: "2025.11", title: "TVspline R 패키지", note: "6개 연구 코드 통합 · R CMD check 통과", track: "analytics" },
+    { date: "2025.11", title: "TVspline R 패키지", note: "6개 연구 코드 통합 · 패키지 구조화", track: "analytics" },
     { date: "2026.01", title: "Imputation 연구", note: "예측과 통계 추론 동시 평가", track: "bio" },
     { date: "2026.03", title: "JOBIS · AutoResearch", note: "에이전트 기반 업무 구조화", track: "agent" },
     { date: "2026.03", title: "Polygram · WorldQuant", note: "방법론 연구와 퀀트 모델링 확장", track: "agent" },
@@ -207,7 +202,7 @@ window.PORTFOLIO_DATA = {
       title: "TVspline R 패키지",
       period: "2025.11 — 2026.05",
       category: "Research Software",
-      result: "6개 논문의 분석 코드를 단일 인터페이스와 S3 메서드로 통합하고 패키지 검사 0 ERROR, 0 WARNING을 확인했습니다.",
+      result: "6개 논문에 흩어진 분석 함수와 호출 관계를 정리해 하나의 일관된 R 패키지로 통합했습니다.",
       links: [
         { label: "GitHub", href: "https://github.com/kiwibirdstrike/TVspline" }
       ]
