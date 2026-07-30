@@ -173,7 +173,8 @@ function renderTimeline() {
         element("time", "", item.date),
         element("span", "timeline-marker"),
         element("h4", "", item.title),
-        element("p", "", item.note)
+        element("p", "", item.note),
+        element("span", "timeline-category", item.category)
       );
       list.append(row);
     });
