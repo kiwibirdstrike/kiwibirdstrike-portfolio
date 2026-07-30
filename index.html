@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <meta
+      name="description"
+      content="통계·데이터 분석을 기반으로 업무를 구조화하고, 모델과 AI를 의사결정에 연결하는 이주성의 마스터 포트폴리오"
+    >
+    <title>이주성 | Master Portfolio</title>
+    <link rel="stylesheet" href="./styles.css">
+    <script src="./data.js" defer></script>
+    <script src="./app.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="포트폴리오 처음으로">LEE JUSEONG</a>
+      <nav class="site-nav" aria-label="주요 메뉴">
+        <a href="#tracks">관심 분야</a>
+        <a href="#projects">프로젝트</a>
+        <a href="#history">이력</a>
+        <button class="print-button" type="button" id="print-button">PDF 저장</button>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero section-shell" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow" id="hero-eyebrow"></p>
+          <h1 id="hero-title"></h1>
+          <p class="hero-lead" id="hero-lead"></p>
+          <ul class="hero-principles" id="hero-principles"></ul>
+          <div class="hero-links" id="hero-links"></div>
+        </div>
+        <div class="hero-signal" aria-label="핵심 문제 해결 과정">
+          <div class="signal-step">
+            <span>01</span>
+            <strong>구조화</strong>
+            <small>복잡한 업무를 단계와 기준으로 분해</small>
+          </div>
+          <div class="signal-line"></div>
+          <div class="signal-step">
+            <span>02</span>
+            <strong>모델링</strong>
+            <small>문제와 데이터에 맞는 방법을 설계</small>
+          </div>
+          <div class="signal-line"></div>
+          <div class="signal-step">
+            <span>03</span>
+            <strong>검증·활용</strong>
+            <small>오류를 측정하고 실제 판단에 연결</small>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-band tracks-band" id="tracks" aria-labelledby="tracks-title">
+        <div class="section-shell">
+          <div class="section-heading">
+            <p class="section-index">01</p>
+            <div>
+              <h2 id="tracks-title">세 가지 성장 축</h2>
+              <p>하나의 방법론보다 문제를 다루는 방식이 여러 도메인에서 어떻게 확장됐는지 보여줍니다.</p>
+            </div>
+          </div>
+          <div class="track-grid" id="track-grid"></div>
+        </div>
+      </section>
+
+      <section class="section-shell projects-section" id="projects" aria-labelledby="projects-title">
+        <div class="section-heading">
+          <p class="section-index">02</p>
+          <div>
+            <h2 id="projects-title">핵심 프로젝트</h2>
+            <p>문제 정의, 역할, 검증 기준과 한계까지 남긴 대표 경험입니다.</p>
+          </div>
+        </div>
+        <div class="filter-bar" id="filter-bar" role="group" aria-label="프로젝트 분야 필터"></div>
+        <div class="featured-projects" id="featured-projects"></div>
+      </section>
+
+      <section class="section-band history-band" id="history" aria-labelledby="history-title">
+        <div class="section-shell">
+          <div class="section-heading">
+            <p class="section-index">03</p>
+            <div>
+              <h2 id="history-title">경험과 연구의 흐름</h2>
+              <p>분석 대회에서 연구, 제품화와 운영으로 이어진 기록입니다.</p>
+            </div>
+          </div>
+          <div class="timeline" id="timeline"></div>
+        </div>
+      </section>
+
+      <section class="section-shell archive-section" aria-labelledby="archive-title">
+        <div class="section-heading">
+          <p class="section-index">04</p>
+          <div>
+            <h2 id="archive-title">프로젝트 아카이브</h2>
+            <p>핵심 프로젝트 외에 문제 해결 범위를 넓혀 온 경험입니다.</p>
+          </div>
+        </div>
+        <div class="archive-grid" id="archive-grid"></div>
+      </section>
+
+      <section class="section-band credentials-band" aria-labelledby="credentials-title">
+        <div class="section-shell">
+          <div class="section-heading">
+            <p class="section-index">05</p>
+            <div>
+              <h2 id="credentials-title">논문·학회·자격</h2>
+              <p>방법론을 이해하고 검증 가능한 결과물로 연결한 기록입니다.</p>
+            </div>
+          </div>
+          <div class="credentials-list" id="credentials-list"></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer section-shell">
+      <p>통계적 분석에서 출발해, 업무 구조와 검증 체계를 설계하는 사람으로 확장하고 있습니다.</p>
+      <a href="#top">처음으로</a>
+    </footer>
+  </body>
+</html>
+
