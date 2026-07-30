@@ -149,15 +149,37 @@ function renderProjects() {
 
 function renderTimeline() {
   const target = document.querySelector("#timeline");
-  data.timeline.forEach((item) => {
-    const row = element("article", `timeline-item timeline-${item.track}`);
-    row.append(
-      element("time", "", item.date),
-      element("span", "timeline-marker"),
-      element("h3", "", item.title),
-      element("p", "", item.note)
-    );
-    target.append(row);
+  const groups = [
+    {
+      id: "agent",
+      title: "데이터 분석·모델링·AI 자동화",
+      items: data.timeline.filter((item) => item.track !== "bio")
+    },
+    {
+      id: "bio",
+      title: "바이오·의료 통계",
+      items: data.timeline.filter((item) => item.track === "bio")
+    }
+  ];
+
+  groups.forEach((group) => {
+    const section = element("section", `timeline-group timeline-group-${group.id}`);
+    const list = element("div", "timeline-list");
+    section.append(element("h3", "timeline-group-title", group.title));
+
+    group.items.forEach((item) => {
+      const row = element("article", `timeline-item timeline-${group.id}`);
+      row.append(
+        element("time", "", item.date),
+        element("span", "timeline-marker"),
+        element("h4", "", item.title),
+        element("p", "", item.note)
+      );
+      list.append(row);
+    });
+
+    section.append(list);
+    target.append(section);
   });
 }
 

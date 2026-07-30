@@ -484,10 +484,22 @@ button {
 }
 
 .timeline {
+  display: grid;
+  gap: 72px;
+}
+
+.timeline-group-title {
+  margin: 0 0 28px;
+  padding-bottom: 18px;
+  border-bottom: 2px solid var(--ink);
+  font-size: 1.45rem;
+}
+
+.timeline-list {
   position: relative;
 }
 
-.timeline::before {
+.timeline-list::before {
   position: absolute;
   top: 8px;
   bottom: 8px;
@@ -526,13 +538,13 @@ button {
   transform: scaleY(1);
 }
 
-.timeline-item h3,
+.timeline-item h4,
 .timeline-item p {
   margin: 0;
   font-size: 0.93rem;
 }
 
-.timeline-item h3 {
+.timeline-item h4 {
   font-weight: 700;
 }
 
@@ -671,7 +683,7 @@ button {
     grid-template-columns: 130px 1fr;
   }
 
-  .timeline::before {
+  .timeline-list::before {
     left: 118px;
   }
 
@@ -802,7 +814,7 @@ button {
     gap: 6px;
   }
 
-  .timeline::before {
+  .timeline-list::before {
     left: 6px;
   }
 
@@ -813,7 +825,7 @@ button {
   }
 
   .timeline-item time,
-  .timeline-item h3,
+  .timeline-item h4,
   .timeline-item p {
     grid-column: 2;
   }
