@@ -109,12 +109,10 @@ function projectArticle(project, index) {
 }
 
 function renderProjects() {
-  const filters = [
-    { id: "all", label: "전체" },
-    ...data.tracks.map(({ id, title }) => ({ id, label: title }))
-  ];
+  const filters = data.tracks.map(({ id, title }) => ({ id, label: title }));
   const bar = document.querySelector("#filter-bar");
   const target = document.querySelector("#featured-projects");
+  const defaultFilter = filters[0].id;
 
   filters.forEach(({ id, label }, index) => {
     const button = element("button", index === 0 ? "filter active" : "filter", label);
@@ -124,7 +122,11 @@ function renderProjects() {
     bar.append(button);
   });
 
-  data.featuredProjects.forEach((project, index) => target.append(projectArticle(project, index)));
+  data.featuredProjects.forEach((project, index) => {
+    const article = projectArticle(project, index);
+    article.hidden = project.track !== defaultFilter;
+    target.append(article);
+  });
 
   bar.addEventListener("click", (event) => {
     const button = event.target.closest("[data-filter]");
@@ -138,7 +140,7 @@ function renderProjects() {
     });
 
     target.querySelectorAll(".project").forEach((project) => {
-      project.hidden = selected !== "all" && project.dataset.track !== selected;
+      project.hidden = project.dataset.track !== selected;
     });
   });
 }
