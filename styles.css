@@ -28,6 +28,8 @@ body {
   font-family:
     Pretendard, "Noto Sans KR", "Apple SD Gothic Neo", Inter, system-ui, sans-serif;
   line-height: 1.65;
+  word-break: keep-all;
+  overflow-wrap: break-word;
 }
 
 a {
@@ -97,13 +99,10 @@ button {
 }
 
 .hero {
-  display: grid;
-  grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
-  gap: clamp(48px, 8vw, 112px);
-  min-height: calc(100vh - 64px);
-  max-height: 900px;
+  display: flex;
+  min-height: min(680px, calc(100vh - 64px));
   align-items: center;
-  padding-block: clamp(72px, 10vh, 128px);
+  padding-block: clamp(72px, 10vh, 120px);
 }
 
 .hero-copy,
@@ -112,29 +111,34 @@ button {
   min-width: 0;
 }
 
-.eyebrow,
-.section-index {
+.hero-copy {
+  max-width: 920px;
+}
+
+.eyebrow {
   margin: 0 0 18px;
-  color: var(--blue);
-  font-size: 0.74rem;
-  font-weight: 800;
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 700;
   letter-spacing: 0;
 }
 
 .hero h1 {
   margin: 0;
-  font-size: clamp(4rem, 7vw, 7rem);
-  font-weight: 850;
-  line-height: 0.98;
+  max-width: 900px;
+  font-size: clamp(2.4rem, 4vw, 3.8rem);
+  font-weight: 730;
+  line-height: 1.35;
   letter-spacing: 0;
 }
 
 .hero-lead {
-  max-width: 720px;
-  margin: 32px 0 26px;
-  font-size: clamp(1.16rem, 2vw, 1.58rem);
-  font-weight: 580;
-  line-height: 1.55;
+  max-width: 760px;
+  margin: 32px 0 28px;
+  color: var(--muted);
+  font-size: clamp(1.04rem, 1.5vw, 1.24rem);
+  font-weight: 500;
+  line-height: 1.8;
 }
 
 .hero-principles {
@@ -166,6 +170,10 @@ button {
   gap: 12px 20px;
 }
 
+.profile-name {
+  font-size: 0.9rem;
+}
+
 .education {
   color: var(--muted);
   font-size: 0.9rem;
@@ -175,42 +183,6 @@ button {
   font-size: 0.9rem;
   font-weight: 750;
   text-underline-offset: 4px;
-}
-
-.hero-signal {
-  display: grid;
-  align-content: center;
-  min-height: 460px;
-  padding-left: clamp(24px, 5vw, 72px);
-  border-left: 1px solid var(--line);
-}
-
-.signal-step {
-  display: grid;
-  grid-template-columns: 34px 100px 1fr;
-  gap: 14px;
-  align-items: baseline;
-}
-
-.signal-step span {
-  color: var(--blue);
-  font-size: 0.72rem;
-  font-weight: 800;
-}
-
-.signal-step strong {
-  font-size: 1.02rem;
-}
-
-.signal-step small {
-  color: var(--muted);
-}
-
-.signal-line {
-  width: 1px;
-  height: 68px;
-  margin: 8px 0 8px 16px;
-  background: var(--line);
 }
 
 .section-band {
@@ -227,8 +199,6 @@ button {
 }
 
 .section-heading {
-  display: grid;
-  grid-template-columns: 56px 1fr;
   margin-bottom: 48px;
 }
 
@@ -260,14 +230,8 @@ button {
   border-right: 0;
 }
 
-.track-number {
-  color: var(--muted);
-  font-size: 0.75rem;
-  font-weight: 800;
-}
-
 .track h3 {
-  margin: 56px 0 14px;
+  margin: 0 0 14px;
   font-size: 1.3rem;
 }
 
@@ -296,7 +260,7 @@ button {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin: -16px 0 28px 56px;
+  margin: -16px 0 28px;
 }
 
 .filter {
@@ -440,7 +404,7 @@ button {
 
 .timeline {
   position: relative;
-  margin-left: 56px;
+  margin-left: 0;
 }
 
 .timeline::before {
@@ -502,7 +466,7 @@ button {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 0 48px;
-  margin-left: 56px;
+  margin-left: 0;
   border-top: 1px solid var(--ink);
 }
 
@@ -534,7 +498,7 @@ button {
 }
 
 .credentials-list {
-  margin-left: 56px;
+  margin-left: 0;
   border-top: 1px solid var(--ink);
 }
 
@@ -581,18 +545,6 @@ button {
 }
 
 @media (max-width: 900px) {
-  .hero {
-    grid-template-columns: 1fr;
-    max-height: none;
-  }
-
-  .hero-signal {
-    min-height: auto;
-    padding: 36px 0 0;
-    border-top: 1px solid var(--line);
-    border-left: 0;
-  }
-
   .track-grid {
     grid-template-columns: 1fr;
   }
@@ -607,7 +559,7 @@ button {
   }
 
   .track h3 {
-    margin-top: 28px;
+    margin-top: 0;
   }
 
   .project {
@@ -655,21 +607,13 @@ button {
   }
 
   .hero h1 {
-    font-size: 3.7rem;
+    font-size: 2.55rem;
+    line-height: 1.35;
   }
 
   .hero-links {
     display: grid;
     justify-items: start;
-  }
-
-  .signal-step {
-    grid-template-columns: 28px 82px 1fr;
-    gap: 10px;
-  }
-
-  .signal-step small {
-    font-size: 0.76rem;
   }
 
   .tracks-band,
@@ -681,11 +625,7 @@ button {
   }
 
   .section-heading {
-    grid-template-columns: 1fr;
-  }
-
-  .section-index {
-    margin-bottom: 10px;
+    margin-bottom: 36px;
   }
 
   .filter-bar,
@@ -795,11 +735,7 @@ button {
   }
 
   .hero h1 {
-    font-size: 46pt;
-  }
-
-  .hero-signal {
-    min-height: auto;
+    font-size: 30pt;
   }
 
   .tracks-band,

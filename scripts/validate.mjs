@@ -67,4 +67,9 @@ if (!html.includes('name="robots" content="noindex, nofollow"')) {
   throw new Error("Missing noindex metadata");
 }
 
+const app = readFileSync(new URL("../app.js", import.meta.url), "utf8");
+if (/\.append\([^;]+\)\.append\(/s.test(app)) {
+  throw new Error("Unsafe chained DOM append detected");
+}
+
 console.log("Portfolio structure and privacy checks passed");

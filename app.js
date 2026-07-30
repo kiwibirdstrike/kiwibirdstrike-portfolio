@@ -19,14 +19,17 @@ function appendLinks(target, links) {
 
 function renderProfile() {
   document.querySelector("#hero-eyebrow").textContent = data.profile.eyebrow;
-  document.querySelector("#hero-title").textContent = data.profile.name;
+  document.querySelector("#hero-title").textContent = data.profile.title;
   document.querySelector("#hero-lead").textContent = data.profile.lead;
 
   const principles = document.querySelector("#hero-principles");
   data.profile.principles.forEach((item) => principles.append(element("li", "", item)));
 
   const links = document.querySelector("#hero-links");
-  links.append(element("span", "education", data.profile.education));
+  links.append(
+    element("strong", "profile-name", data.profile.name),
+    element("span", "education", data.profile.education)
+  );
   appendLinks(links, data.profile.links);
 }
 
@@ -36,7 +39,6 @@ function renderTracks() {
     const article = element("article", `track track-${track.id}`);
     article.dataset.track = track.id;
     article.append(
-      element("span", "track-number", track.number),
       element("h3", "", track.title),
       element("p", "", track.summary),
       element("small", "", track.evidence)
@@ -51,7 +53,9 @@ function detailBlock(label, value) {
   if (Array.isArray(value)) {
     const list = element("ul");
     value.forEach((item) => list.append(element("li", "", item)));
-    block.append(element("dd")).append(list);
+    const description = element("dd");
+    description.append(list);
+    block.append(description);
   } else {
     block.append(element("dd", "", value));
   }
