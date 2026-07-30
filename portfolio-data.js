@@ -181,6 +181,144 @@ window.PORTFOLIO_DATA = {
       links: [
         { label: "ILR Polygram GitHub", href: "https://github.com/kiwibirdstrike/PolygramLCR" }
       ]
+    },
+    {
+      id: "lh-vacancy",
+      title: "LH 지식산업센터 공실률 분석",
+      subtitle: "입지와 비용 요인을 활용한 공실 위험 분석",
+      period: "2025.01 — 2025.02",
+      track: "agent",
+      status: "장려상",
+      media: null,
+      summary:
+        "지식산업센터의 공실에 영향을 주는 입지·비용 요인을 모델링하고, SHAP으로 요인별 영향과 상충관계를 해석했습니다.",
+      problem:
+        "공실 위험은 입지, 교통, 분양가 등 여러 요인이 함께 작용해 단일 지표만으로 설명하기 어려웠습니다.",
+      role:
+        "분석 문제 정의, 변수 구성, 예측 모델링과 결과 해석을 맡아 정책적 시사점으로 정리했습니다.",
+      process: [
+        "공실률과 입지·비용 관련 변수 정제",
+        "XGBoost 기반 공실 위험 모델 구축",
+        "SHAP을 활용한 주요 요인과 상충관계 해석"
+      ],
+      validation:
+        "예측 성능과 해석 결과를 함께 검토하고, 변수별 영향 방향이 실제 입지 조건과 부합하는지 확인했습니다.",
+      result:
+        "71팀 중 3위로 장려상을 수상했습니다.",
+      limitation:
+        "대회 이후 비공개 데이터를 계속 활용할 수 없어 후속 정책 분석으로 확장하지 못했습니다.",
+      links: []
+    },
+    {
+      id: "sports-location",
+      title: "공공체육시설 입지 분석",
+      subtitle: "시설 접근성을 고려한 최적 입지 선정",
+      period: "2025.09 — 2025.11",
+      track: "agent",
+      status: "우수상",
+      media: null,
+      summary:
+        "지역별 수요와 접근성을 반영해 공공체육시설 후보지를 비교하고, 정책 담당자가 결과를 확인할 수 있는 웹 도구로 구현했습니다.",
+      problem:
+        "시설 입지는 전체 수요뿐 아니라 기존 시설과의 거리, 지역별 접근성 차이를 함께 고려해야 했습니다.",
+      role:
+        "수요 추정, 입지 최적화 모델링, 결과 시각화와 웹 도구 구현을 수행했습니다.",
+      process: [
+        "지역별 수요와 기존 시설 접근성 데이터 구성",
+        "MCLP 기반 후보지 최적화",
+        "Trend Filtering을 활용한 수요 변화 반영",
+        "후보지별 결과를 비교하는 웹 화면 구현"
+      ],
+      validation:
+        "입지 수와 거리 기준을 바꿔도 후보지 선택이 어떻게 달라지는지 시나리오별로 비교했습니다.",
+      result:
+        "정책 시뮬레이션이 가능한 웹 도구로 완성해 우수상을 수상했습니다.",
+      limitation:
+        "실제 정책 적용 전에는 이동시간과 시설별 수용능력에 대한 추가 검증이 필요합니다.",
+      links: [
+        { label: "GitHub", href: "https://github.com/kiwibirdstrike/chungju" }
+      ]
+    },
+    {
+      id: "digital-bio",
+      title: "디지털 바이오 데이터 분석",
+      subtitle: "유전체 변이 기반 암종 분류",
+      period: "2024.08 — 2024.10",
+      track: "bio",
+      status: "은상",
+      media: null,
+      summary:
+        "고차원 유전체 변이 데이터에서 암종을 구분하는 특징을 찾고 분류 모델을 구축했습니다.",
+      problem:
+        "변수 수가 많고 희소한 유전체 데이터에서는 과적합을 줄이면서 암종별 신호를 구분해야 했습니다.",
+      role:
+        "데이터 전처리, 특징 선택, 모델 비교와 검증을 수행했습니다.",
+      process: [
+        "희소 유전체 변이 데이터 정제",
+        "특징 선택과 차원 축소 전략 비교",
+        "분류 모델 학습과 교차검증"
+      ],
+      validation:
+        "검증 데이터 성능을 기준으로 전처리와 모델 조합을 비교했습니다.",
+      result:
+        "940팀 중 29위로 은상을 수상했습니다.",
+      limitation:
+        "대회 데이터 성능을 실제 임상적 유용성으로 해석하기 위해서는 외부 코호트 검증이 필요합니다.",
+      links: []
+    },
+    {
+      id: "khd",
+      title: "KHD 의료 데이터 분석",
+      subtitle: "수면장애 분류 문제의 재정의와 모델링",
+      period: "2025.06 — 2025.08",
+      track: "bio",
+      status: "우수상",
+      media: null,
+      summary:
+        "수면장애 분류 문제를 치료 기준과 연결해 다시 정의하고, 의료 데이터에 맞는 분류 모델을 구축했습니다.",
+      problem:
+        "단순한 분류 정확도만으로는 실제 치료 기준과 연결되는 결과를 만들기 어려웠습니다.",
+      role:
+        "임상적 문제 정의, 변수 검토, 모델링과 결과 해석을 수행했습니다.",
+      process: [
+        "치료 기준을 반영한 목표 변수 재정의",
+        "의료 변수 전처리와 특징 검토",
+        "분류 모델 비교와 오류 사례 분석"
+      ],
+      validation:
+        "전체 정확도와 함께 분류별 오류와 치료 기준에 따른 결과 차이를 확인했습니다.",
+      result:
+        "26팀 중 5위로 우수상을 수상했습니다.",
+      limitation:
+        "단일 대회 데이터 결과로, 다른 환자군에서도 같은 기준이 유지되는지 외부 검증이 필요합니다.",
+      links: []
+    },
+    {
+      id: "wine-consulting",
+      title: "와인연구소 통계 자문",
+      subtitle: "산업체 데이터를 활용한 품질 분류 모델 개발",
+      period: "2025.05",
+      track: "bio",
+      status: "산업체 자문",
+      media: null,
+      summary:
+        "와인연구소의 실제 품질 데이터를 바탕으로 분석 목적을 정리하고, 현장에서 활용할 수 있는 분류 모델을 개발했습니다.",
+      problem:
+        "연구소가 보유한 데이터를 어떤 기준으로 정리하고 품질 판단에 활용할지 분석 구조가 명확하지 않았습니다.",
+      role:
+        "산업체 요구사항을 분석 문제로 구체화하고, 데이터 전처리와 분류 모델링을 수행했습니다.",
+      process: [
+        "연구소 담당자와 분석 목적 및 품질 기준 확인",
+        "품질 관련 변수 정리와 데이터 전처리",
+        "분류 모델 비교와 결과 해석"
+      ],
+      validation:
+        "모델 성능뿐 아니라 연구소의 품질 판단 기준과 결과가 부합하는지 함께 검토했습니다.",
+      result:
+        "산업체의 실제 요구를 데이터 분석 문제로 전환하고 품질 분류 모델로 구현했습니다.",
+      limitation:
+        "추가 생산 데이터가 축적된 뒤 모델의 안정성과 현장 적용성을 다시 검증할 필요가 있습니다.",
+      links: []
     }
   ],
   timeline: [
@@ -207,39 +345,6 @@ window.PORTFOLIO_DATA = {
       result: "6개 논문에 흩어진 분석 함수와 호출 관계를 정리해 하나의 일관된 R 패키지로 통합했습니다.",
       links: [
         { label: "GitHub", href: "https://github.com/kiwibirdstrike/TVspline" }
-      ]
-    },
-    {
-      title: "디지털 바이오 데이터분석",
-      period: "2024.08 — 2024.10",
-      category: "Bio AI",
-      result: "유전체 변이 기반 암종 분류에서 940팀 중 29위로 은상을 수상했습니다."
-    },
-    {
-      title: "Konyang Health Datathon",
-      period: "2025.06 — 2025.08",
-      category: "Medical Data",
-      result: "수면 장애 분류 문제를 치료 기준으로 재정의해 26팀 중 5위, 우수상을 수상했습니다."
-    },
-    {
-      title: "알츠하이머 후보물질 발굴",
-      period: "학과 협업 프로젝트",
-      category: "Drug Discovery",
-      result: "통계적 유의성과 생물학적 타당성을 교차 검토해 후보물질을 단계적으로 축소했습니다."
-    },
-    {
-      title: "LH 지식산업센터 공실률 분석",
-      period: "2025.01 — 2025.02",
-      category: "Decision Analytics",
-      result: "XGBoost와 SHAP으로 입지·비용 상충관계를 해석해 71팀 중 3위로 장려상을 수상했습니다."
-    },
-    {
-      title: "공공체육시설 입지 시뮬레이션",
-      period: "2025.09 — 2025.11",
-      category: "Optimization",
-      result: "MCLP와 Trend Filtering을 결합한 정책 웹 도구로 우수상을 수상했습니다.",
-      links: [
-        { label: "GitHub", href: "https://github.com/kiwibirdstrike/chungju" }
       ]
     },
     {

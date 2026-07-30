@@ -122,8 +122,10 @@ function renderProjects() {
     bar.append(button);
   });
 
-  data.featuredProjects.forEach((project, index) => {
-    const article = projectArticle(project, index);
+  const trackCounts = {};
+  data.featuredProjects.forEach((project) => {
+    trackCounts[project.track] = (trackCounts[project.track] || 0) + 1;
+    const article = projectArticle(project, trackCounts[project.track] - 1);
     article.hidden = project.track !== defaultFilter;
     target.append(article);
   });
