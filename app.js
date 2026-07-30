@@ -194,6 +194,22 @@ renderCredentials();
 
 document.querySelector("#print-button").addEventListener("click", () => window.print());
 
+const observer = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add("visible");
+      observer.unobserve(entry.target);
+    });
+  },
+  { threshold: 0.08, rootMargin: "0px 0px -40px" }
+);
+
+document.querySelectorAll("main > section").forEach((section) => {
+  section.classList.add("reveal");
+  observer.observe(section);
+});
+
 if (window.location.hash) {
   setTimeout(() => document.querySelector(window.location.hash)?.scrollIntoView(), 100);
 }

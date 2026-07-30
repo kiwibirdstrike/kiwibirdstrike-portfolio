@@ -20,10 +20,10 @@ window.PORTFOLIO_DATA = {
     {
       id: "agent",
       number: "01",
-      title: "AI·에이전트 활용",
+      title: "데이터 분석·모델링·AI 자동화",
       summary:
-        "분석과 판단 업무를 단계별로 나누고, 기억·실험·평가가 이어지는 프로세스에 관심이 있습니다.",
-      evidence: "JOBIS · AutoResearch · 졸업논문 확장"
+        "통계적 분석과 예측 모델링을 기반으로 금융·공공 문제를 다뤄 왔으며, 최근에는 반복되는 분석과 판단을 에이전트로 구조화하고 자동화하는 방향으로 확장하고 있습니다.",
+      evidence: "JOBIS · AutoResearch · WorldQuant · 자동투자 포트폴리오"
     },
     {
       id: "bio",
@@ -32,14 +32,6 @@ window.PORTFOLIO_DATA = {
       summary:
         "예측 정확도뿐 아니라 통계적 추론과 도메인 타당성까지 확인하는 분석을 이어가고 있습니다.",
       evidence: "Imputation · 디지털 바이오 · KHD"
-    },
-    {
-      id: "quant",
-      number: "03",
-      title: "금융·퀀트 모델링",
-      summary:
-        "편향을 통제한 검증, 위험 관리, 실제 주문 제약을 함께 고려하는 모델링에 관심이 있습니다.",
-      evidence: "WorldQuant · 자동투자 포트폴리오"
     }
   ],
   featuredProjects: [
@@ -114,7 +106,7 @@ window.PORTFOLIO_DATA = {
       title: "자동투자 포트폴리오",
       subtitle: "편향 통제 백테스트와 주문 계획 에이전트",
       period: "2026.06 — 현재",
-      track: "quant",
+      track: "agent",
       status: "운영·확장 중",
       media: null,
       summary:
@@ -205,8 +197,8 @@ window.PORTFOLIO_DATA = {
     { date: "2025.11", title: "TVspline R 패키지", note: "6개 연구 코드 통합 · R CMD check 통과", track: "analytics" },
     { date: "2026.01", title: "Imputation 연구", note: "예측과 통계 추론 동시 평가", track: "bio" },
     { date: "2026.03", title: "JOBIS · AutoResearch", note: "에이전트 기반 업무 구조화", track: "agent" },
-    { date: "2026.03", title: "Polygram · WorldQuant", note: "방법론 연구와 퀀트 모델링 확장", track: "quant" },
-    { date: "2026.06", title: "자동투자 포트폴리오", note: "검증·계좌·주문 계획 연결", track: "quant" }
+    { date: "2026.03", title: "Polygram · WorldQuant", note: "방법론 연구와 퀀트 모델링 확장", track: "agent" },
+    { date: "2026.06", title: "자동투자 포트폴리오", note: "검증·계좌·주문 계획 연결", track: "agent" }
   ],
   otherProjects: [
     {
