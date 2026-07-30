@@ -25,11 +25,10 @@ function renderProfile() {
   const principles = document.querySelector("#hero-principles");
   data.profile.principles.forEach((item) => principles.append(element("li", "", item)));
 
+  document.querySelector("#profile-name").textContent = data.profile.name;
+  document.querySelector("#profile-education").textContent = data.profile.education;
+
   const links = document.querySelector("#hero-links");
-  links.append(
-    element("strong", "profile-name", data.profile.name),
-    element("span", "education", data.profile.education)
-  );
   appendLinks(links, data.profile.links);
 }
 
