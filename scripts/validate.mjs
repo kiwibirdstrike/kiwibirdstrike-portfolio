@@ -1,7 +1,7 @@
 import { readFileSync, statSync } from "node:fs";
 import vm from "node:vm";
 
-const requiredFiles = ["index.html", "styles.css", "portfolio-app.js", "portfolio-data.js", ".nojekyll"];
+const requiredFiles = ["index.html", "portfolio.css", "site.js", "portfolio-content.js", ".nojekyll"];
 const requiredKeys = [
   "profile",
   "tracks",
@@ -28,7 +28,7 @@ for (const file of requiredFiles) {
 
 const context = { window: {} };
 vm.runInNewContext(
-  readFileSync(new URL("../portfolio-data.js", import.meta.url), "utf8"),
+  readFileSync(new URL("../portfolio-content.js", import.meta.url), "utf8"),
   context
 );
 
@@ -67,7 +67,7 @@ if (!html.includes('name="robots" content="noindex, nofollow"')) {
   throw new Error("Missing noindex metadata");
 }
 
-const app = readFileSync(new URL("../portfolio-app.js", import.meta.url), "utf8");
+const app = readFileSync(new URL("../site.js", import.meta.url), "utf8");
 if (/\.append\([^;]+\)\.append\(/s.test(app)) {
   throw new Error("Unsafe chained DOM append detected");
 }
