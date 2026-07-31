@@ -298,7 +298,7 @@ window.PORTFOLIO_DATA = {
     { date: "2024.08", title: "디지털 바이오 데이터 분석", note: "유전체 변이 기반 암종 분류 모델 개발 · 은상", track: "bio", category: "공모전" },
     { date: "2024.11", title: "취업박람회 부스 배치 최적화", note: "방문 동선을 고려한 부스 배치 개선 · 최우수상", track: "analytics", category: "공모전" },
     { date: "2025.01", title: "LH 지식산업센터 공실률 분석", note: "입지와 비용 요인을 활용한 공실 위험 분석 · 장려상", track: "analytics", category: "공모전" },
-    { date: "2025.05", title: "와인연구소 통계 자문", note: "산업체 데이터를 활용한 품질 분류 모델 개발", track: "bio", category: "산업체 자문" },
+    { date: "2025.05", title: "충청북도농업기술원 와인연구소 통계 자문", note: "산업체 데이터를 활용한 품질 분류 모델 개발", track: "bio", category: "산업체 자문" },
     { date: "2025.05", title: "기상청 빅데이터 콘테스트", note: "공간·시계열 모델로 3개 예측 과제 수행 · 2개 부문 입상", track: "analytics", category: "공모전" },
     { date: "2025.06", title: "요양 방치 위험 분석", note: "지역별 위험 수준 추정과 정책 대안 제시", track: "analytics", category: "공모전" },
     { date: "2025.06", title: "KHD 의료 데이터 분석", note: "수면장애 분류 모델 개발 · 우수상", track: "bio", category: "공모전" },
