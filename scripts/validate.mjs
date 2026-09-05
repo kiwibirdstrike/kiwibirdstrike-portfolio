@@ -69,6 +69,21 @@ for (const key of requiredTechnicalKeys) {
   }
 }
 
+if (!Array.isArray(jobis.architectureDiagram) || jobis.architectureDiagram.length !== 3) {
+  throw new Error("JOBIS architecture diagram must contain three stages");
+}
+
+for (const [index, stage] of jobis.architectureDiagram.entries()) {
+  if (!stage.title || !Array.isArray(stage.nodes) || stage.nodes.length < 3) {
+    throw new Error(`Invalid JOBIS architecture stage: ${index + 1}`);
+  }
+  for (const node of stage.nodes) {
+    if (!node.label || !node.note) {
+      throw new Error(`Invalid JOBIS architecture node in stage: ${stage.title}`);
+    }
+  }
+}
+
 const serialized = JSON.stringify(data);
 const privatePatterns = [
   /01[016789][-\s]?\d{3,4}[-\s]?\d{4}/,

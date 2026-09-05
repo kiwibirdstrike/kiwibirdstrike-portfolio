@@ -499,6 +499,95 @@ button {
   margin-top: 34px;
 }
 
+.architecture-figure {
+  margin: 0 0 96px;
+  padding: 44px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+}
+
+.architecture-heading {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  margin-bottom: 42px;
+}
+
+.architecture-heading .eyebrow {
+  margin: 6px 0 0;
+}
+
+.architecture-title {
+  max-width: 680px;
+  margin: 0;
+  font-size: clamp(1.65rem, 3.5vw, 2.55rem);
+  line-height: 1.3;
+}
+
+.architecture-lanes {
+  display: grid;
+  gap: 38px;
+}
+
+.architecture-stage {
+  padding-top: 18px;
+  border-top: 1px solid var(--ink);
+}
+
+.architecture-stage-title {
+  margin: 0 0 18px;
+  color: var(--accent);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+.architecture-flow {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 28px;
+}
+
+.architecture-node {
+  position: relative;
+  display: grid;
+  align-content: start;
+  gap: 8px;
+  min-height: 138px;
+  padding: 18px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+}
+
+.architecture-node:not(:last-child)::after {
+  position: absolute;
+  top: 50%;
+  right: -21px;
+  color: var(--accent);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 1rem;
+  content: "→";
+  transform: translateY(-50%);
+}
+
+.architecture-node strong {
+  font-size: 0.88rem;
+  line-height: 1.45;
+}
+
+.architecture-node span {
+  color: var(--muted);
+  font-size: 0.75rem;
+  line-height: 1.65;
+}
+
+.architecture-figure figcaption {
+  margin-top: 34px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.75rem;
+}
+
 .technical-deep-dive {
   margin-top: 112px;
 }
@@ -931,6 +1020,36 @@ button {
   .project-page-lead {
     margin-block: 36px 44px;
     font-size: 1.08rem;
+  }
+
+  .architecture-figure {
+    margin-bottom: 72px;
+    padding: 28px 20px;
+  }
+
+  .architecture-heading {
+    display: block;
+  }
+
+  .architecture-heading .eyebrow {
+    margin-bottom: 14px;
+  }
+
+  .architecture-flow {
+    grid-template-columns: 1fr;
+    gap: 26px;
+  }
+
+  .architecture-node {
+    min-height: 0;
+  }
+
+  .architecture-node:not(:last-child)::after {
+    top: auto;
+    right: 50%;
+    bottom: -22px;
+    content: "↓";
+    transform: translateX(50%);
   }
 
   .technical-deep-dive {

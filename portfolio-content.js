@@ -64,6 +64,35 @@ window.PORTFOLIO_DATA = {
         "Stage 1 Recall 100%, Stage 2 필드 일치 정확도 87.36%. 실제 서비스와 커스텀 도메인까지 연결했습니다.",
       limitation:
         "잔여 오류가 전체 결과에 분산돼 전수검수 없이 실패 위치를 찾기 어려웠습니다. 이 경험이 신뢰도·근거 추적·검토 대상 선별에 대한 후속 관심으로 이어졌습니다.",
+      architectureDiagram: [
+        {
+          title: "01 · 수집과 문서화",
+          nodes: [
+            { label: "나라장터 Open API", note: "공고 메타데이터와 첨부 URL 수집" },
+            { label: "Raw 저장소", note: "원본 JSON과 첨부문서를 재현 가능한 형태로 보존" },
+            { label: "핵심 첨부 선택", note: "파일명·확장자·공고정보를 점수화해 대표 문서 결정" },
+            { label: "문서 추출기", note: "PDF·HWP·HWPX를 본문과 구조 힌트가 담긴 meta로 변환" }
+          ]
+        },
+        {
+          title: "02 · 에이전트 파이프라인",
+          nodes: [
+            { label: "Stage 1 Specialists", note: "범주별 에이전트가 자격 판단 근거를 넓게 탐색" },
+            { label: "Merge & Audit", note: "근거를 병합하고 누락·중복·입력 범위를 검사" },
+            { label: "Repair Queue", note: "실패한 공고와 범주만 선별해 다시 추론" },
+            { label: "Stage 2 Mapper", note: "근거를 면허·인증·실적·인력 등의 스키마로 정리" }
+          ]
+        },
+        {
+          title: "03 · 판정과 서비스",
+          nodes: [
+            { label: "parsed_tenders", note: "파싱·분류·근거·평가 결과를 서비스 중간 표현으로 저장" },
+            { label: "판정 입력", note: "구조화된 요구조건과 회사 프로필을 동일한 기준으로 구성" },
+            { label: "DecisionEngine", note: "AI 판정에 규칙 기반 검증과 누락 보정을 적용" },
+            { label: "FastAPI · Next.js", note: "판정 결과와 원문 근거를 사용자가 확인하는 웹서비스" }
+          ]
+        }
+      ],
       technicalDetails: {
         architecture: [
           "수집 계층은 나라장터 Open API 응답을 날짜와 업무 유형별 원본 JSON으로 보존합니다. 모델이나 프롬프트를 바꿀 때 API를 다시 호출하지 않고 동일한 입력으로 파싱 실험을 반복하기 위한 구조입니다.",
