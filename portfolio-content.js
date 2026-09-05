@@ -398,12 +398,6 @@ window.PORTFOLIO_DATA = {
       links: [
         { label: "GitHub", href: "https://github.com/kiwibirdstrike/lab-rooms-pwa" }
       ]
-    },
-    {
-      title: "언론 통계 분석 경진대회",
-      period: "2026.07",
-      category: "Public Data",
-      result: "청소년 뉴스 원문 접근 취약군 1,470명을 정의하고 재현 가능한 분석·보고 패키지로 완성했습니다."
     }
   ],
   credentials: [

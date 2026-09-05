@@ -52,6 +52,10 @@ function inspect(value, path = "portfolio") {
 
 inspect(data);
 
+if (data.otherProjects.some((project) => project.title === "언론 통계 분석 경진대회")) {
+  throw new Error("Removed project still appears in the project archive");
+}
+
 const jobis = data.featuredProjects.find((project) => project.id === "jobis");
 if (!jobis) throw new Error("Missing JOBIS project");
 
