@@ -74,7 +74,11 @@ function projectArticle(project, index) {
     element("p", "project-subtitle", project.subtitle)
   );
   const status = element("span", `status status-${project.track}`, project.status);
-  header.append(identity, status);
+  const actions = element("div", "project-header-actions");
+  const detailLink = element("a", "project-detail-link", "상세 보기 ↗");
+  detailLink.href = `./project.html?id=${encodeURIComponent(project.id)}`;
+  actions.append(status, detailLink);
+  header.append(identity, actions);
 
   const body = element("div", "project-body");
   body.append(element("p", "project-summary", project.summary));
