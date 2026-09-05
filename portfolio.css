@@ -499,6 +499,74 @@ button {
   margin-top: 34px;
 }
 
+.technical-deep-dive {
+  margin-top: 112px;
+}
+
+.technical-deep-dive-title {
+  max-width: 760px;
+  margin: 0 0 64px;
+  font-size: clamp(2rem, 4vw, 3.35rem);
+  line-height: 1.25;
+}
+
+.technical-section {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 42px;
+  padding-block: 42px;
+  border-top: 1px solid var(--line);
+}
+
+.technical-section:last-child {
+  border-bottom: 1px solid var(--line);
+}
+
+.technical-section-heading {
+  display: grid;
+  align-content: start;
+  gap: 10px;
+}
+
+.technical-section-number {
+  color: var(--accent);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+.technical-section h2 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.technical-list {
+  display: grid;
+  gap: 22px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: technical-item;
+}
+
+.technical-list li {
+  position: relative;
+  padding-left: 38px;
+  color: var(--muted);
+  counter-increment: technical-item;
+}
+
+.technical-list li::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: var(--ink);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.68rem;
+  font-weight: 600;
+  content: counter(technical-item, decimal-leading-zero);
+}
+
 .project-summary {
   max-width: 760px;
   margin: 0 0 36px;
@@ -863,6 +931,15 @@ button {
   .project-page-lead {
     margin-block: 36px 44px;
     font-size: 1.08rem;
+  }
+
+  .technical-deep-dive {
+    margin-top: 80px;
+  }
+
+  .technical-section {
+    grid-template-columns: 1fr;
+    gap: 24px;
   }
 
   .hero-copy {

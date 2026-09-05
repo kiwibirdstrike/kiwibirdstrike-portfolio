@@ -52,6 +52,23 @@ function inspect(value, path = "portfolio") {
 
 inspect(data);
 
+const jobis = data.featuredProjects.find((project) => project.id === "jobis");
+if (!jobis) throw new Error("Missing JOBIS project");
+
+const requiredTechnicalKeys = [
+  "architecture",
+  "dataFlow",
+  "implementation",
+  "decisions",
+  "experiments"
+];
+
+for (const key of requiredTechnicalKeys) {
+  if (!Array.isArray(jobis.technicalDetails?.[key]) || jobis.technicalDetails[key].length === 0) {
+    throw new Error(`Missing JOBIS technical detail: ${key}`);
+  }
+}
+
 const serialized = JSON.stringify(data);
 const privatePatterns = [
   /01[016789][-\s]?\d{3,4}[-\s]?\d{4}/,

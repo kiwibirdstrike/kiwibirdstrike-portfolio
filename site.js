@@ -93,12 +93,8 @@ function projectArticle(project, index) {
   }
   const details = element("dl", "project-details");
   details.append(
-    detailBlock("문제", project.problem),
     detailBlock("역할", project.role),
-    detailBlock("프로세스", project.process),
-    detailBlock("검증", project.validation),
-    detailBlock("결과", project.result),
-    detailBlock("한계와 확장", project.limitation)
+    detailBlock("성과", project.result)
   );
   body.append(details);
 

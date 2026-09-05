@@ -35,6 +35,19 @@ function detailBlock(label, value) {
   return block;
 }
 
+function technicalSection(number, title, items) {
+  const section = element("section", "technical-section");
+  const heading = element("div", "technical-section-heading");
+  heading.append(
+    element("span", "technical-section-number", number),
+    element("h2", "", title)
+  );
+  const list = element("ol", "technical-list");
+  items.forEach((item) => list.append(element("li", "", item)));
+  section.append(heading, list);
+  return section;
+}
+
 function renderNotFound() {
   target.append(
     element("p", "eyebrow", "PROJECT NOT FOUND"),
@@ -70,6 +83,19 @@ function renderProject(project) {
   );
 
   target.append(header, intro, details);
+  if (project.technicalDetails) {
+    const technical = element("div", "technical-deep-dive");
+    technical.append(
+      element("p", "eyebrow", "TECHNICAL DEEP DIVE"),
+      element("h2", "technical-deep-dive-title", "어떻게 설계하고 검증했는가"),
+      technicalSection("01", "시스템 구조", project.technicalDetails.architecture),
+      technicalSection("02", "데이터 흐름", project.technicalDetails.dataFlow),
+      technicalSection("03", "구현 핵심", project.technicalDetails.implementation),
+      technicalSection("04", "기술적 판단", project.technicalDetails.decisions),
+      technicalSection("05", "실험과 검증", project.technicalDetails.experiments)
+    );
+    target.append(technical);
+  }
   if (project.links.length) {
     const links = element("div", "project-links project-page-links");
     appendLinks(links, project.links);
