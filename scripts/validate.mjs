@@ -102,6 +102,9 @@ const html = readFileSync(new URL("../index.html", import.meta.url), "utf8");
 if (!html.includes('name="robots" content="noindex, nofollow"')) {
   throw new Error("Missing noindex metadata");
 }
+if (html.includes("profile-monogram") || html.includes("PROFILE / 2026")) {
+  throw new Error("Profile still contains photo-placeholder styling");
+}
 
 const app = readFileSync(new URL("../site.js", import.meta.url), "utf8");
 if (/\.append\([^;]+\)\.append\(/s.test(app)) {

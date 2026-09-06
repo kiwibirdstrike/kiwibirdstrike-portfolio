@@ -183,65 +183,30 @@ button {
 }
 
 .profile-panel {
-  position: relative;
-  min-height: 460px;
-  padding: 26px;
-  overflow: hidden;
-  background: var(--ink);
-  color: #fff;
-}
-
-.profile-label {
-  position: relative;
-  z-index: 1;
-  margin: 0;
-  color: #aeb3b3;
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 0.68rem;
-}
-
-.profile-monogram {
-  position: absolute;
-  right: -18px;
-  bottom: 78px;
-  color: #2d2f2f;
-  font-size: clamp(9rem, 18vw, 15rem);
-  font-weight: 800;
-  line-height: 0.75;
-  user-select: none;
+  align-self: end;
+  padding: 30px 0 4px;
+  border-top: 2px solid var(--ink);
 }
 
 .profile-meta {
-  position: absolute;
-  z-index: 1;
-  right: 26px;
-  bottom: 84px;
-  left: 26px;
   display: grid;
-  gap: 8px;
+  gap: 10px;
 }
 
 .profile-meta strong {
-  font-size: 1.55rem;
+  font-size: 1.65rem;
+  line-height: 1.3;
 }
 
 .profile-meta span {
-  color: #b9bdbc;
-  font-size: 0.82rem;
+  color: var(--muted);
+  font-size: 0.9rem;
 }
 
 .profile-panel .hero-links {
-  position: absolute;
-  z-index: 1;
-  right: 26px;
-  bottom: 26px;
-  left: 26px;
-  padding-top: 16px;
-  border-top: 1px solid #3b3d3d;
-}
-
-.profile-panel .text-link {
-  color: #fff;
+  margin-top: 28px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
 }
 
 .text-link {
@@ -957,10 +922,6 @@ button {
     align-items: start;
   }
 
-  .profile-panel {
-    min-height: 300px;
-  }
-
   .section-heading {
     grid-template-columns: 130px 1fr;
   }
@@ -1073,10 +1034,6 @@ button {
   .hero-links {
     display: grid;
     justify-items: start;
-  }
-
-  .profile-panel {
-    min-height: 260px;
   }
 
   .tracks-band,
