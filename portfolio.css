@@ -183,9 +183,9 @@ button {
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 32px;
   align-items: end;
-  margin-top: 44px;
-  padding-top: 24px;
-  border-top: 1px solid var(--line);
+  margin-bottom: 48px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--line);
 }
 
 .profile-meta {

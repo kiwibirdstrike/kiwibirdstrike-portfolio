@@ -109,6 +109,9 @@ if (
 ) {
   throw new Error("Profile still contains photo-placeholder styling");
 }
+if (html.indexOf('class="profile-summary"') > html.indexOf('id="hero-title"')) {
+  throw new Error("Profile summary must appear before the hero introduction");
+}
 
 const app = readFileSync(new URL("../site.js", import.meta.url), "utf8");
 if (/\.append\([^;]+\)\.append\(/s.test(app)) {
