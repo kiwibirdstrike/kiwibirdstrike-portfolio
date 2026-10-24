@@ -48,16 +48,16 @@ function technicalSection(number, title, items) {
   return section;
 }
 
-function architectureFigure(stages) {
+function architectureFigure(project) {
   const figure = element("figure", "architecture-figure");
   const heading = element("div", "architecture-heading");
   heading.append(
     element("p", "eyebrow", "SYSTEM ARCHITECTURE"),
-    element("h2", "architecture-title", "공고 원문이 참가 가능성 판단으로 바뀌는 과정")
+    element("h2", "architecture-title", project.architectureTitle)
   );
 
   const lanes = element("div", "architecture-lanes");
-  stages.forEach((stage) => {
+  project.architectureDiagram.forEach((stage) => {
     const lane = element("section", "architecture-stage");
     lane.append(element("h3", "architecture-stage-title", stage.title));
     const flow = element("div", "architecture-flow");
@@ -73,11 +73,7 @@ function architectureFigure(stages) {
     lanes.append(lane);
   });
 
-  figure.append(
-    heading,
-    lanes,
-    element("figcaption", "", "원본 데이터와 모델 출력 사이에 감사·수리·규칙 검증 단계를 두어 오류 위치를 추적할 수 있도록 설계했습니다.")
-  );
+  figure.append(heading, lanes, element("figcaption", "", project.architectureCaption));
   return figure;
 }
 
@@ -117,10 +113,20 @@ function renderProject(project) {
 
   target.append(header, intro);
   if (project.architectureDiagram) {
-    target.append(architectureFigure(project.architectureDiagram));
+    target.append(architectureFigure(project));
   }
   target.append(details);
-  if (project.technicalDetails) {
+  if (project.technicalSections) {
+    const technical = element("div", "technical-deep-dive");
+    technical.append(
+      element("p", "eyebrow", "TECHNICAL DEEP DIVE"),
+      element("h2", "technical-deep-dive-title", "어떻게 설계하고 검증했는가")
+    );
+    project.technicalSections.forEach(({ title, items }, index) => {
+      technical.append(technicalSection(String(index + 1).padStart(2, "0"), title, items));
+    });
+    target.append(technical);
+  } else if (project.technicalDetails) {
     const technical = element("div", "technical-deep-dive");
     technical.append(
       element("p", "eyebrow", "TECHNICAL DEEP DIVE"),

@@ -1,50 +1,186 @@
 window.PORTFOLIO_DATA = {
   profile: {
-    eyebrow: "데이터 분석 · 통계 모델링 · 업무 자동화",
+    eyebrow: "통계 모델링 · 근거 검색 · LLM 에이전트",
     name: "이주성",
-    title: "데이터로 문제를 분석하고, 실제 의사결정과 업무 개선까지 연결합니다.",
+    title: "근거를 찾는 검색과 에이전트를 통계 모형으로 설계하고 검증합니다.",
     lead:
-      "통계와 데이터 분석을 기반으로 문제를 정의하고 모델을 설계해 왔습니다. 최근에는 반복 작업은 에이전트로 자동화하고, 중요한 판단은 사람이 검토할 수 있도록 업무 과정을 설계하는 데 관심을 넓히고 있습니다.",
+      "통계학 석사과정에서 멀티홉 근거 검색을 연구하고 있습니다. 졸업논문에서는 문단의 근거 여부를 auto-logistic 모형으로 두고, 이웃 근거가 검색 순위에 기여하는 정도를 라벨 질문으로 추정하는 검색 규칙을 유도했습니다. 공공조달 공고의 자격요건을 원문 근거와 함께 판정하는 에이전트 서비스, 소방 예방업무를 위한 법령 근거 검색 엔진, 미래정보·생존편향을 통제한 투자 백테스트 시스템도 직접 만들어 왔습니다.",
     education: "충북대학교 정보통계학과 학사 · 석사과정",
     principles: [
       "프롬프트보다 반복 가능한 프로세스를 설계합니다.",
       "평균 성능보다 오류가 발생하는 위치와 비용을 확인합니다.",
-      "자동화할 업무와 사람이 판단할 지점을 구분합니다."
+      "비교 대상과 조건을 맞추고, 불리한 결과도 함께 보고합니다."
     ],
     links: [
       { label: "GitHub", href: "https://github.com/kiwibirdstrike" },
-      { label: "JOBIS", href: "https://www.gonggoradar.kr/" }
+      { label: "공공레이더", href: "https://www.gonggoradar.kr/" }
     ]
   },
   tracks: [
     {
-      id: "agent",
+      id: "llm",
       number: "01",
-      title: "데이터 분석·모델링·AI 자동화",
+      title: "근거 검색·LLM 에이전트",
       summary:
-        "통계적 분석과 예측 모델링으로 금융·공공 문제를 다뤄 왔습니다. 최근에는 반복 가능한 작업을 에이전트로 자동화하고, 사람이 검토해야 할 판단에 더 집중할 수 있는 업무 구조로 확장하고 있습니다.",
-      evidence: "JOBIS · AutoResearch · WorldQuant · 자동투자 포트폴리오"
+        "답에 필요한 근거를 빠짐없이 찾고, 모델의 판단을 원문 근거와 대조할 수 있게 만드는 문제를 다룹니다. 검색 순위의 근거 신호를 통계적으로 추정하는 연구와, 근거를 보존하는 에이전트 서비스를 함께 해 왔습니다.",
+      evidence: "GCER 석사학위논문 · 소방 법령 근거 검색 · 공공레이더 · AutoResearch"
     },
     {
-      id: "bio",
+      id: "quant",
       number: "02",
-      title: "바이오·의료 통계",
+      title: "금융·퀀트",
       summary:
-        "예측 정확도뿐 아니라 통계적 추론과 도메인 타당성까지 확인하는 분석을 이어가고 있습니다.",
-      evidence: "Imputation · 디지털 바이오 · KHD"
+        "백테스트 성과가 미래정보, 생존편향, 특정 종목·기간에 기대고 있지 않은지 먼저 의심합니다. 알파 검증 기준을 실제 계좌 상태와 주문 계획으로 연결하는 시스템을 운영하고 있습니다.",
+      evidence: "WorldQuant · 자동투자 포트폴리오"
+    },
+    {
+      id: "stats",
+      number: "03",
+      title: "통계 방법론·바이오의료",
+      summary:
+        "데이터 구조에 맞는 모형을 직접 유도하고 최적화 알고리즘으로 풉니다. 예측 정확도뿐 아니라 후속 통계적 추론의 타당성까지 확인합니다.",
+      evidence: "ILR Polygram · Imputation · 디지털 바이오 · KHD"
+    },
+    {
+      id: "analytics",
+      number: "04",
+      title: "데이터 분석·공공 정책",
+      summary:
+        "공간·시계열·행정 데이터를 결합해 정책 담당자가 바로 쓸 수 있는 우선순위와 도구로 정리합니다.",
+      evidence: "LH 공실률 · 공공체육시설 입지 · 음성군 화재 분석"
     }
   ],
   featuredProjects: [
     {
+      id: "gcer",
+      title: "GCER",
+      subtitle: "auto-logistic 모형으로 유도한 멀티홉 근거 검색",
+      period: "2026.09 — 현재",
+      track: "llm",
+      status: "석사학위논문",
+      media: null,
+      summary:
+        "문단의 근거 여부를 auto-logistic 모형으로 두고, 그 조건부에서 질문 관련성과 이웃 근거를 더하는 순위 규칙을 유도했습니다. 이웃 근거의 기여와 간선 가중을 라벨 질문으로 추정해, MuSiQue 평가 질문 2,417개에서 HippoRAG 2·GNN-Ret 등 비교 방법보다 유의하게 많은 근거를 찾았습니다.",
+      problem:
+        "멀티홉 질문의 두 번째 이후 근거는 원래 질문과의 유사도가 낮아 유사도 검색에서 빠지기 쉽습니다. 그래프 기반 검색기는 관련성을 이웃으로 전파해 이를 보완하지만, PPR·flow diffusion은 전파 규칙의 형태가 알고리즘으로 정해져 있고 신경망 검색기는 많은 라벨이나 합성 질문을 씁니다.",
+      role:
+        "연구실 주제(비모수통계·최적화)와 다른 RAG 분야에서 문제 정의, 선행연구 조사, 모형 유도, 구현, 비교 실험 설계와 실행, 원고 작성을 모두 직접 수행했습니다.",
+      process: [
+        "문자열 겹침·OpenIE 개체·위키피디아 링크·BM25 이웃으로 네 가지 문단 그래프 구성",
+        "근거 상태를 auto-logistic 모형(이진 MRF)으로 두고, 국소 조건부에서 질문 관련성과 이웃 근거의 두 성분 순위 지수 유도",
+        "방문한 이웃의 모르는 근거 상태를 점수 기반 확률 대리값으로 바꾸고 sum·mean·max·noisy-OR 중 이웃 통계량 선택",
+        "검색 단계별 후보 집합에 조건부 로짓을 적합해 이웃 근거 계수 λ와 연결자 빈도 지수 κ 추정"
+      ],
+      validation:
+        "MuSiQue 학습 질문 1,000개(13,956문단)로 추정하고, 근거 문단을 공유하지 않는 개발 질문 2,417개(21,099문단)로 평가했습니다. 모든 방법에 같은 임베딩(NV-Embed-v2)과 LLM(Llama-3.3-70B-Instruct)을 쓰고 비교 방법의 설정도 같은 1,000문항에서 골랐으며, 차이는 질문 단위 짝지은 부트스트랩 95% 구간으로 보고했습니다.",
+      result:
+        "Recall@5 71.1%, Recall@10 80.3%, 3,000토큰 안 완전 근거율 67.6%로 모든 지표에서 가장 높았고, 비교 방법과의 차이는 모두 유의했습니다. 3,000토큰 완전 근거율은 HippoRAG 2보다 4.6%p, GNN-Ret보다 2.3%p 높았고, 같은 LLM 판독기에서 상위 5개 문단의 답변 F1도 모든 비교 방법보다 유의하게 높았습니다.",
+      limitation:
+        "분기형 질문에서는 HippoRAG 2·GNN-Ret과의 차이가 유의하지 않았고, 3,000토큰 문맥의 답변 F1은 PPR·flow diffusion·HippoRAG 2·GNN-Ret과 유의한 차이가 없었습니다. 라벨 질문이 25~200개뿐이면 GNN-Ret의 3,000토큰 재현율이 더 높습니다.",
+      architectureTitle: "질문에서 근거 묶음까지 이어지는 순차 검색",
+      architectureCaption:
+        "그래프는 후보를 넓히는 역할과 이웃 근거 신호를 주는 역할을 합니다. λ = 0이면 유사도 검색과 같아지므로 그래프 항의 효과를 따로 볼 수 있습니다.",
+      architectureDiagram: [
+        {
+          title: "01 · 오프라인 준비",
+          nodes: [
+            { label: "문단 그래프", note: "문자열·OpenIE·위키 링크·BM25 네 가지 후보" },
+            { label: "기저 관련성", note: "NV-Embed-v2 코사인 유사도로 질문–문단 점수 계산" },
+            { label: "추정", note: "라벨 질문 1,000개로 그래프·통계량을 고르고 λ와 κ 추정" }
+          ]
+        },
+        {
+          title: "02 · 순차 탐색",
+          nodes: [
+            { label: "앵커", note: "질문과 가장 유사한 문단 3개에서 시작" },
+            { label: "후보 확장", note: "방문 문단의 그래프 이웃 100개와 전역 유사도 후보 100개" },
+            { label: "후보 점수", note: "기저 관련성 + λ × 방문한 이웃의 근거 통계량(max)" },
+            { label: "방문 갱신", note: "최고 점수 문단을 방문하고 이웃 근거 신호를 다시 계산, 최대 100개" }
+          ]
+        },
+        {
+          title: "03 · 평가",
+          nodes: [
+            { label: "검색 지표", note: "Recall@5·10, 1,500·3,000토큰 안 재현율과 완전 근거율" },
+            { label: "답변 지표", note: "같은 LLM 판독기로 상위 5개·3,000토큰 문맥의 EM·F1" },
+            { label: "불확실성", note: "질문 단위 짝지은 부트스트랩 2,000회, 95% 구간" }
+          ]
+        }
+      ],
+      technicalSections: [
+        {
+          title: "통계적 정식화",
+          items: [
+            "문단의 근거 여부를 이진변수로 두고, 연결된 문단끼리 근거 상태가 함께 움직이는 정도를 auto-logistic 모형(이진 pairwise MRF)으로 표현했습니다. 이 모형의 국소 조건부에서 후보 자신의 질문 관련성과 이웃 근거 항이 더해지는 순위 지수가 나옵니다.",
+            "간선 가중은 그 간선을 만든 연결자(공유 개체 등)가 많은 문단에 나올수록 줄어들게 두고, 줄어드는 정도를 지수 κ로 추정했습니다. 흔한 개체로 이어진 간선은 연결은 유지하되 영향은 덜 줍니다.",
+            "검색 중에는 이웃의 근거 여부를 모르므로, 점수를 로지스틱 변환한 확률 대리값으로 바꾸고 방문한 이웃 값을 하나의 통계량으로 요약했습니다. 네 그래프 모두에서 가장 강한 이웃 하나를 보는 max가 선택됐습니다."
+          ]
+        },
+        {
+          title: "추정과 검색 정책",
+          items: [
+            "검색기가 매 단계 마주하는 후보 집합에 조건부 로짓을 적합해 λ를 추정하고, κ는 계수에 대해 최대화한 프로파일 목적함수로 추정했습니다. 선택된 규칙은 OpenIE 그래프, max, κ̂ = 0.16, λ̂ = 10.6이며, κ̂는 다섯 폴드에서 0.15~0.18로 안정적이었습니다.",
+            "매 단계 방문 문단의 그래프 이웃과 전역 유사도 후보를 함께 후보로 두어, 불완전한 그래프 이웃에 갇히지 않도록 했습니다.",
+            "λ = 0이면 매 단계 가장 유사한 문단을 고르므로 유사도 검색과 같아집니다. 검색 시점에는 LLM을 호출하지 않고, LLM은 색인 단계의 OpenIE 그래프 구축에만 씁니다."
+          ]
+        },
+        {
+          title: "공정 비교 설계",
+          items: [
+            "모든 방법이 같은 임베딩과 같은 LLM을 쓰도록 고정하고, 그래프 구축과 중간 출력은 각 방법의 설계가 허용하는 범위에서 공유했습니다.",
+            "PPR과 flow diffusion은 GCER과 같은 네 그래프에서 그래프·κ·시작 문단 수·감쇠계수를 함께 고르게 했고, GNN-Ret의 가중치와 HippoRAG 2·QAFD-RAG의 설정도 같은 1,000문항에서 골랐습니다.",
+            "평가 질문의 크기, 라벨, 질문 유형 구성은 추정·튜닝·학습 어디에도 쓰지 않았습니다."
+          ]
+        },
+        {
+          title: "결과 해석",
+          items: [
+            "같은 네 그래프와 같은 라벨로 설정을 고른 PPR·flow diffusion보다 모든 지표에서 높았습니다. 그래프를 무엇으로 만드는가뿐 아니라 관련성을 어떻게 전파하는가가 성능을 좌우합니다.",
+            "연쇄형 질문 2,066개에서는 3,000토큰 완전 근거율이 HippoRAG 2보다 4.7%p, GNN-Ret보다 2.8%p 높았고, 3홉 연쇄에서 차이가 가장 컸습니다. 분기형 질문 351개에서는 유의한 차이가 없었습니다.",
+            "상위 5개 문단에 근거가 모두 들어 있어도 문맥을 3,000토큰으로 늘리면 모든 방법의 답변 F1이 떨어졌습니다. 근거 검색 성능과 답변 정확도를 따로 평가한 이유입니다."
+          ]
+        }
+      ],
+      links: []
+    },
+    {
+      id: "fire-law-search",
+      title: "소방 법령 근거 검색 엔진",
+      subtitle: "건축허가 동의 검수를 위한 근거 조항 검색",
+      period: "2026.10 — 현재",
+      track: "llm",
+      status: "개인 개발 중",
+      media: null,
+      summary:
+        "소방서 예방안전과 담당자가 질문하면 법률·시행령·별표·화재안전기준의 근거 조항을 연결 경로와 원문으로 보여주는 검색 엔진을 만들고 있습니다. 결론은 생성하지 않고 근거만 찾으며, 내부망 서버에서 GPU 없이 돌아가는 구성을 목표로 합니다.",
+      problem:
+        "건축허가 동의 검수는 건물 용도로 특정소방대상물 분류를 찾고, 면적·층수로 설치 대상 시설을 정한 뒤, 시설별 세부 기준을 화재안전기준에서 다시 찾아야 해 한 문서로 끝나지 않습니다. 현장 질문은 건축 용어나 줄임말로 들어오지만 법령은 다른 이름을 씁니다.",
+      role:
+        "음성소방서 화재 분석을 하며 본 예방안전과 업무에서 출발해, 문제 정의, 법령 API 수집, 질의회신집 정답셋 구축, 검색 실험, 계획서 작성을 혼자 하고 있습니다.",
+      process: [
+        "국가법령정보센터 API로 소방시설법·화재예방법·다중이용업소법과 화재안전기준을 시행일별 버전으로 수집",
+        "조문은 항, 별표는 항목, 화재안전기준은 조 단위로 나누고 시행 기간을 붙여 시점별 검색 후보 구성",
+        "BM25와 bge-m3 임베딩을 섞은 하이브리드 검색에 인용 그래프 확장(k-hop·PPR·GCER식)을 붙여 비교",
+        "실패 분석 뒤 cross-encoder 재순위와 질의회신 데이터를 쓴 임베딩 미세조정 실험"
+      ],
+      validation:
+        "소방청 질의회신집에서 회신이 판단 근거로 든 조문을 문항별로 판정해 정답으로 삼았습니다. 2022·2024·2025년판으로 조합을 고르고 2026년판 204문항은 최종 1회만 평가했으며, 필요한 근거를 상위 10개 안에 모두 찾은 비율(완전 재현율@10)을 주 지표로 했습니다.",
+      result:
+        "하이브리드 검색과 인용 그래프 확장 조합이 2026년판에서 완전 재현율@10 77.0%를 기록했습니다. 개발셋에서 놓친 정답의 60%는 찾은 조항과 인용으로 이어지지 않아 문서 간 연결보다 질문과 조문의 표현 차이가 주된 원인임을 확인했고, 재순위로 개발셋 65.4%를 68.5%로 올렸습니다(McNemar p = 0.003).",
+      limitation:
+        "정답 판정은 사람이 검수한 것이 아니고, 실제 현장 질문으로는 아직 검증하지 않았습니다. 미세조정은 검증셋에서 이득이 있었지만 최종 평가셋에서는 유의한 차이가 없었습니다. 별표의 면적·층수 조건 구조화와 법령용어-일상용어 사전이 다음 과제입니다.",
+      links: []
+    },
+    {
       id: "jobis",
-      title: "JOBIS",
+      title: "공공레이더",
       subtitle: "공공조달 공고 적격성 판정 에이전트",
-      period: "2026.03 — 2026.06",
-      track: "agent",
-      status: "서비스 구축",
+      period: "2026.03 — 현재",
+      track: "llm",
+      status: "개발 중",
       media: {
         src: "./assets/projects/jobis-dashboard.png",
-        alt: "JOBIS 공공조달 공고 검토 워크스페이스 화면"
+        alt: "공공레이더 공공조달 공고 검토 워크스페이스 화면"
       },
       summary:
         "조달 공고의 참가자격을 추출하고 기업 정보와 대조하는 업무를 2-stage 에이전트와 실제 웹서비스로 구현했습니다.",
@@ -64,6 +200,9 @@ window.PORTFOLIO_DATA = {
         "Stage 1 Recall 100%, Stage 2 필드 일치 정확도 87.36%. 실제 서비스와 커스텀 도메인까지 연결했습니다.",
       limitation:
         "잔여 오류가 전체 결과에 분산돼 전수검수 없이 실패 위치를 찾기 어려웠습니다. 이 경험이 신뢰도·근거 추적·검토 대상 선별에 대한 후속 관심으로 이어졌습니다.",
+      architectureTitle: "공고 원문이 참가 가능성 판단으로 바뀌는 과정",
+      architectureCaption:
+        "원본 데이터와 모델 출력 사이에 감사·수리·규칙 검증 단계를 두어 오류 위치를 추적할 수 있도록 설계했습니다.",
       architectureDiagram: [
         {
           title: "01 · 수집과 문서화",
@@ -130,8 +269,7 @@ window.PORTFOLIO_DATA = {
         ]
       },
       links: [
-        { label: "서비스", href: "https://www.gonggoradar.kr/" },
-        { label: "GitHub", href: "https://github.com/kiwibirdstrike/jobis" }
+        { label: "서비스", href: "https://www.gonggoradar.kr/" }
       ]
     },
     {
@@ -139,7 +277,7 @@ window.PORTFOLIO_DATA = {
       title: "AutoResearch",
       subtitle: "지식과 실험 이력을 재사용하는 분석 에이전트",
       period: "2026.03 — 2026.05",
-      track: "agent",
+      track: "llm",
       status: "경진대회 적용",
       media: null,
       summary:
@@ -166,7 +304,7 @@ window.PORTFOLIO_DATA = {
       title: "자동투자 포트폴리오",
       subtitle: "편향 통제 백테스트와 주문 계획 에이전트",
       period: "2026.06 — 현재",
-      track: "agent",
+      track: "quant",
       status: "운영·확장 중",
       media: null,
       summary:
@@ -194,7 +332,7 @@ window.PORTFOLIO_DATA = {
       title: "Imputation 연구",
       subtitle: "예측 오차와 후속 통계 추론의 동시 평가",
       period: "2026.01 — 현재",
-      track: "bio",
+      track: "stats",
       status: "논문 작성 중",
       media: null,
       summary:
@@ -222,7 +360,7 @@ window.PORTFOLIO_DATA = {
       title: "ILR Polygram",
       subtitle: "조성자료를 위한 국소 로지스틱 회귀 연구",
       period: "2026.03 — 현재",
-      track: "bio",
+      track: "stats",
       status: "Under Review",
       media: null,
       summary:
@@ -240,7 +378,7 @@ window.PORTFOLIO_DATA = {
       validation:
         "전역 선형·국소 경계 시뮬레이션에서 로지스틱 회귀, GAM, SVM과 예측 및 경계 복원 성능을 비교했습니다.",
       result:
-        "IMS-APRM 2026과 한국통계학회에서 동일 연구를 포스터 발표했으며, 현재 Under Review 중입니다.",
+        "IMS-APRM 2026과 한국통계학회에서 동일 연구를 발표했으며, 현재 Under Review 중입니다.",
       limitation:
         "심사 중인 연구로, 결과와 방법론의 최종 내용은 심사 결과에 따라 변경될 수 있습니다.",
       links: [
@@ -252,7 +390,7 @@ window.PORTFOLIO_DATA = {
       title: "LH 지식산업센터 공실률 분석",
       subtitle: "입지와 비용 요인을 활용한 공실 위험 분석",
       period: "2025.01 — 2025.02",
-      track: "agent",
+      track: "analytics",
       status: "장려상",
       media: null,
       summary:
@@ -279,7 +417,7 @@ window.PORTFOLIO_DATA = {
       title: "공공체육시설 입지 분석",
       subtitle: "시설 접근성을 고려한 최적 입지 선정",
       period: "2025.09 — 2025.11",
-      track: "agent",
+      track: "analytics",
       status: "우수상",
       media: null,
       summary:
@@ -300,16 +438,14 @@ window.PORTFOLIO_DATA = {
         "정책 시뮬레이션이 가능한 웹 도구로 완성해 우수상을 수상했습니다.",
       limitation:
         "실제 정책 적용 전에는 이동시간과 시설별 수용능력에 대한 추가 검증이 필요합니다.",
-      links: [
-        { label: "GitHub", href: "https://github.com/kiwibirdstrike/chungju" }
-      ]
+      links: []
     },
     {
       id: "digital-bio",
       title: "디지털 바이오 데이터 분석",
       subtitle: "유전체 변이 기반 암종 분류",
       period: "2024.08 — 2024.10",
-      track: "bio",
+      track: "stats",
       status: "은상",
       media: null,
       summary:
@@ -336,7 +472,7 @@ window.PORTFOLIO_DATA = {
       title: "KHD 의료 데이터 분석",
       subtitle: "수면장애 분류 문제의 재정의와 모델링",
       period: "2025.06 — 2025.08",
-      track: "bio",
+      track: "stats",
       status: "우수상",
       media: null,
       summary:
@@ -360,27 +496,45 @@ window.PORTFOLIO_DATA = {
     }
   ],
   timeline: [
-    { date: "2024.08", title: "디지털 바이오 데이터 분석", note: "유전체 변이 기반 암종 분류 모델 개발 · 은상", track: "bio", category: "공모전" },
+    { date: "2024.08", title: "디지털 바이오 데이터 분석", note: "유전체 변이 기반 암종 분류 모델 개발 · 은상", track: "stats", category: "공모전" },
     { date: "2024.11", title: "취업박람회 부스 배치 최적화", note: "방문 동선을 고려한 부스 배치 개선 · 최우수상", track: "analytics", category: "공모전" },
     { date: "2025.01", title: "LH 지식산업센터 공실률 분석", note: "입지와 비용 요인을 활용한 공실 위험 분석 · 장려상", track: "analytics", category: "공모전" },
-    { date: "2025.05", title: "충청북도농업기술원 와인연구소 통계 자문", note: "산업체 데이터를 활용한 품질 분류 모델 개발", track: "bio", category: "산업체 자문" },
+    { date: "2025.05", title: "충청북도농업기술원 와인연구소 통계 자문", note: "산업체 데이터를 활용한 품질 분류 모델 개발", track: "stats", category: "산업체 자문" },
     { date: "2025.05", title: "기상청 빅데이터 콘테스트", note: "공간·시계열 모델로 3개 예측 과제 수행 · 2개 부문 입상", track: "analytics", category: "공모전" },
     { date: "2025.06", title: "요양 방치 위험 분석", note: "지역별 위험 수준 추정과 정책 대안 제시", track: "analytics", category: "공모전" },
-    { date: "2025.06", title: "KHD 의료 데이터 분석", note: "수면장애 분류 모델 개발 · 우수상", track: "bio", category: "공모전" },
-    { date: "2025.07", title: "Scientific Reports 논문", note: "Penalized B-spline 연구 공동저자", track: "bio", category: "논문" },
+    { date: "2025.06", title: "KHD 의료 데이터 분석", note: "수면장애 분류 모델 개발 · 우수상", track: "stats", category: "공모전" },
+    { date: "2025.07", title: "Scientific Reports 논문", note: "Penalized B-spline 연구 공동저자", track: "stats", category: "논문" },
     { date: "2025.09", title: "공공체육시설 입지 분석", note: "시설 접근성을 고려한 최적 입지 선정 · 우수상", track: "analytics", category: "공모전" },
     { date: "2025.10", title: "KAMP 제조데이터 분석대회", note: "공정 예측 모델과 현장용 웹 분석 도구 개발", track: "analytics", category: "공모전" },
-    { date: "2025.11", title: "TVspline", note: "스플라인 R 패키지 제작 및 관리", track: "analytics", category: "연구 개발" },
-    { date: "2026.01", title: "AAAI 학회 참석", note: "멀티모달 AI 연구 동향과 모델 구조 탐색", track: "agent", category: "학회" },
-    { date: "2026.01", title: "결측치 대치 방법론 연구", note: "예측 성능과 통계적 추론의 신뢰성 비교", track: "bio", category: "연구" },
-    { date: "2026.02", title: "연구실 예약 PWA", note: "수기 예약 절차를 공용 예약 서비스로 전환", track: "agent", category: "서비스 개발" },
-    { date: "2026.03", title: "JOBIS", note: "공공조달 공고 적격성 판정 서비스 설계 및 구축", track: "agent", category: "서비스 개발" },
-    { date: "2026.03", title: "AutoResearch", note: "실험 결과와 분석 지식을 재사용하는 연구 자동화 구조 설계", track: "agent", category: "공모전" },
-    { date: "2026.03", title: "ILR Polygram", note: "조성자료를 위한 로지스틱 회귀 방법론 연구", track: "bio", category: "연구" },
-    { date: "2026.03", title: "WorldQuant", note: "퀀트 모델링과 알파 검증 방법 학습", track: "agent", category: "대회" },
-    { date: "2026.06", title: "자동투자 포트폴리오", note: "백테스트, 위험 관리와 주문 계획을 연결한 투자 시스템 구축", track: "agent", category: "개인 프로젝트" }
+    { date: "2025.11", title: "TVspline", note: "스플라인 R 패키지 제작 및 관리", track: "stats", category: "연구 개발" },
+    { date: "2026.01", title: "AAAI 학회 참석", note: "멀티모달 AI 연구 동향과 모델 구조 탐색", track: "llm", category: "학회" },
+    { date: "2026.01", title: "결측치 대치 방법론 연구", note: "예측 성능과 통계적 추론의 신뢰성 비교", track: "stats", category: "연구" },
+    { date: "2026.02", title: "연구실 예약 PWA", note: "수기 예약 절차를 공용 예약 서비스로 전환", track: "llm", category: "서비스 개발" },
+    { date: "2026.03", title: "공공레이더", note: "공공조달 공고 적격성 판정 서비스 설계 및 구축", track: "llm", category: "서비스 개발" },
+    { date: "2026.03", title: "AutoResearch", note: "실험 결과와 분석 지식을 재사용하는 연구 자동화 구조 설계", track: "llm", category: "공모전" },
+    { date: "2026.03", title: "ILR Polygram", note: "조성자료를 위한 로지스틱 회귀 방법론 연구", track: "stats", category: "연구" },
+    { date: "2026.03", title: "WorldQuant", note: "퀀트 모델링과 알파 검증 방법 학습", track: "quant", category: "대회" },
+    { date: "2026.06", title: "자동투자 포트폴리오", note: "백테스트, 위험 관리와 주문 계획을 연결한 투자 시스템 구축", track: "quant", category: "개인 프로젝트" },
+    { date: "2026.06", title: "LG Aimers 9기", note: "투구 제구 성공 확률 예측 · 1,087팀 중 15위 본선 진출", track: "analytics", category: "교육·해커톤" },
+    { date: "2026.08", title: "음성군 화재발생 현황 분석", note: "음성소방서 의뢰 · 화재 1,821건의 시공간 분석, 소방서 발표와 2차 분석 보고서", track: "analytics", category: "외부 의뢰" },
+    { date: "2026.09", title: "GCER 석사학위논문", note: "auto-logistic 모형으로 멀티홉 근거 검색 규칙을 유도하고 라벨 질문으로 추정", track: "llm", category: "연구" },
+    { date: "2026.10", title: "소방 법령 근거 검색 엔진", note: "건축허가 동의 검수를 위한 근거 조항 검색 · 개인 개발 중", track: "llm", category: "개인 프로젝트" }
   ],
   otherProjects: [
+    {
+      title: "음성군 화재발생 현황 분석",
+      period: "2026.08 — 2026.10",
+      category: "Public Analysis",
+      result: "음성소방서 의뢰로 음성군 화재 1,821건의 주소를 표준화해 96.4%의 위치를 복원하고, LISA와 Poisson-SLX 회귀로 공간 군집과 노출량을 보정해 예방정책 우선순위를 제시했습니다. 소방서에서 결과를 발표한 뒤 현장 피드백을 반영해 2차 분석 보고서를 작성했습니다.",
+      links: []
+    },
+    {
+      title: "LG Aimers 9기",
+      period: "2026.06 — 2026.09",
+      category: "Competition",
+      result: "투구 직전까지 알 수 있는 정보로 제구 성공 확률을 예측했습니다. 도메인 피처와 타깃 인코딩을 구성하고 LightGBM과 선수 임베딩 신경망을 앙상블해 1,087팀 중 15위로 본선에 진출했습니다.",
+      links: []
+    },
     {
       title: "TVspline R 패키지",
       period: "2025.11 — 2026.05",
@@ -395,12 +549,15 @@ window.PORTFOLIO_DATA = {
       period: "2026.02 — 2026.04",
       category: "Workflow",
       result: "수기 예약을 PWA와 Google Calendar 기반 공용 예약·충돌 방지 절차로 전환했습니다.",
-      links: [
-        { label: "GitHub", href: "https://github.com/kiwibirdstrike/lab-rooms-pwa" }
-      ]
+      links: []
     }
   ],
   credentials: [
+    {
+      type: "석사학위논문",
+      title: "GCER: Auto-Logistic Modeling for Multi-Hop Evidence Retrieval",
+      meta: "충북대학교 정보통계학과 · 2027.02 졸업 예정"
+    },
     {
       type: "논문",
       title: "Efficient curve fitting with penalized B-splines for oceanographic and ecological applications",
@@ -409,7 +566,7 @@ window.PORTFOLIO_DATA = {
     {
       type: "학회 발표",
       title: "ILR-Based Polygram Logistic Regression",
-      meta: "IMS-APRM 2026 홍콩 · 2026 한국통계학회 하계학술대회 · 포스터 발표"
+      meta: "IMS-APRM 2026 홍콩 · 2026 한국통계학회 하계학술대회 발표"
     },
     {
       type: "자격",

@@ -151,13 +151,13 @@ function renderTimeline() {
   const target = document.querySelector("#timeline");
   const legend = element("div", "timeline-legend");
   legend.append(
-    element("span", "legend-data", "데이터 분석·모델링·자동화"),
-    element("span", "legend-bio", "바이오·의료 통계")
+    element("span", "legend-data", "AI·퀀트·데이터 분석"),
+    element("span", "legend-bio", "통계 방법론·바이오의료")
   );
   target.append(legend);
 
   data.timeline.forEach((item) => {
-    const side = item.track === "bio" ? "bio" : "data";
+    const side = item.track === "stats" ? "bio" : "data";
     const row = element("article", `timeline-item timeline-side-${side}`);
     const content = element("div", "timeline-content");
     content.append(

@@ -88,7 +88,36 @@ for (const [index, stage] of jobis.architectureDiagram.entries()) {
   }
 }
 
+const trackIds = new Set(data.tracks.map((track) => track.id));
+for (const project of data.featuredProjects) {
+  if (!trackIds.has(project.track)) throw new Error(`Unknown track on project: ${project.id}`);
+  if (project.architectureDiagram && (!project.architectureTitle || !project.architectureCaption)) {
+    throw new Error(`Architecture diagram needs a title and caption: ${project.id}`);
+  }
+}
+for (const item of data.timeline) {
+  if (!trackIds.has(item.track)) throw new Error(`Unknown track on timeline item: ${item.title}`);
+}
+
+const gcer = data.featuredProjects.find((project) => project.id === "gcer");
+if (!gcer) throw new Error("Missing GCER thesis project");
+if (
+  !Array.isArray(gcer.technicalSections) ||
+  gcer.technicalSections.length === 0 ||
+  gcer.technicalSections.some(({ title, items }) => !title || !Array.isArray(items) || items.length === 0)
+) {
+  throw new Error("GCER technical sections must each have a title and items");
+}
+
 const serialized = JSON.stringify(data);
+
+// 비공개 저장소 링크는 방문자에게 404가 되므로 공개 포트폴리오에 넣지 않는다.
+const privateRepos = ["jobis", "chungju", "lab-rooms-pwa", "finance-rag", "superjuseongs", "ssalmuk-lab"];
+for (const repo of privateRepos) {
+  if (serialized.includes(`github.com/kiwibirdstrike/${repo}"`)) {
+    throw new Error(`Link to private repository: ${repo}`);
+  }
+}
 const privatePatterns = [
   /01[016789][-\s]?\d{3,4}[-\s]?\d{4}/,
   /\d{6}[-\s]?[1-4]\d{6}/
