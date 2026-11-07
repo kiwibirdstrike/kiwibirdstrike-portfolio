@@ -1,7 +1,7 @@
 window.PORTFOLIO_DATA = {
   "profile": {
     "name": "이주성",
-    "education": "충북대학교 정보통계학과 학사 · 석사과정",
+    "education": "충북대학교 정보통계학과 학사 · 석사 졸업",
     "eyebrow": "STATISTICS · MODELING · DEVELOPMENT",
     "title": "통계학을 공부하고,\n현장의 문제를 풀고 있습니다.",
     "lead": "조성자료 모형과 근거 검색을 연구합니다. 선박 식별 모델을 학습하고, 화재 데이터를 분석하고, 연구 코드를 패키지와 서비스로 구현해 왔습니다.",

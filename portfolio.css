@@ -9,9 +9,9 @@
   --line: #dfe1e4;
   --accent: #245fba;
   --selected: #e9edf3;
-  --text-small: .8125rem;
-  --text-label: .875rem;
-  --text-body: 1rem;
+  --text-small: .9375rem;
+  --text-label: 1rem;
+  --text-body: 1.125rem;
   --max: 1040px;
 }
 * { box-sizing: border-box; }
@@ -57,7 +57,7 @@ h1,h2,h3,h4 { text-wrap: balance; }
 .filter-bar { display: flex; flex-direction: column; gap: 6px; }
 .filter { display: flex; align-items: center; justify-content: space-between; gap: 14px; width: 100%; text-align: start; min-height: 44px; padding: 10px 12px; border: 1px solid transparent; border-radius: 6px; background: transparent; color: var(--muted); cursor: pointer; font-size: var(--text-small); line-height: 1.6; }
 .filter.active { color: var(--ink); background: var(--selected); border-color: var(--ink); font-weight: 600; }
-.filter-count { font-size: .75rem; font-variant-numeric: tabular-nums; }
+.filter-count { font-size: var(--text-small); font-variant-numeric: tabular-nums; }
 .filter-result { margin: 16px 12px 0; font-size: var(--text-small); color: var(--muted); }
 .archive-group { margin-block-end: 52px; }
 .archive-group:last-child { margin-bottom: 0; }
@@ -65,7 +65,7 @@ h1,h2,h3,h4 { text-wrap: balance; }
 .project { min-width: 0; padding-block: 26px 30px; border-bottom: 1px solid var(--line); }
 .project:last-child { border: 0; }
 .project-header { display: flex; flex-direction: column; gap: 8px; }
-.project-identity h4 { font-size: 1.125rem; font-weight: 500; line-height: 1.6; margin: 0; }
+.project-identity h4 { font-size: 1.25rem; font-weight: 500; line-height: 1.6; margin: 0; }
 .project-title-link { text-decoration: none; display: inline; }
 .project-arrow { color: var(--muted); font-size: var(--text-label); margin-inline-start: 10px; display: inline-block; }
 .project-period { font-size: var(--text-small); font-variant-numeric: tabular-nums; color: var(--muted); margin: 6px 0 0; }
@@ -96,7 +96,7 @@ figcaption { font-size: var(--text-small); color: var(--muted); margin-top: 12px
 .eyebrow { font-size: var(--text-small); color: var(--muted); margin: 0 0 12px; }
 .project-page-title { font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 600; line-height: 1.45; letter-spacing: -.02em; margin: 12px 0; }
 .project-page-subtitle { font-size: var(--text-label); color: var(--muted); margin: 16px 0; }
-.project-page-lead { font-size: 1.0625rem; line-height: 1.85; max-width: 65ch; margin: 32px 0; }
+.project-page-lead { font-size: var(--text-body); line-height: 1.85; max-width: 65ch; margin: 32px 0; }
 .project-page-details { border-top: 1px solid var(--line); }
 .project-page-links { margin-top: 32px; }
 .workflow-figure,.architecture-figure{margin:40px 0 64px;padding:30px;background:var(--surface);border:1px solid var(--line)}
@@ -104,9 +104,9 @@ figcaption { font-size: var(--text-small); color: var(--muted); margin-top: 12px
 .workflow-steps{list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:26px;padding:0}
 .workflow-steps li{position:relative;border-top:2px solid var(--accent);padding-top:14px}
 .workflow-steps li:not(:last-child)::after{content:'→';position:absolute;top:20px;right:-22px;color:var(--accent)}
-.workflow-number{font-family:'IBM Plex Mono',monospace;color:var(--accent);font-size:.8125rem}
-.workflow-steps h3{font-size:.95rem;margin:10px 0}
-.workflow-steps p{color:var(--muted);font-size:.875rem}
+.workflow-number{font-family:monospace;color:var(--accent);font-size:var(--text-small)}
+.workflow-steps h3{font-size:var(--text-label);margin:10px 0}
+.workflow-steps p{color:var(--muted);font-size:var(--text-label)}
 .workflow-figure figcaption{border-top:1px solid var(--line);padding-top:18px;margin-top:24px}
 .workflow-parallel{grid-template-columns:repeat(3,minmax(0,1fr))}
 .workflow-parallel li:first-child{grid-column:1;grid-row:1/3}
@@ -114,18 +114,18 @@ figcaption { font-size: var(--text-small); color: var(--muted); margin-top: 12px
 .workflow-parallel li:nth-child(3){grid-column:2;grid-row:2}
 .workflow-parallel li:last-child{grid-column:3;grid-row:1/3}
 .architecture-lanes{display:grid;gap:24px}
-.architecture-stage-title{font-size:.85rem;color:var(--accent)}
+.architecture-stage-title{font-size:var(--text-label);color:var(--accent)}
 .architecture-flow{display:flex;flex-wrap:wrap;gap:14px}
 .architecture-node{flex:1 1 160px;border:1px solid var(--line);background:var(--paper);padding:16px}
-.architecture-node strong,.architecture-node span{display:block;font-size:.875rem}
-.architecture-node span{margin-top:8px;font-size:.8125rem;color:var(--muted)}
+.architecture-node strong,.architecture-node span{display:block;font-size:var(--text-label)}
+.architecture-node span{margin-top:8px;font-size:var(--text-small);color:var(--muted)}
 .technical-deep-dive{margin-top:72px}
 .technical-deep-dive-title{font-size:1.75rem;letter-spacing:-.04em}
 .technical-section{border-top:1px solid var(--line);padding-block:26px}
 .technical-section-heading{display:flex;gap:18px;align-items:baseline}
-.technical-section-number{color:var(--accent);font-size:.8125rem}
+.technical-section-number{color:var(--accent);font-size:var(--text-small)}
 .technical-section-heading h2{font-size:1.1rem;margin:0}
-.technical-list{color:var(--muted);font-size:.95rem;padding-left:22px}
+.technical-list{color:var(--muted);font-size:var(--text-body);padding-left:22px}
 .technical-list li{margin-top:18px;line-height:2}
 
 @media (hover: hover) {
