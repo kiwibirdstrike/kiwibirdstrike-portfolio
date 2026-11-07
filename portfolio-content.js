@@ -79,6 +79,7 @@ window.PORTFOLIO_DATA = {
   "projects": [
     {
       "id": "port-matching",
+      "story": {"problem":"작성자마다 다른 선박 표기","approach":"후보 검색과 CE 재순위","outcome":"현장 오류를 반영한 식별 모델"},
       "title": "사람마다 다른 선박 표기를 연결하는 AI",
       "track": "llm",
       "status": "468팀 중 7위",
@@ -129,6 +130,7 @@ window.PORTFOLIO_DATA = {
     },
     {
       "id": "eumseong-fire",
+      "story": {"problem":"음성군에서 두드러지는 화재 원인","approach":"전국 비교와 화학적 요인 추가 분석","outcome":"예방 대상과 정책 방향 제안"},
       "title": "현장 피드백으로 확장한 음성군 화재 분석",
       "track": "analytics",
       "status": "외부 의뢰 · 1·2차 분석",
@@ -180,6 +182,7 @@ window.PORTFOLIO_DATA = {
     },
     {
       "id": "jobis",
+      "story": {"problem":"공고 조건과 기업 정보 대조","approach":"근거 추출과 조건 구조화 분리","outcome":"사용할 수 있는 서비스로 구현"},
       "title": "공공레이더",
       "track": "llm",
       "status": "팀장 · 서비스 구축·운영",
@@ -248,6 +251,7 @@ window.PORTFOLIO_DATA = {
     },
     {
       "id": "lg-aimers-9",
+      "story": {"problem":"성공 여부와 실패 유형 예측","approach":"손실별 학습 후 확률 블렌딩","outcome":"학습 방식 비교와 본선 진출"},
       "title": "분류 목표를 나누어 학습한 제구 성공 확률 예측",
       "track": "stats",
       "status": "1,087팀 중 15위 · 본선 진출",
@@ -297,6 +301,7 @@ window.PORTFOLIO_DATA = {
     },
     {
       "id": "tvspline",
+      "story": {"problem":"흩어진 6개 모형의 연구 코드","approach":"호출 구조 정리와 공통 기능 통합","outcome":"설치 가능한 R 패키지 완성"},
       "title": "6개 논문의 연구 코드를 하나의 R 패키지로",
       "track": "stats",
       "status": "TVspline 1.0.0",
@@ -355,6 +360,7 @@ window.PORTFOLIO_DATA = {
     },
     {
       "id": "polygram",
+      "story": {"problem":"조성자료의 국소적 반응 변화","approach":"기하 구조를 반영한 모형 설계","outcome":"방법론 정리와 저널 투고"},
       "title": "ILR Polygram 로지스틱 회귀",
       "track": "stats",
       "status": "Journal of Classification 투고",
@@ -392,6 +398,7 @@ window.PORTFOLIO_DATA = {
     },
     {
       "id": "gcer",
+      "story": {"problem":"유사도 검색이 놓치는 멀티홉 근거","approach":"통계 모형에서 검색 규칙 유도","validation":"동일 조건 비교와 통계적 검증","outcome":"근거 검색 성능과 적용 한계"},
       "title": "GCER",
       "subtitle": "auto-logistic 모형으로 유도한 멀티홉 근거 검색",
       "period": "2026.09 — 현재",
@@ -511,6 +518,7 @@ window.PORTFOLIO_DATA = {
     },
     {
       "id": "booth-layout",
+      "story": {"problem":"기업 인기도를 반영한 부스 배치","approach":"인기도 예측을 그래프 가중치로 연결","outcome":"최적 배치안 도출"},
       "title": "취업박람회 부스 배치 최적화",
       "track": "analytics",
       "status": "최우수상",
@@ -537,6 +545,7 @@ window.PORTFOLIO_DATA = {
     },
     {
       "id": "lh-vacancy",
+      "story": {"problem":"지식산업센터의 공실 문제","approach":"상권·교통·비용 관계 분석","outcome":"도입 방안 제안"},
       "title": "지식산업센터 공실 분석",
       "track": "analytics",
       "status": "71팀 중 3위 · 장려상",
@@ -563,6 +572,7 @@ window.PORTFOLIO_DATA = {
     },
     {
       "id": "wine-survey",
+      "story": {"problem":"사람마다 다른 와인 분류 기준","approach":"일관된 단맛 평가를 먼저 모델링","outcome":"단맛 예측을 최종 분류로 연결"},
       "title": "소비자가 느끼는 단맛에서 출발한 와인 분류",
       "track": "stats",
       "status": "산업체 설문 분석",
@@ -611,6 +621,7 @@ window.PORTFOLIO_DATA = {
     },
     {
       "id": "weather-study",
+      "story": {"problem":"자료 배포만으로 이어지지 않는 학습","approach":"발표형 세미나로 운영 변경","outcome":"공모전 참여로 실제 분석 경험"},
       "title": "학습 소모임을 공동 분석 팀으로",
       "track": "analytics",
       "status": "대표·운영자 · 2개 부문 입선",
@@ -637,6 +648,7 @@ window.PORTFOLIO_DATA = {
     },
     {
       "id": "khd",
+      "story": {"problem":"전문가의 수면 영상 검토 부담","approach":"폐쇄망에서 신호 분석 직접 구현","outcome":"장애 여부를 먼저 선별하는 모델"},
       "title": "폐쇄망에서 구현한 수면 장애 1차 선별",
       "track": "stats",
       "status": "26팀 중 5위 · 우수상",
@@ -665,6 +677,7 @@ window.PORTFOLIO_DATA = {
     },
     {
       "id": "care-demand",
+      "story": {"problem":"지역별 돌봄 인력 부족 위험","approach":"연 단위 수요·인력 예측","outcome":"돌봄 공백과 대응 방향 제시"},
       "title": "지역별 요양 인력 부족 위험 분석",
       "track": "analytics",
       "status": "팀장 · 정책 제안",
@@ -691,6 +704,7 @@ window.PORTFOLIO_DATA = {
     },
     {
       "id": "sports-location",
+      "story": {"problem":"인구와 접근성을 고려한 시설 입지","approach":"예산별 입지 최적화","outcome":"대안을 비교하는 웹 시뮬레이션"},
       "title": "청주시 공공체육시설 입지 최적화",
       "track": "analytics",
       "status": "우수상",
@@ -721,6 +735,7 @@ window.PORTFOLIO_DATA = {
     },
     {
       "id": "kamp",
+      "story": {"problem":"센서 이상값과 현장 해석의 어려움","approach":"예측 모델과 결과 설명 기능 연결","outcome":"담당자를 위한 분석 도구"},
       "title": "제조데이터 분석을 현장 설명 도구로",
       "track": "analytics",
       "status": "분석·모델링·웹 구현",
@@ -747,6 +762,7 @@ window.PORTFOLIO_DATA = {
     },
     {
       "id": "english-survey",
+      "story": {"problem":"설문이 측정하는 개념 확인","approach":"요인 구조와 신뢰도 검토","outcome":"레벨별 차이 해석과 담당자 전달"},
       "title": "교양 영어 레벨반 설문 분석",
       "track": "stats",
       "status": "설문 설계·통계 자문",
@@ -773,6 +789,7 @@ window.PORTFOLIO_DATA = {
     },
     {
       "id": "lab-rooms",
+      "story": {"problem":"매주 출력하는 종이 예약표","approach":"관리 부담을 고려한 캘린더·PWA","outcome":"공용 미팅룸 모바일 예약"},
       "title": "졸업 후의 운영까지 고려한 예약 PWA",
       "track": "llm",
       "status": "공용 운영에 적용",
@@ -799,6 +816,7 @@ window.PORTFOLIO_DATA = {
     },
     {
       "id": "autoresearch",
+      "story": {"problem":"실험의 경험을 다음 가설로 연결","approach":"지식·실험 이력 기반 반복 구조","outcome":"서로 다른 두 과제에 적용"},
       "title": "실험의 기억을 다음 가설로 잇는 AutoResearch",
       "track": "llm",
       "status": "두 DACON 과제에 적용",
@@ -825,6 +843,7 @@ window.PORTFOLIO_DATA = {
     },
     {
       "id": "worldquant",
+      "story": {"problem":"시장 데이터에서 투자 가설 탐색","approach":"성과·회전율·신호 중복 비교","outcome":"알파 검증과 자동투자 구현 학습"},
       "title": "WorldQuant 알파 설계와 검증",
       "track": "quant",
       "status": "국내 99위 / 3,099명",
@@ -852,6 +871,7 @@ window.PORTFOLIO_DATA = {
     },
     {
       "id": "media-trust",
+      "story": {"problem":"청소년의 뉴스 이용과 신뢰","approach":"코드북 검토와 이용 집단 구분","outcome":"출처 확인 서비스의 적용군 제안"},
       "title": "청소년 뉴스 이용·신뢰 분석",
       "track": "analytics",
       "status": "312팀 중 6위",

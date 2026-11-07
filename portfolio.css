@@ -123,15 +123,33 @@ figcaption { font-size: var(--text-small); color: var(--muted); margin-top: 12px
 .project-page-title { font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 600; line-height: 1.45; letter-spacing: -.02em; margin: 12px 0; }
 .project-page-subtitle { font-size: var(--text-label); color: var(--muted); margin: 16px 0; }
 .project-page-lead { font-size: var(--text-body); line-height: 1.85; max-width: 65ch; margin: 32px 0; }
-.project-page-details { border-top: 1px solid var(--line); }
 .project-page-links { margin-top: 32px; }
+.case-map { padding: 24px; margin-block: 32px 48px; background: var(--surface); border-radius: 8px; }
+.case-map-nodes { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 28px; margin: 0; padding: 0; list-style: none; }
+.case-map-node { position: relative; min-width: 0; }
+.case-map-node:not(:last-child)::after { content: '→'; position: absolute; top: 28px; inset-inline-end: -23px; color: var(--muted); }
+.case-map-link { display: block; padding-block: 8px 16px; text-decoration: none; border-bottom: 3px solid transparent; }
+.case-map-label { display: block; font-size: var(--text-small); color: var(--accent); margin-bottom: 12px; }
+.case-map-link strong { font-size: var(--text-label); font-weight: 500; line-height: 1.65; text-decoration: underline; text-underline-offset: .22em; }
+.case-map-link[aria-current="step"] { border-bottom-color: var(--accent); }
+.case-section { margin-block: 48px; padding-block: 24px 0; border-top: 1px solid var(--line); }
+.case-stage-label { color: var(--muted); font-size: var(--text-small); margin: 0 0 8px; }
+.case-section-title { font-size: 1.5rem; line-height: 1.5; font-weight: 600; margin: 0 0 28px; border-inline-start: 3px solid transparent; padding-inline-start: 12px; }
+.case-section:target .case-section-title { border-inline-start-color: var(--accent); color: var(--accent); }
+.case-subheading { font-size: var(--text-body); font-weight: 600; margin: 32px 0 12px; }
+.case-prose { max-width: 65ch; color: var(--muted); font-size: var(--text-body); line-height: 1.85; }
+.case-prose p { margin: 0; }
+.case-prose p + p { margin-top: 20px; }
+.case-decision { padding: 24px; background: var(--surface); border-radius: 8px; }
+.case-decision .case-subheading { margin-top: 0; }
+.case-decision .case-prose { color: var(--ink); }
 .workflow-figure,.architecture-figure{margin:40px 0 64px;padding:30px;background:var(--surface);border:1px solid var(--line)}
-.workflow-figure h2,.architecture-title{font-size:1.3rem;line-height:1.6;margin:0 0 24px}
+.workflow-figure h3,.architecture-title{font-size:1.3rem;line-height:1.6;margin:0 0 24px}
 .workflow-steps{list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:26px;padding:0}
 .workflow-steps li{position:relative;border-top:2px solid var(--accent);padding-top:14px}
 .workflow-steps li:not(:last-child)::after{content:'→';position:absolute;top:20px;right:-22px;color:var(--accent)}
 .workflow-number{font-family:monospace;color:var(--accent);font-size:var(--text-small)}
-.workflow-steps h3{font-size:var(--text-label);margin:10px 0}
+.workflow-steps h4{font-size:var(--text-label);margin:10px 0}
 .workflow-steps p{color:var(--muted);font-size:var(--text-label)}
 .workflow-figure figcaption{border-top:1px solid var(--line);padding-top:18px;margin-top:24px}
 .workflow-parallel{grid-template-columns:repeat(3,minmax(0,1fr))}
@@ -150,7 +168,7 @@ figcaption { font-size: var(--text-small); color: var(--muted); margin-top: 12px
 .technical-section{border-top:1px solid var(--line);padding-block:26px}
 .technical-section-heading{display:flex;gap:18px;align-items:baseline}
 .technical-section-number{color:var(--accent);font-size:var(--text-small)}
-.technical-section-heading h2{font-size:1.1rem;margin:0}
+.technical-section-heading h4{font-size:1.125rem;margin:0}
 .technical-list{color:var(--muted);font-size:var(--text-body);padding-left:22px}
 .technical-list li{margin-top:18px;line-height:2}
 
@@ -164,6 +182,9 @@ figcaption { font-size: var(--text-small); color: var(--muted); margin-top: 12px
   .filter, .print-button { transition: background-color 120ms ease-out; }
 }
 @media (max-width: 800px) {
+  .case-map-nodes { grid-auto-flow: row; grid-auto-columns: auto; grid-template-columns: 1fr; gap: 28px; }
+  .case-map-node:not(:last-child)::after { content: '↓'; top: auto; bottom: -28px; inset-inline-start: 0; inset-inline-end: auto; }
+  .case-map-link { padding-block: 0 8px; }
   .process-map { position: relative; padding: 20px 16px 20px 44px; }
   .process-nodes { grid-template-columns: 1fr; gap: 24px; }
   .process-link { flex-direction: row; text-align: start; padding: 0; }

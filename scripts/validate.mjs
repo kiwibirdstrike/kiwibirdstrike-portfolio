@@ -62,6 +62,9 @@ for (const p of projects) {
     if (!p[key] || (Array.isArray(p[key]) && !p[key].length)) throw new Error('Missing ' + key + ' on ' + p.id);
   }
   if (p.workflow && (p.workflow.steps.length !== 4 || !p.workflow.caption)) throw new Error('Invalid workflow: ' + p.id);
+  for (const key of ['problem', 'approach', 'outcome', ...(p.validation ? ['validation'] : [])]) {
+    if (!p.story?.[key]) throw new Error('Missing story stage ' + key + ' on ' + p.id);
+  }
 }
 for (const id of ['quant-agent','imputation','digital-bio','fire-law-search']) {
   if (projects.some(p => p.id === id)) throw new Error('Removed project remains: ' + id);

@@ -20,17 +20,13 @@ function appendLinks(target, links) {
   });
 }
 
-function detailBlock(label, value) {
-  const block = element("div", "project-detail");
-  block.append(element("dt", "", label));
-  if (Array.isArray(value)) {
-    const list = element("ul");
-    value.forEach((item) => list.append(element("li", "", item)));
-    const description = element("dd");
-    description.append(list);
-    block.append(description);
-  } else {
-    block.append(element("dd", "", value));
+function prose(value) {
+  const block = element("div", "case-prose");
+  for (const text of Array.isArray(value) ? value : [value]) {
+    const sentences = text.split(/(?<=[.!?])\s+(?=[가-힣A-Z“])/u);
+    for (let i = 0; i < sentences.length; i += 2) {
+      block.append(element("p", "", sentences.slice(i, i + 2).join(" ")));
+    }
   }
   return block;
 }
@@ -40,7 +36,7 @@ function technicalSection(number, title, items) {
   const heading = element("div", "technical-section-heading");
   heading.append(
     element("span", "technical-section-number", number),
-    element("h2", "", title)
+    element("h4", "", title)
   );
   const list = element("ol", "technical-list");
   items.forEach((item) => list.append(element("li", "", item)));
@@ -50,11 +46,11 @@ function technicalSection(number, title, items) {
 
 function workflowFigure(workflow) {
   const figure = element("figure", "workflow-figure");
-  figure.append(element("h2", "", workflow.title));
+  figure.append(element("h3", "", workflow.title));
   const steps = element("ol", `workflow-steps${workflow.parallel ? " workflow-parallel" : ""}`);
   for (const [index, step] of workflow.steps.entries()) {
     const item = element("li");
-    item.append(element("span", "workflow-number", String(index + 1).padStart(2, "0")), element("h3", "", step.title), element("p", "", step.note));
+    item.append(element("span", "workflow-number", String(index + 1).padStart(2, "0")), element("h4", "", step.title), element("p", "", step.note));
     steps.append(item);
   }
   figure.append(steps, element("figcaption", "", workflow.caption));
@@ -66,13 +62,13 @@ function architectureFigure(project) {
   const heading = element("div", "architecture-heading");
   heading.append(
     element("p", "eyebrow", "SYSTEM ARCHITECTURE"),
-    element("h2", "architecture-title", project.architectureTitle)
+    element("h3", "architecture-title", project.architectureTitle)
   );
 
   const lanes = element("div", "architecture-lanes");
   project.architectureDiagram.forEach((stage) => {
     const lane = element("section", "architecture-stage");
-    lane.append(element("h3", "architecture-stage-title", stage.title));
+    lane.append(element("h4", "architecture-stage-title", stage.title));
     const flow = element("div", "architecture-flow");
     stage.nodes.forEach((node) => {
       const card = element("div", "architecture-node");
@@ -115,48 +111,89 @@ function renderProject(project) {
   );
 
   const intro = element("p", "project-page-lead", project.summary);
-  const details = element("dl", "project-details project-page-details");
-  for (const [label, value] of [
-    ["해결하려던 문제", project.problem],
-    ["내 역할과 목표", project.role],
-    ["핵심 판단", project.decision],
-    ["수행 과정", project.process],
-    ["검증", project.validation],
-    ["결과와 배운 점", project.result],
-    ["한계와 확장", project.limitation]
-  ]) {
-    if (value && (!Array.isArray(value) || value.length)) details.append(detailBlock(label, value));
-  }
-
   target.append(header, intro);
-  if (project.workflow) target.append(workflowFigure(project.workflow));
-  if (project.architectureDiagram) {
-    target.append(architectureFigure(project));
-  }
-  target.append(details);
+
+  const stages = [
+    { id: "problem", label: "문제 정의", title: project.story.problem },
+    { id: "approach", label: "판단과 실행", title: project.story.approach },
+    ...(project.validation ? [{ id: "validation", label: "검증", title: project.story.validation }] : []),
+    { id: "outcome", label: "결과와 배운 점", title: project.story.outcome },
+  ];
+  const map = element("nav", "case-map");
+  map.setAttribute("aria-label", "프로젝트 흐름 — 각 단계의 설명으로 이동");
+  const nodes = element("ol", "case-map-nodes");
+  const sections = {};
+  const mapLinks = [];
+  stages.forEach(({ id, label, title }, index) => {
+    const number = String(index + 1).padStart(2, "0");
+    const node = element("li", "case-map-node");
+    const link = element("a", "case-map-link");
+    link.href = `#case-${id}`;
+    link.append(element("span", "case-map-label", `${number} / ${label}`), element("strong", "", title));
+    node.append(link);
+    nodes.append(node);
+    mapLinks.push({ link, id: `case-${id}` });
+    const section = element("section", "case-section");
+    section.id = `case-${id}`;
+    section.setAttribute("tabindex", "-1");
+    section.setAttribute("aria-labelledby", `${section.id}-title`);
+    const heading = element("h2", "case-section-title", title);
+    heading.id = `${section.id}-title`;
+    section.append(element("p", "case-stage-label", `${number} / ${label}`), heading);
+    sections[id] = section;
+  });
+  map.append(nodes);
+  target.append(map);
+
+  sections.problem.append(prose(project.problem), element("h3", "case-subheading", "내 역할과 목표"), prose(project.role));
+  const decision = element("aside", "case-decision");
+  decision.setAttribute("aria-label", "핵심 판단");
+  decision.append(element("h3", "case-subheading", "핵심 판단"), prose(project.decision));
+  sections.approach.append(decision);
+  if (project.workflow) sections.approach.append(workflowFigure(project.workflow));
+  if (project.architectureDiagram) sections.approach.append(architectureFigure(project));
+  sections.approach.append(element("h3", "case-subheading", "수행 과정"), prose(project.process));
   if (project.technicalSections) {
     const technical = element("div", "technical-deep-dive");
     technical.append(
       element("p", "eyebrow", "TECHNICAL DEEP DIVE"),
-      element("h2", "technical-deep-dive-title", "어떻게 설계하고 검증했는가")
+      element("h3", "technical-deep-dive-title", "설계와 구현의 세부 내용")
     );
     project.technicalSections.forEach(({ title, items }, index) => {
       technical.append(technicalSection(String(index + 1).padStart(2, "0"), title, items));
     });
-    target.append(technical);
+    sections.approach.append(technical);
   } else if (project.technicalDetails) {
     const technical = element("div", "technical-deep-dive");
     technical.append(
       element("p", "eyebrow", "TECHNICAL DEEP DIVE"),
-      element("h2", "technical-deep-dive-title", "어떻게 설계하고 검증했는가"),
+      element("h3", "technical-deep-dive-title", "설계와 구현의 세부 내용"),
       technicalSection("01", "시스템 구조", project.technicalDetails.architecture),
       technicalSection("02", "데이터 흐름", project.technicalDetails.dataFlow),
       technicalSection("03", "구현 핵심", project.technicalDetails.implementation),
       technicalSection("04", "기술적 판단", project.technicalDetails.decisions),
       technicalSection("05", "실험과 검증", project.technicalDetails.experiments)
     );
-    target.append(technical);
+    sections.approach.append(technical);
   }
+  if (project.validation) sections.validation.append(prose(project.validation));
+  sections.outcome.append(prose(project.result));
+  if (project.media) {
+    const figure = element("figure", "project-media");
+    const image = element("img");
+    image.src = project.media.src;
+    image.alt = project.media.alt;
+    image.loading = "lazy";
+    figure.append(image, element("figcaption", "", project.media.alt));
+    sections.outcome.append(figure);
+  }
+  if (project.limitation) sections.outcome.append(element("h3", "case-subheading", "한계와 다음 과제"), prose(project.limitation));
+  for (const stage of stages) target.append(sections[stage.id]);
+  const syncSelection = () => {
+    for (const item of mapLinks) item.link.setAttribute("aria-current", window.location.hash === `#${item.id}` ? "step" : "false");
+  };
+  window.addEventListener("hashchange", syncSelection);
+  syncSelection();
   if (project.links.length) {
     const links = element("div", "project-links project-page-links");
     appendLinks(links, project.links);

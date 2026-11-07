@@ -24,6 +24,7 @@ class Element {
     ]);
   }
   querySelector(selector) { return this.querySelectorAll(selector)[0]; }
+  get lastElementChild() { return this.children.at(-1); }
 }
 
 const roots = {};
@@ -92,11 +93,38 @@ console.log('PASS: pagination to 20; categories; focus; diagram/row selection; h
 const detailScript = readFileSync(new URL('../project-page.js', import.meta.url), 'utf8');
 for (const project of context.window.PORTFOLIO_DATA.projects) {
   const target = new Element('main');
+  const detailHandlers = {};
+  const location = { search: `?id=${project.id}`, hash: '' };
   vm.runInNewContext(detailScript, {
-    window: { PORTFOLIO_DATA: context.window.PORTFOLIO_DATA, location: { search: `?id=${project.id}` } },
+    window: { PORTFOLIO_DATA: context.window.PORTFOLIO_DATA, location, addEventListener: (name, handler) => { detailHandlers[name] = handler; } },
     document: { ...document, querySelector: () => target },
     URLSearchParams,
   });
   assert(target.children.length > 2, project.id);
+  const sections = target.querySelectorAll('.case-section');
+  const links = target.querySelectorAll('.case-map-link');
+  assert.equal(sections.length, project.validation ? 4 : 3);
+  assert.equal(links.length, sections.length);
+  links.forEach((link, index) => assert.equal(link.href, `#${sections[index].id}`));
+  location.hash = '#case-approach';
+  detailHandlers.hashchange();
+  assert.equal(links[1].attributes['aria-current'], 'step');
+  assert.equal(links[0].attributes['aria-current'], 'false');
+  assert.equal(target.querySelectorAll('.workflow-figure').length, project.workflow ? 1 : 0);
+  assert.equal(target.querySelectorAll('.architecture-figure').length, project.architectureDiagram ? 1 : 0);
+  assert.equal(target.querySelectorAll('.project-media').length, project.media ? 1 : 0);
+  const textOf = node => [node.textContent || '', ...node.children.map(textOf)].join(' ');
+  const normalized = textOf(target).replace(/\s+/g, '');
+  for (const field of ['problem', 'role', 'decision', 'process', 'validation', 'result', 'limitation']) {
+    for (const text of [project[field]].flat().filter(Boolean)) {
+      assert(normalized.includes(text.replace(/\s+/g, '')), `${project.id}: missing ${field}`);
+    }
+  }
 }
-console.log('PASS: all 20 detail pages render');
+const missing = new Element('main');
+vm.runInNewContext(detailScript, {
+  window: { PORTFOLIO_DATA: context.window.PORTFOLIO_DATA, location: { search: '?id=fire-law-search' } },
+  document: { ...document, querySelector: () => missing }, URLSearchParams,
+});
+assert.equal(missing.lastElementChild.href, './index.html#projects');
+console.log('PASS: 20 detail flows, links, figures, full source text and removed-project fallback');
