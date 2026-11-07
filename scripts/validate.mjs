@@ -1,7 +1,7 @@
 import { readFileSync, statSync } from "node:fs";
 import vm from "node:vm";
 
-const requiredFiles = ["index.html", "portfolio.css", "site.js", "portfolio-content.js", ".nojekyll", "project.html", "project-page.js"];
+const requiredFiles = ["index.html", "portfolio.css", "site.js", "portfolio-content.js", "project-visuals.js", ".nojekyll", "project.html", "project-page.js"];
 const requiredKeys = [
   "profile",
   "tracks",
@@ -51,6 +51,30 @@ function inspect(value, path = "portfolio") {
 inspect(data);
 
 const projects = data.projects;
+vm.runInNewContext(readFileSync(new URL('../project-visuals.js', import.meta.url), 'utf8'), context);
+const visuals = context.window.PROJECT_VISUALS;
+if (Object.keys(visuals).length !== projects.length) throw new Error('Visual project coverage mismatch');
+for (const project of projects) {
+  if (!visuals[project.id]?.length) throw new Error('Missing visual: ' + project.id);
+  for (const visual of visuals[project.id]) {
+    const fail = () => { throw new Error('Invalid visual: ' + project.id + ' / ' + visual.title); };
+    if (!visual.title || !visual.caption || !['approach', 'outcome'].includes(visual.placement) || !visual.sources?.length || visual.sources.some(key => !project[key])) fail();
+    const source = visual.sources.map(key => JSON.stringify(project[key])).join(' ');
+    if (visual.type === 'architecture') {
+      if (!visual.lanes.length || visual.lanes.some(lane => !lane.title || lane.stages.length < 2 || lane.stages.length > 4 || lane.stages.some(stage => !stage.label || !stage.nodes.length || stage.nodes.some(node => !node.title || !node.text)))) fail();
+    } else if (visual.type === 'table') {
+      if (!visual.columns.length || !visual.rows.length || visual.rows.some(row => row.length !== visual.columns.length || row.some(cell => !cell))) fail();
+    } else if (visual.type === 'bars') {
+      if (!(visual.max > 0) || !visual.rows.length || visual.rows.some(row => !row.label || !row.display || !Number.isFinite(row.value) || row.value < 0 || row.value > visual.max || (row.evidence && !source.includes(row.evidence)))) fail();
+      if (visual.derivation) {
+        const { baseline, increasePercent } = visual.derivation;
+        if (!source.includes(`${increasePercent}%`) || visual.rows[0].value !== baseline || Math.abs(visual.rows[1].value - baseline * (1 + increasePercent / 100)) > 1e-9) fail();
+      }
+    } else if (visual.type === 'composition') {
+      if (visual.total !== 2674 || visual.selected !== 1470 || (visual.selected / visual.total * 100).toFixed(1) !== '55.0' || visual.conditions.length !== 2) fail();
+    } else fail();
+  }
+}
 for (const skill of data.profile.skills) {
   if (!skill.category || !skill.question || !skill.items || !skill.example || !projects.some(p => p.id === skill.projectId)) {
     throw new Error('Incomplete capability stage or invalid project link');

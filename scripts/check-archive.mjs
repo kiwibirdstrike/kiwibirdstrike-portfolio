@@ -7,6 +7,7 @@ class Element {
     this.tag = tag;
     this.children = [];
     this.dataset = {};
+    this.style = {};
     this.attributes = {};
     this.handlers = {};
     this.className = '';
@@ -17,6 +18,8 @@ class Element {
   addEventListener(name, handler) { this.handlers[name] = handler; }
   closest() { return this; }
   focus() { this.focused = true; }
+  scrollIntoView(options) { this.scrollOptions = options; }
+  getBoundingClientRect() { return this.rect || { top: 2000, bottom: 2200 }; }
   querySelectorAll(selector) {
     return this.children.flatMap(child => [
       ...(child.className.split(' ').includes(selector.slice(1)) ? [child] : []),
@@ -34,9 +37,10 @@ const document = {
   querySelectorAll: () => [],
 };
 const windowHandlers = {};
-const context = { document, window: { location: { hash: '' }, addEventListener: (name, handler) => { windowHandlers[name] = handler; } } };
+const frames = [];
+const context = { document, requestAnimationFrame: fn => frames.push(fn), window: { innerHeight: 800, history: { pushState() {} }, matchMedia: () => ({ matches: false }), location: { hash: '' }, addEventListener: (name, handler) => { windowHandlers[name] = handler; } } };
 vm.createContext(context);
-for (const file of ['portfolio-content.js', 'site.js']) {
+for (const file of ['portfolio-content.js', 'project-visuals.js', 'site.js']) {
   vm.runInContext(readFileSync(new URL(`../${file}`, import.meta.url), 'utf8'), context);
 }
 const archive = roots['#project-archive'];
@@ -71,7 +75,8 @@ const nodes = roots['#process-nodes'].children;
 const stages = roots['#skills-list'].children;
 assert.equal(nodes.length, 6);
 nodes.forEach((node, index) => assert.equal(node.children[0].href, `#${stages[index].id}`));
-nodes[0].children[0].handlers.click();
+nodes[0].children[0].handlers.click({ preventDefault() {} });
+assert.equal(stages[0].scrollOptions.block, 'center');
 assert.equal(stages[0].querySelector('.skill-select').attributes['aria-pressed'], 'true');
 stages[2].handlers.click({ target: { closest: () => null } });
 assert.equal(stages[2].querySelector('.skill-select').attributes['aria-pressed'], 'true');
@@ -82,6 +87,18 @@ assert.equal(stages[2].querySelector('.skill-select').attributes['aria-pressed']
 context.window.location.hash = '#process-stage-2';
 windowHandlers.hashchange();
 assert.equal(stages[1].querySelector('.skill-select').attributes['aria-pressed'], 'true');
+assert.equal(stages[2].querySelector('.skill-select').attributes['aria-pressed'], 'false');
+frames.splice(0).forEach(fn => fn());
+roots['#skills-list'].rect = { top: -400, bottom: 1200 };
+stages.forEach((stage, index) => { stage.rect = { top: index * 200 - 200, bottom: index * 200 }; });
+windowHandlers.scroll();
+windowHandlers.scroll();
+assert.equal(frames.length, 1);
+frames.shift()();
+assert.equal(stages[2].querySelector('.skill-select').attributes['aria-pressed'], 'true');
+stages.forEach(stage => { stage.rect.top -= 200; stage.rect.bottom -= 200; });
+windowHandlers.scroll(); frames.shift()();
+assert.equal(stages[3].querySelector('.skill-select').attributes['aria-pressed'], 'true');
 assert.equal(stages[2].querySelector('.skill-select').attributes['aria-pressed'], 'false');
 assert.equal(roots['#hero-lead'].children.length, 3);
 for (const article of articles) {
@@ -96,7 +113,7 @@ for (const project of context.window.PORTFOLIO_DATA.projects) {
   const detailHandlers = {};
   const location = { search: `?id=${project.id}`, hash: '' };
   vm.runInNewContext(detailScript, {
-    window: { PORTFOLIO_DATA: context.window.PORTFOLIO_DATA, location, addEventListener: (name, handler) => { detailHandlers[name] = handler; } },
+    window: { PORTFOLIO_DATA: context.window.PORTFOLIO_DATA, PROJECT_VISUALS: context.window.PROJECT_VISUALS, location, addEventListener: (name, handler) => { detailHandlers[name] = handler; } },
     document: { ...document, querySelector: () => target },
     URLSearchParams,
   });
@@ -110,7 +127,9 @@ for (const project of context.window.PORTFOLIO_DATA.projects) {
   detailHandlers.hashchange();
   assert.equal(links[1].attributes['aria-current'], 'step');
   assert.equal(links[0].attributes['aria-current'], 'false');
-  assert.equal(target.querySelectorAll('.workflow-figure').length, project.workflow ? 1 : 0);
+  const visuals = context.window.PROJECT_VISUALS[project.id];
+  assert.equal(target.querySelectorAll('.project-visual').length, visuals.length);
+  assert.equal(target.querySelectorAll('.workflow-figure').length, project.workflow && !visuals.some(v => v.replacesWorkflow) ? 1 : 0);
   assert.equal(target.querySelectorAll('.architecture-figure').length, project.architectureDiagram ? 1 : 0);
   assert.equal(target.querySelectorAll('.project-media').length, project.media ? 1 : 0);
   const textOf = node => [node.textContent || '', ...node.children.map(textOf)].join(' ');

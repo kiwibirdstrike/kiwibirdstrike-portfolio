@@ -86,6 +86,97 @@ function architectureFigure(project) {
   return figure;
 }
 
+function visualFigure(visual, index) {
+  const figure = element("figure", `project-visual visual-${visual.type}`);
+  figure.id = `visual-${index + 1}`;
+  const heading = element("h3", "visual-title", visual.title);
+  heading.id = `${figure.id}-title`;
+  figure.setAttribute("aria-labelledby", heading.id);
+  figure.append(heading);
+
+  if (visual.type === "architecture") {
+    for (const lane of visual.lanes) {
+      const section = element("section", "system-lane");
+      section.append(element("h4", "system-lane-title", lane.title));
+      const stages = element("ol", `system-stages system-stages-${lane.stages.length}`);
+      for (const stage of lane.stages) {
+        const step = element("li", "system-stage");
+        step.append(element("p", "system-stage-label", stage.label));
+        for (const node of stage.nodes) {
+          const box = element("div", "system-node");
+          box.append(element("strong", "", node.title), element("p", "", node.text));
+          step.append(box);
+        }
+        stages.append(step);
+      }
+      section.append(stages);
+      figure.append(section);
+    }
+    if (visual.loop) figure.append(element("p", "system-loop", `↶ ${visual.loop}`));
+  } else if (visual.type === "table") {
+    const table = element("table", "evidence-table");
+    table.setAttribute("aria-labelledby", heading.id);
+    const head = element("thead");
+    const header = element("tr");
+    for (const label of visual.columns) {
+      const cell = element("th", "", label);
+      cell.setAttribute("scope", "col");
+      header.append(cell);
+    }
+    head.append(header);
+    const body = element("tbody");
+    for (const values of visual.rows) {
+      const row = element("tr");
+      values.forEach((value, column) => {
+        const cell = element(column === 0 ? "th" : "td", "", value);
+        if (column === 0) cell.setAttribute("scope", "row");
+        row.append(cell);
+      });
+      body.append(row);
+    }
+    table.append(head, body);
+    figure.append(table);
+  } else if (visual.type === "bars") {
+    const axis = element("div", "bar-axis");
+    axis.setAttribute("aria-hidden", "true");
+    [0, visual.max / 2, visual.max].forEach(value => axis.append(element("span", "", `${value}${visual.unit === "%" ? "%" : ""}`)));
+    figure.append(element("p", "visual-unit", `단위: ${visual.unit}`), axis);
+    const rows = element("ul", "bar-rows");
+    for (const row of visual.rows) {
+      const item = element("li", "bar-row");
+      const label = element("div", "bar-label");
+      label.append(element("span", "", row.label), element("strong", "", row.display));
+      const track = element("div", "bar-track");
+      track.setAttribute("aria-hidden", "true");
+      const fill = element("div", `bar-fill${row.reference ? " bar-reference" : ""}`);
+      fill.style.width = `${row.value / visual.max * 100}%`;
+      track.append(fill);
+      item.append(label, track);
+      rows.append(item);
+    }
+    figure.append(rows);
+  } else if (visual.type === "composition") {
+    figure.append(element("p", "visual-unit", `전체 응답자 ${visual.total.toLocaleString("ko-KR")}명 · 다음 두 조건에 모두 해당`));
+    const conditions = element("ul", "cohort-conditions");
+    visual.conditions.forEach(condition => conditions.append(element("li", "", condition)));
+    const track = element("div", "composition-track");
+    track.setAttribute("aria-hidden", "true");
+    const legend = element("ul", "composition-legend");
+    [[visual.selectedLabel, visual.selected], [visual.otherLabel, visual.total - visual.selected]].forEach(([label, count], group) => {
+      const percentage = count / visual.total * 100;
+      const segment = element("div", `composition-segment composition-${group}`);
+      segment.style.width = `${percentage}%`;
+      track.append(segment);
+      const item = element("li", `composition-key composition-${group}`);
+      item.append(element("span", "", label), element("strong", "", `${count.toLocaleString("ko-KR")}명 · ${percentage.toFixed(1)}%`));
+      legend.append(item);
+    });
+    figure.append(conditions, track, legend);
+  }
+  figure.append(element("figcaption", "", visual.caption));
+  return figure;
+}
+
 function renderNotFound() {
   target.append(
     element("p", "eyebrow", "PROJECT NOT FOUND"),
@@ -97,6 +188,7 @@ function renderNotFound() {
 }
 
 function renderProject(project) {
+  const visuals = window.PROJECT_VISUALS[project.id];
   document.title = `${project.title} | 이주성 포트폴리오`;
   const header = element("header", "project-page-header");
   const back = element("a", "back-link", "← 프로젝트 목록");
@@ -150,8 +242,11 @@ function renderProject(project) {
   decision.setAttribute("aria-label", "핵심 판단");
   decision.append(element("h3", "case-subheading", "핵심 판단"), prose(project.decision));
   sections.approach.append(decision);
-  if (project.workflow) sections.approach.append(workflowFigure(project.workflow));
+  if (project.workflow && !visuals.some(visual => visual.replacesWorkflow)) sections.approach.append(workflowFigure(project.workflow));
   if (project.architectureDiagram) sections.approach.append(architectureFigure(project));
+  visuals.forEach((visual, index) => {
+    if (visual.placement === "approach") sections.approach.append(visualFigure(visual, index));
+  });
   sections.approach.append(element("h3", "case-subheading", "수행 과정"), prose(project.process));
   if (project.technicalSections) {
     const technical = element("div", "technical-deep-dive");
@@ -177,6 +272,9 @@ function renderProject(project) {
     sections.approach.append(technical);
   }
   if (project.validation) sections.validation.append(prose(project.validation));
+  visuals.forEach((visual, index) => {
+    if (visual.placement === "outcome") sections.outcome.append(visualFigure(visual, index));
+  });
   sections.outcome.append(prose(project.result));
   if (project.media) {
     const figure = element("figure", "project-media");

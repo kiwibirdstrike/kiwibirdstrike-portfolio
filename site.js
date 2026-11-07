@@ -33,6 +33,10 @@ function renderProfile() {
       view.link.setAttribute("aria-current", selected ? "step" : "false");
     }
   }
+  function centerStage(row) {
+    selectStage(row.id);
+    row.scrollIntoView({ block: "center", behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth" });
+  }
   data.profile.skills.forEach(({ category, question, items, example, projectId }, index) => {
     const node = element("li", "process-node");
     const link = element("a", "process-link");
@@ -59,15 +63,41 @@ function renderProfile() {
     evidence.href = `./project.html?id=${encodeURIComponent(projectId)}`;
     row.append(stage, reasoning, evidence);
     stageViews.push({ row, button, link });
-    link.addEventListener("click", () => selectStage(row.id));
+    link.addEventListener("click", event => {
+      event.preventDefault();
+      window.history.pushState(null, "", link.href);
+      centerStage(row);
+      row.focus({ preventScroll: true });
+    });
     row.addEventListener("click", event => {
-      if (!event.target.closest("a")) selectStage(row.id);
+      if (!event.target.closest("a")) centerStage(row);
     });
     skills.append(row);
   });
   const selectFromHash = () => selectStage(window.location.hash.slice(1));
   window.addEventListener("hashchange", selectFromHash);
   selectFromHash();
+  let framePending = false;
+  function selectCenteredStage() {
+    framePending = false;
+    const center = window.innerHeight / 2;
+    const bounds = skills.getBoundingClientRect();
+    if (bounds.top > center || bounds.bottom < center) return;
+    const nearest = stageViews.reduce((best, view) => {
+      const rect = view.row.getBoundingClientRect();
+      const distance = Math.abs((rect.top + rect.bottom) / 2 - center);
+      return !best || distance < best.distance ? { view, distance } : best;
+    }, null);
+    selectStage(nearest.view.row.id);
+  }
+  function scheduleStageSelection() {
+    if (framePending) return;
+    framePending = true;
+    requestAnimationFrame(selectCenteredStage);
+  }
+  window.addEventListener("scroll", scheduleStageSelection, { passive: true });
+  window.addEventListener("resize", scheduleStageSelection);
+  scheduleStageSelection();
 
   document.querySelector("#profile-name").textContent = data.profile.name;
   document.querySelector("#profile-education").textContent = data.profile.education;
@@ -210,7 +240,7 @@ document.querySelector("#print-button").addEventListener("click", () => window.p
 
 function scrollToCurrentHash() {
   if (!window.location.hash) return;
-  document.querySelector(window.location.hash)?.scrollIntoView();
+  document.querySelector(window.location.hash)?.scrollIntoView({ block: window.location.hash.startsWith("#process-stage-") ? "center" : "start" });
 }
 
 if (window.location.hash) {
