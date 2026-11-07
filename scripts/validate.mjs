@@ -60,7 +60,9 @@ for (const project of projects) {
     const fail = () => { throw new Error('Invalid visual: ' + project.id + ' / ' + visual.title); };
     if (!visual.title || !visual.caption || !['approach', 'outcome'].includes(visual.placement) || !visual.sources?.length || visual.sources.some(key => !project[key])) fail();
     const source = visual.sources.map(key => JSON.stringify(project[key])).join(' ');
-    if (visual.type === 'architecture') {
+    if (visual.type === 'image') {
+      if (!visual.alt || !visual.credit || !(visual.width > 0) || !(visual.height > 0) || !visual.src.startsWith('./assets/projects/') || !statSync(new URL('../' + visual.src, import.meta.url)).isFile()) fail();
+    } else if (visual.type === 'architecture') {
       if (!visual.lanes.length || visual.lanes.some(lane => !lane.title || lane.stages.length < 2 || lane.stages.length > 4 || lane.stages.some(stage => !stage.label || !stage.nodes.length || stage.nodes.some(node => !node.title || !node.text)))) fail();
     } else if (visual.type === 'table') {
       if (!visual.columns.length || !visual.rows.length || visual.rows.some(row => row.length !== visual.columns.length || row.some(cell => !cell))) fail();

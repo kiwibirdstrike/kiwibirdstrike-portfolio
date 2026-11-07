@@ -94,7 +94,21 @@ function visualFigure(visual, index) {
   figure.setAttribute("aria-labelledby", heading.id);
   figure.append(heading);
 
-  if (visual.type === "architecture") {
+  if (visual.type === "image") {
+    const link = element("a", "paper-figure-link");
+    link.href = visual.src;
+    link.target = "_blank";
+    link.rel = "noopener";
+    link.setAttribute("aria-label", `${visual.title} — 큰 이미지 열기`);
+    const img = element("img");
+    img.src = visual.src;
+    img.alt = visual.alt;
+    img.loading = "lazy";
+    img.width = visual.width;
+    img.height = visual.height;
+    link.append(img);
+    figure.append(link, element("p", "paper-figure-source", `${visual.credit} · 그림을 누르면 크게 볼 수 있습니다.`));
+  } else if (visual.type === "architecture") {
     for (const lane of visual.lanes) {
       const section = element("section", "system-lane");
       section.append(element("h4", "system-lane-title", lane.title));
@@ -209,7 +223,7 @@ function renderProject(project) {
     { id: "problem", label: "문제 정의", title: project.story.problem },
     { id: "approach", label: "판단과 실행", title: project.story.approach },
     ...(project.validation ? [{ id: "validation", label: "검증", title: project.story.validation }] : []),
-    { id: "outcome", label: "결과와 배운 점", title: project.story.outcome },
+    { id: "outcome", label: "결과", title: project.story.outcome },
   ];
   const map = element("nav", "case-map");
   map.setAttribute("aria-label", "프로젝트 흐름 — 각 단계의 설명으로 이동");

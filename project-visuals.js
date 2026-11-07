@@ -84,19 +84,17 @@ window.PROJECT_VISUALS = {
     ], caption: "실행 순서와 개발 절차를 나눠 표현했습니다. 6개 연구 모형을 사용자가 같은 방식으로 실행하고 결과를 활용할 수 있도록 구성했습니다."
   }],
   "polygram": [{
-    type: "architecture", placement: "approach", title: "조성자료의 기하 구조에서 적합과 해석까지", sources: ["process"],
-    lanes: [
-      { title: "모형 정의", stages: [
-        { label: "입력", nodes: [{ title: "세 성분 조성자료", text: "합이 1인 simplex의 자료" }] },
-        { label: "좌표와 표면", nodes: [{ title: "ILR 변환 · 삼각분할", text: "삼각형마다 선형 logit surface 구성" }] },
-        { label: "복잡도 조절", nodes: [{ title: "기울기 변화의 L1 벌점", text: "인접 삼각형의 불필요한 변화 억제" }] }
-      ] },
-      { title: "적합과 해석", stages: [
-        { label: "최적화", nodes: [{ title: "ADMM", text: "로지스틱 음의 로그우도 + 벌점 최적화" }] },
-        { label: "모형 선택", nodes: [{ title: "Penalty path · AIC", text: "벌점 강도에 따른 모형 비교" }] },
-        { label: "원래 공간으로", nodes: [{ title: "Simplex 역변환", text: "확률 표면과 활성 edge 해석" }] }
-      ] }
-    ], caption: "적합은 ILR 공간에서, 해석은 원래 조성 공간에서 수행했습니다. 벌점은 데이터가 뒷받침하는 국소 추세 변화만 남기도록 설계했습니다."
+    type: "image", placement: "approach", title: "국소적인 변화가 생기는 위치를 찾는 모형", sources: ["process"],
+    src: "./assets/projects/polygram-simulation.png", width: 2000, height: 1010,
+    alt: "SIM03 시뮬레이션: 왼쪽은 자료 생성에 사용한 실제 기울기 변화 경계, 오른쪽은 Polygram이 추정한 활성 경계. 선의 색과 굵기는 기울기 변화의 크기를 나타냅니다.",
+    credit: "논문 Figure 2 · SIM03 시뮬레이션",
+    caption: "왼쪽은 자료를 만들 때 설정한 기울기 변화 경계, 오른쪽은 모형이 추정한 경계입니다. 오른쪽에서 선이 진하고 굵을수록 인접 영역 사이의 기울기 변화가 큽니다."
+  }, {
+    type: "image", placement: "outcome", title: "시간 사용 조성과 고용 여부에 적용", sources: ["process", "result"],
+    src: "./assets/projects/polygram-atus.png", width: 1600, height: 1462,
+    alt: "ATUS 2022–2024 자료의 시간 사용 조성. 붉은 점은 취업자, 푸른 점은 비취업자이며, 회색과 검은 선은 모형이 추정한 국소 기울기 변화 경계입니다.",
+    credit: "논문 Figure 4 · ATUS 2022–2024",
+    caption: "점은 응답자의 시간 사용 비율과 고용 상태를 나타냅니다. 검은 선은 시간 사용 비율이 달라질 때 고용 확률의 변화 양상이 달라지는 위치입니다. 취업자와 비취업자를 직접 나누는 분류선은 아닙니다."
   }],
   "gcer": [{
     type: "table", placement: "outcome", title: "MuSiQue 평가 질문 2,417개의 근거 검색 결과", sources: ["validation", "result", "limitation"],

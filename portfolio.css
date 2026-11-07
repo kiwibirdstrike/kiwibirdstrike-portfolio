@@ -147,6 +147,9 @@ figcaption { font-size: var(--text-small); color: var(--muted); margin-top: 12px
 .case-decision .case-prose { color: var(--ink); }
 .project-visual { margin: 36px 0; }
 .visual-title { font-size: 1.375rem; line-height: 1.5; margin: 0 0 24px; }
+.paper-figure-link { display: block; max-width: 100%; width: fit-content; margin-inline: auto; }
+.paper-figure-link img { display: block; width: 100%; height: auto; max-height: 680px; object-fit: contain; }
+.paper-figure-source { font-size: var(--text-small); color: var(--muted); margin: 16px 0; }
 .project-visual figcaption { padding-top: 16px; border-top: 1px solid var(--line); }
 .system-lane + .system-lane { margin-top: 32px; }
 .system-lane-title { font-size: var(--text-label); font-weight: 600; margin: 0 0 16px; }

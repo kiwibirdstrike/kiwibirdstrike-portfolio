@@ -129,6 +129,14 @@ for (const project of context.window.PORTFOLIO_DATA.projects) {
   assert.equal(links[0].attributes['aria-current'], 'false');
   const visuals = context.window.PROJECT_VISUALS[project.id];
   assert.equal(target.querySelectorAll('.project-visual').length, visuals.length);
+  const imageVisuals = visuals.filter(visual => visual.type === 'image');
+  const imageLinks = target.querySelectorAll('.paper-figure-link');
+  assert.equal(imageLinks.length, imageVisuals.length);
+  imageLinks.forEach((link, index) => {
+    assert.equal(link.href, imageVisuals[index].src);
+    assert.equal(link.children[0].src, imageVisuals[index].src);
+    assert.equal(link.children[0].alt, imageVisuals[index].alt);
+  });
   assert.equal(target.querySelectorAll('.workflow-figure').length, project.workflow && !visuals.some(v => v.replacesWorkflow) ? 1 : 0);
   assert.equal(target.querySelectorAll('.architecture-figure').length, project.architectureDiagram ? 1 : 0);
   assert.equal(target.querySelectorAll('.project-media').length, project.media ? 1 : 0);

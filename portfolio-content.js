@@ -360,7 +360,7 @@ window.PORTFOLIO_DATA = {
     },
     {
       "id": "polygram",
-      "story": {"problem":"조성자료의 국소적 반응 변화","approach":"기하 구조를 반영한 모형 설계","outcome":"방법론 정리와 저널 심사"},
+      "story": {"problem":"조성자료의 국소적 반응 변화","approach":"기하 구조를 반영한 모형 설계","outcome":"연구 결과"},
       "title": "ILR Polygram 로지스틱 회귀",
       "track": "stats",
       "status": "Journal of Classification · Under review",
@@ -385,7 +385,8 @@ window.PORTFOLIO_DATA = {
         "시뮬레이션, ATUS 전처리·분석, 표·그림 생성, 논문 PDF 빌드를 하나의 재현 파이프라인으로 정리하고 원고를 작성"
       ],
       "result": [
-        "세 성분 조성형 예측변수에서 국소적·비선형적 이진 반응 구조를 추정하고 simplex 위에서 해석할 수 있는 ILR 기반 Polygram 로지스틱 회귀 연구 원고를 작성했습니다. 시뮬레이션과 ATUS 실증 분석, 활성 edge 기반 국소 추세 변화 해석, 전체 결과 재현 코드를 논문 구조로 통합했습니다. 연구 내용은 2026 IMS-APRM과 통계학회에서 동일 포스터로 발표했으며, 현재 Journal of Classification에서 심사 중(Under review)입니다."
+        "세 성분 조성자료의 국소적·비선형적 이진 반응을 추정하는 ILR 기반 Polygram 로지스틱 회귀 모형을 구현했습니다. 시뮬레이션에서 비교 모형의 예측 성능과 경계 복원 성능을 검토하고, ATUS 자료에 적용해 시간 사용 조성과 고용 여부의 관계를 분석했습니다.",
+        "확률 표면과 활성 edge를 원래 simplex 위에 시각화해 국소 추세 변화를 해석했습니다. 분석 코드와 결과를 논문으로 정리하고, 2026 IMS-APRM과 통계학회에서 포스터로 발표했습니다."
       ],
       "links": [
         {
