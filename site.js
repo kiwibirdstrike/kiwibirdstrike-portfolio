@@ -19,10 +19,20 @@ function appendLinks(target, links) {
 
 function renderProfile() {
   document.querySelector("#hero-title").textContent = data.profile.title;
-  document.querySelector("#hero-lead").textContent = data.profile.lead;
+  const lead = document.querySelector("#hero-lead");
+  data.profile.lead.split("\n").forEach(paragraph => lead.append(element("p", "", paragraph)));
 
   const skills = document.querySelector("#skills-list");
   const processNodes = document.querySelector("#process-nodes");
+  const stageViews = [];
+  function selectStage(id) {
+    for (const view of stageViews) {
+      const selected = view.row.id === id;
+      view.row.classList.toggle("is-selected", selected);
+      view.button.setAttribute("aria-pressed", String(selected));
+      view.link.setAttribute("aria-current", selected ? "step" : "false");
+    }
+  }
   data.profile.skills.forEach(({ category, question, items, example, projectId }, index) => {
     const node = element("li", "process-node");
     const link = element("a", "process-link");
@@ -36,14 +46,28 @@ function renderProfile() {
     const stage = element("div", "skill-stage");
     const number = element("span", "skill-number", String(index + 1).padStart(2, "0"));
     number.setAttribute("aria-hidden", "true");
-    stage.append(number, element("h3", "", category));
+    const heading = element("h3");
+    const button = element("button", "skill-select", category);
+    button.type = "button";
+    button.setAttribute("aria-label", `${category} 단계 선택`);
+    button.setAttribute("aria-pressed", "false");
+    heading.append(button);
+    stage.append(number, heading);
     const reasoning = element("div", "skill-reasoning");
     reasoning.append(element("p", "skill-question", question), element("p", "skill-description", items));
     const evidence = element("a", "skill-example", example);
     evidence.href = `./project.html?id=${encodeURIComponent(projectId)}`;
     row.append(stage, reasoning, evidence);
+    stageViews.push({ row, button, link });
+    link.addEventListener("click", () => selectStage(row.id));
+    row.addEventListener("click", event => {
+      if (!event.target.closest("a")) selectStage(row.id);
+    });
     skills.append(row);
   });
+  const selectFromHash = () => selectStage(window.location.hash.slice(1));
+  window.addEventListener("hashchange", selectFromHash);
+  selectFromHash();
 
   document.querySelector("#profile-name").textContent = data.profile.name;
   document.querySelector("#profile-education").textContent = data.profile.education;
@@ -91,20 +115,11 @@ function projectArticle(project) {
   const expandable = element("details", "project-expand");
   const disclosure = element("summary", "", "역할과 판단");
   disclosure.setAttribute("aria-label", `${project.title} — 역할과 판단`);
-  expandable.append(disclosure, element("p", "project-subtitle", project.subtitle));
-  if (project.media) {
-    const figure = element("figure", "project-media");
-    const image = element("img");
-    image.src = project.media.src;
-    image.alt = project.media.alt;
-    image.loading = "lazy";
-    figure.append(image, element("figcaption", "", project.media.alt));
-    expandable.append(figure);
-  }
+  expandable.append(disclosure);
   const details = element("dl", "project-details");
   details.append(
     detailBlock("내 역할", project.roleSummary),
-    detailBlock("핵심 판단", project.decision || project.summary)
+    detailBlock("핵심 판단", project.decision)
   );
   expandable.append(details);
   body.append(expandable);

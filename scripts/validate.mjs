@@ -56,14 +56,14 @@ for (const skill of data.profile.skills) {
     throw new Error('Incomplete capability stage or invalid project link');
   }
 }
-if (projects.length !== 21 || new Set(projects.map(p => p.id)).size !== 21) throw new Error('Expected 21 unique projects');
+if (projects.length !== 20 || new Set(projects.map(p => p.id)).size !== 20) throw new Error('Expected 20 unique projects');
 for (const p of projects) {
-  for (const key of ['id', 'title', 'summary', 'roleSummary', 'period', 'problem', 'role', 'process', 'result']) {
+  for (const key of ['id', 'title', 'summary', 'roleSummary', 'decision', 'period', 'problem', 'role', 'process', 'result']) {
     if (!p[key] || (Array.isArray(p[key]) && !p[key].length)) throw new Error('Missing ' + key + ' on ' + p.id);
   }
   if (p.workflow && (p.workflow.steps.length !== 4 || !p.workflow.caption)) throw new Error('Invalid workflow: ' + p.id);
 }
-for (const id of ['quant-agent','imputation','digital-bio']) {
+for (const id of ['quant-agent','imputation','digital-bio','fire-law-search']) {
   if (projects.some(p => p.id === id)) throw new Error('Removed project remains: ' + id);
 }
 
@@ -80,6 +80,7 @@ for (const p of projects) {
 }
 if (projects.find(p => p.id === 'port-matching').category !== 'modeling') throw new Error('Ship matching must be modeling');
 if (projects.find(p => p.id === 'gcer').category !== 'research') throw new Error('GCER must be research');
+if (projects.find(p => p.id === 'worldquant').category !== 'other') throw new Error('WorldQuant must be other');
 
 const gcer = data.projects.find((project) => project.id === "gcer");
 if (!gcer) throw new Error("Missing GCER thesis project");
