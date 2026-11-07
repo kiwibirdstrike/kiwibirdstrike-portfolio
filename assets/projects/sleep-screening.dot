@@ -1,0 +1,18 @@
+digraph Sleep {
+  graph [rankdir=TB, bgcolor="white", pad=0.3, ranksep=0.6, nodesep=0.5];
+  node [fontname="Apple SD Gothic Neo", fontsize=19, shape=plain, fontcolor="#242424"];
+  edge [fontname="Apple SD Gothic Neo", fontsize=14, color="#737373", arrowsize=0.7];
+  edf [label="EDF 수면 신호"];
+  sample [label="균등 샘플링\n클래스 불균형 대응"];
+  wavelet [shape=box, margin=0.22, label="웨이블릿 변환\n신호 특징 추출"];
+  rf [shape=box, margin=0.22, label="Random Forest\n장애 분류"];
+  edf -> sample -> wavelet -> rf;
+  type [label="장애 유형 구분\n정확도 69%"];
+  presence [label="장애 유무 선별\n정확도 97%"];
+  rf -> type; rf -> presence;
+  {rank=same; type; presence}
+  expert [label="전문가의 영상 검토를 위한 1차 선별"];
+  presence -> expert;
+  implementation [label="폐쇄망\n필요 함수를 직접 정의", fontcolor="#555555"];
+  implementation -> wavelet [style=dashed, label="실행 제약 대응", constraint=false];
+}

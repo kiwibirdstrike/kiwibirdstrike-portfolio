@@ -1,0 +1,37 @@
+digraph JobisService {
+  graph [rankdir=TB, bgcolor="white", pad=0.2, nodesep=0.38, ranksep=0.55,
+         fontname="Apple SD Gothic Neo", fontsize=18];
+  node [fontname="Apple SD Gothic Neo", fontsize=18, shape=plain,
+        fontcolor="#242424"];
+  edge [fontname="Apple SD Gothic Neo", fontsize=16, color="#737373",
+        arrowsize=0.7, penwidth=1.1];
+
+  document [label="공고 원문\nPDF · HWP · HWPX"];
+  extract [shape=box, margin=0.2,
+           label="사전처리 · 형식별 추출\nPDF·HWP·HWPX → meta"];
+  evidence [shape=box, margin=0.2,
+            label="Stage 1 · 근거 추출\n원문에서 판단 근거 수집"];
+  summarize [shape=box, margin=0.2,
+             label="Stage 2 · 조건 구조화\n참가 조건으로 매핑\n자격·서류·지역·경험"];
+  parser [shape=box, margin=0.2,
+          label="Parser service\n파싱 결과·평가 저장"];
+  db [shape=box, margin=0.2,
+      label="공고 DB\nmeta · summary · 원문 연결"];
+  profile [label="기업 프로필\n자격·지역·면허·경험"];
+  decision [shape=box, margin=0.2,
+            label="Eligibility decision service\n공고 요건과 기업 프로필 비교"];
+  api [shape=box, margin=0.2,
+       label="FastAPI\n/evaluate/eligibility\n/evaluate/eligibility/full"];
+  ui [shape=box, margin=0.2,
+      label="서비스 화면\n공고 목록·상세·참가 가능성"];
+
+  document -> extract;
+  extract -> evidence;
+  evidence -> summarize;
+  summarize -> parser;
+  parser -> db;
+  db -> decision;
+  profile -> decision;
+  decision -> api;
+  api -> ui;
+}

@@ -129,6 +129,17 @@ for (const project of context.window.PORTFOLIO_DATA.projects) {
   assert.equal(links[0].attributes['aria-current'], 'false');
   const visuals = context.window.PROJECT_VISUALS[project.id];
   assert.equal(target.querySelectorAll('.project-visual').length, visuals.length);
+  for (const section of sections) {
+    const placement = section.id.replace('case-', '');
+    assert.equal(section.querySelectorAll('.project-visual').length, visuals.filter(v => v.placement === placement).length);
+  }
+  const tableRegions = target.querySelectorAll('.table-scroll');
+  assert.equal(tableRegions.length, visuals.filter(v => v.type === 'table').length);
+  for (const region of tableRegions) {
+    assert.equal(region.attributes.tabindex, '0');
+    assert.equal(region.attributes.role, 'region');
+    assert(region.attributes['aria-labelledby']);
+  }
   const imageVisuals = visuals.filter(visual => visual.type === 'image');
   const imageLinks = target.querySelectorAll('.paper-figure-link');
   assert.equal(imageLinks.length, imageVisuals.length);
@@ -138,7 +149,7 @@ for (const project of context.window.PORTFOLIO_DATA.projects) {
     assert.equal(link.children[0].alt, imageVisuals[index].alt);
   });
   assert.equal(target.querySelectorAll('.workflow-figure').length, project.workflow && !visuals.some(v => v.replacesWorkflow) ? 1 : 0);
-  assert.equal(target.querySelectorAll('.architecture-figure').length, project.architectureDiagram ? 1 : 0);
+  assert.equal(target.querySelectorAll('.architecture-figure').length, project.architectureDiagram && !visuals.some(v => v.replacesArchitecture) ? 1 : 0);
   assert.equal(target.querySelectorAll('.project-media').length, project.media ? 1 : 0);
   const textOf = node => [node.textContent || '', ...node.children.map(textOf)].join(' ');
   const normalized = textOf(target).replace(/\s+/g, '');

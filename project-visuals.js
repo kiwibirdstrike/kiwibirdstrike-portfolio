@@ -1,24 +1,33 @@
 // Sources point to the reviewed fields of the same project in portfolio-content.js.
 window.PROJECT_VISUALS = {
   "port-matching": [{
-    type: "architecture", placement: "approach", replacesWorkflow: true,
-    title: "학습과 실제 선박 식별을 나눈 구조", sources: ["process"],
-    lanes: [
-      { title: "학습", stages: [
-        { label: "자료 구성", nodes: [{ title: "선박 단위 분할", text: "학습·검증 자료 분리" }, { title: "입력 노이즈", text: "오타·단어 누락·톤수 오차" }] },
-        { label: "모델 학습", nodes: [{ title: "한글 CE", text: "기록과 후보 정보를 함께 입력" }, { title: "비한글 CE", text: "언어별 모델을 분리해 학습" }] },
-        { label: "검증", nodes: [{ title: "후보 묶음 단위 추론", text: "배치 구성에 따른 예측 변화 방지" }] }
-      ] },
-      { title: "추론", stages: [
-        { label: "입력", nodes: [{ title: "입출항 기록", text: "선박명·국적·선종·톤수" }] },
-        { label: "후보 축소", nodes: [{ title: "표기 정규화 + 검색", text: "이름 유사도와 톤수로 카탈로그 후보 검색" }] },
-        { label: "정밀 비교", nodes: [{ title: "CE 순위화", text: "기록–후보의 일치 가능성 평가" }, { title: "추가 리랭커", text: "비한글 후보에 적용" }] },
-        { label: "출력", nodes: [{ title: "최종 선박 연결", text: "후보 순위로 카탈로그의 선박 식별" }] }
-      ] }
-    ],
-    caption: "현장의 입력 오류를 학습 조건에 반영하고, 추론에서는 전체 카탈로그 검색과 후보 정밀 비교의 역할을 분리했습니다."
-  }],
+  "type": "image",
+  "placement": "approach",
+  "replacesWorkflow": true,
+  "title": "표기가 다른 기록을 같은 선박으로 연결",
+  "sources": [
+    "process"
+  ],
+  "src": "./assets/projects/port-model.svg",
+  "width": 604,
+  "height": 716,
+  "alt": "한글·비한글 후보 검색과 각각의 Cross-Encoder, 조건부 후보 복구 및 비한글 추가 리랭커로 이어지는 실제 추론 구조.",
+  "credit": "최종 제출 코드의 후보 검색·CE·리랭커 흐름을 바탕으로 재구성",
+  "caption": "CE는 기록과 후보의 이름·국적·선종·톤수 문맥을 함께 비교하는 Cross-Encoder입니다. 학습에서는 입력 노이즈를 섞고, 추론은 기록별 후보 묶음으로 처리했습니다."
+}],
   "eumseong-fire": [{
+    type: "image", placement: "approach", replacesWorkflow: true, title: "날씨를 보정해도 남는 계절 차이", sources: ["process", "result"],
+    src: "./assets/projects/fire-season-adjustment.png", width: 2268, height: 1212,
+    alt: "가을 대비 일별 화재 발생 배율. 봄은 날씨 보정 전 1.67배에서 보정 후 1.48배, 여름은 1.24배에서 1.47배, 겨울은 1.44배에서 1.14배입니다.",
+    credit: "1차 화재 위험요인 분석보고서 · 계절 효과",
+    caption: "봄철 화재가 많은 현상을 날씨 차이만으로 설명할 수 있는지 확인했습니다. 보정 후에도 가을 대비 1.48배의 발생률이 남았습니다."
+  }, {
+    type: "image", placement: "outcome", title: "담당자 피드백 후, 화학적 요인으로 분석 범위 축소", sources: ["process", "result"],
+    src: "./assets/projects/fire-causes.png", width: 1672, height: 1100,
+    alt: "공장 수로 보정한 음성군 공장화재 발생 배율. 전체 1.2배, 화학적 요인 3.8배, 자연발화 4.5배, 유증기 확산 4.4배입니다.",
+    credit: "후속 화학적 요인 공장화재 분석보고서 · 전국 비교 2016–2024",
+    caption: "공장화재 전체는 기대 수준에 가까웠지만 화학적 요인은 3.8배였습니다. 이 그림의 62건은 전국 비교 기간의 값이며, 2016.7–2026.6 상세 조사에서의 68건과 집계 기간이 다릅니다."
+  }, {
     type: "table", placement: "outcome", title: "비교 조건을 구분한 핵심 분석 결과", sources: ["result"],
     columns: ["확인한 내용", "결과", "비교 기준"],
     rows: [
@@ -31,22 +40,20 @@ window.PROJECT_VISUALS = {
     caption: "비율의 분모와 보정 조건이 달라 하나의 순위로 비교하지 않습니다. 후속 예방 목표는 제안이며 실제 채택·달성 여부는 확인되지 않았습니다."
   }],
   "jobis": [{
-    type: "architecture", placement: "approach", replacesWorkflow: true,
-    title: "공고 수집·파싱과 사용자 서비스를 연결한 구조", sources: ["process"],
-    lanes: [
-      { title: "데이터와 파싱 모델", stages: [
-        { label: "수집", nodes: [{ title: "조달청 Open API", text: "공고 JSON과 첨부 공고문" }] },
-        { label: "Stage 1", nodes: [{ title: "근거 추출", text: "입찰 판단에 필요한 evidence를 넓게 수집" }] },
-        { label: "Stage 2", nodes: [{ title: "조건 구조화", text: "면허·인증·실적·인력·제출서류로 매핑" }] },
-        { label: "저장", nodes: [{ title: "PostgreSQL", text: "원자료와 구조화된 공고 데이터" }] }
-      ] },
-      { title: "사용자 서비스", stages: [
-        { label: "화면", nodes: [{ title: "Next.js", text: "공고 확인과 기업 정보 입력" }] },
-        { label: "연결", nodes: [{ title: "FastAPI", text: "DB·파서·공고 분류·서비스 기능 통합" }] },
-        { label: "판정", nodes: [{ title: "기업 정보와 조건 비교", text: "공고의 참가자격 검토" }] }
-      ] }
-    ], caption: "파싱은 놓치지 않고 찾는 단계와 실제 조건을 고르는 단계로 나눴습니다. 서비스 통합에 더해 파싱 모델 개발을 직접 맡았습니다."
-  }, {
+  "type": "image",
+  "placement": "approach",
+  "replacesWorkflow": true,
+  "title": "공고문 파싱부터 참가자격 비교까지",
+  "sources": [
+    "process"
+  ],
+  "src": "./assets/projects/jobis-service.svg",
+  "width": 429,
+  "height": 1029,
+  "alt": "공고문 추출, 근거 추출과 조건 구조화, 데이터 저장, 기업 프로필 비교 및 사용자 화면을 연결한 구조.",
+  "credit": "파서·판정 서비스 구현과 검수한 개발 기록을 바탕으로 재구성",
+  "caption": "원문에서 판단 근거를 찾는 일과 참가 조건을 구조화하는 일을 나눴습니다. 구조화한 조건은 기업 정보와 비교하고, 결과를 서비스 화면에 전달합니다."
+}, {
     type: "table", placement: "outcome", title: "단계별 평가 결과와 남은 문제", sources: ["result"],
     columns: ["평가", "결과", "평가 범위"],
     rows: [
@@ -57,32 +64,29 @@ window.PROJECT_VISUALS = {
     ], caption: "단계별 분모와 평가 목적이 다릅니다. 높은 근거 추출률만으로 최종 판정의 정확도나 자동화 효율을 설명할 수는 없었습니다."
   }],
   "lg-aimers-9": [{
-    type: "architecture", placement: "approach", replacesWorkflow: true,
-    title: "손실함수별로 학습하고 성공 확률에서 결합", sources: ["process"],
-    lanes: [{ title: "학습 목표를 분리한 확률 예측", stages: [
-      { label: "입력", nodes: [{ title: "투구 상황과 과거 이력", text: "선수·팀·상황 기반 피처" }] },
-      { label: "별도 학습", nodes: [{ title: "이진 분류 모델", text: "성공 / 실패 → 성공 확률" }, { title: "4클래스 분류 모델", text: "성공 + 실패 3유형 → 성공 클래스 확률" }] },
-      { label: "결합", nodes: [{ title: "확률 블렌딩", text: "두 모델이 출력한 성공 확률 결합" }] },
-      { label: "평가", nodes: [{ title: "Brier Skill Score", text: "두 손실의 동시 최적화 방식과 비교" }] }
-    ] }],
-    caption: "병렬로 그린 두 모델은 각각 다른 손실함수로 학습했습니다. 이 그림은 제가 비교한 학습 방식이며, 팀 전체 앙상블의 모든 모델을 나타내지는 않습니다."
+    type: "image", placement: "approach", replacesWorkflow: true,
+    title: "서로 다른 학습 목표를 성공 확률로 연결", sources: ["process"],
+    src: "./assets/projects/lg-loss-model.svg", width: 634, height: 817,
+    alt: "공통 피처에서 제곱오차로 학습하는 기존 성공 확률 경로와 4클래스 교차엔트로피 경로로 나뉘고, 각각의 성공 확률을 결합하는 모델 구조.",
+    credit: "학습 코드의 손실함수와 출력 구조를 바탕으로 재구성",
+    caption: "실패를 세 유형으로 나눠 학습한 모델의 성공 클래스 확률을 기존 모델과 결합했습니다. 두 손실을 한 번에 최적화하는 대신 각각 학습한 뒤 블렌딩한 구조입니다."
   }],
   "tvspline": [{
-    type: "architecture", placement: "approach", replacesWorkflow: true,
-    title: "사용자 인터페이스와 모형별 구현을 분리한 호출 계층", sources: ["process", "result"],
-    lanes: [
-      { title: "패키지 호출 구조", stages: [
-        { label: "공개 인터페이스", nodes: [{ title: "tvspline()", text: "모형을 공통 방식으로 실행" }] },
-        { label: "모형별 내부 함수", nodes: [{ title: "평균 · 분위수 · 밀도", text: "각 모형의 적합 로직" }, { title: "가법 · 단일지수 · Polygram", text: "모형별 차이를 백엔드에 분리" }] },
-        { label: "공통 기반", nodes: [{ title: "공통 유틸리티", text: "중복 기능 통합" }, { title: "Rcpp 연산 코드", text: "패키지 구조에 맞춰 연결" }] }
-      ] },
-      { title: "개발과 검증", stages: [
-        { label: "구조 점검", nodes: [{ title: "호출 그래프", text: "입력·출력·의존 관계 확인" }] },
-        { label: "동작 확인", nodes: [{ title: "testthat", text: "의도한 동작을 검증하는 테스트" }] },
-        { label: "배포 준비", nodes: [{ title: "문서·예제·버전 관리", text: "roxygen2와 GitHub 활용" }] }
-      ] }
-    ], caption: "실행 순서와 개발 절차를 나눠 표현했습니다. 6개 연구 모형을 사용자가 같은 방식으로 실행하고 결과를 활용할 수 있도록 구성했습니다."
-  }],
+    "type": "image",
+    "placement": "approach",
+    "replacesWorkflow": true,
+    "title": "단일 인터페이스 아래의 여섯 모형",
+    "sources": [
+        "process",
+        "result"
+    ],
+    "src": "./assets/projects/tvspline-calls.svg",
+    "width": 485,
+    "height": 470,
+    "alt": "사용자 입력이 tvspline 진입점을 거쳐 여섯 모형별 함수와 공통 유틸리티·Rcpp 연산으로 연결되는 주요 호출 구조.",
+    "credit": "프로젝트 수행 내용을 바탕으로 재구성한 구조도",
+    "caption": "실행 순서와 개발 절차를 나눠 표현했습니다. 6개 연구 모형을 사용자가 같은 방식으로 실행하고 결과를 활용할 수 있도록 구성했습니다."
+}],
   "polygram": [{
     type: "image", placement: "approach", title: "국소적인 변화가 생기는 위치를 찾는 모형", sources: ["process"],
     src: "./assets/projects/polygram-simulation.png", width: 2000, height: 1010,
@@ -96,20 +100,378 @@ window.PROJECT_VISUALS = {
     credit: "논문 Figure 4 · ATUS 2022–2024",
     caption: "점은 응답자의 시간 사용 비율과 고용 상태를 나타냅니다. 검은 선은 시간 사용 비율이 달라질 때 고용 확률의 변화 양상이 달라지는 위치입니다. 취업자와 비취업자를 직접 나누는 분류선은 아닙니다."
   }],
-  "gcer": [{
-    type: "table", placement: "outcome", title: "MuSiQue 평가 질문 2,417개의 근거 검색 결과", sources: ["validation", "result", "limitation"],
-    columns: ["지표", "결과", "측정하는 것"],
-    rows: [["Recall@5", "71.1%", "상위 5개 문단의 근거 재현율"], ["Recall@10", "80.3%", "상위 10개 문단의 근거 재현율"], ["3,000토큰 완전 근거율", "67.6%", "필요한 근거가 문맥 안에 모두 포함된 질문 비율"]],
-    caption: "같은 임베딩과 LLM을 사용해 비교했습니다. 근거 검색 지표와 최종 답변 지표는 별개이며, 분기형 질문과 일부 답변 F1 비교에서는 유의한 차이가 없었습니다."
-  }],
+  "gcer": [
+  {
+    "type": "image",
+    "placement": "approach",
+    "replacesArchitecture": true,
+    "title": "방문한 근거로 다음 문단의 순위를 갱신",
+    "sources": [
+      "process",
+      "architectureDiagram"
+    ],
+    "src": "./assets/projects/gcer-search.svg",
+    "width": 651,
+    "height": 967,
+    "alt": "질문 임베딩으로 앵커를 선택하고, 문단 그래프와 전역 후보를 결합해 관련성 및 이웃 근거 점수를 계산합니다. 선택한 문단으로 방문 집합을 갱신하는 반복 검색 구조입니다.",
+    "credit": "논문의 순차 검색 알고리즘을 바탕으로 재구성",
+    "caption": "점선은 학습된 계수의 적용, 되돌아가는 선은 검색 중 방문 집합의 갱신입니다. 검색 단계에서는 LLM을 호출하지 않고, 공통 LLM은 검색 결과로 답변을 평가할 때 사용합니다."
+  },
+  {
+    "type": "table",
+    "placement": "validation",
+    "title": "문단 수를 고정한 근거 검색 성능",
+    "sources": [
+      "validation",
+      "result"
+    ],
+    "numeric": true,
+    "highlight": "GCER",
+    "columns": [
+      "방법",
+      "Recall@5",
+      "Recall@10"
+    ],
+    "rows": [
+      [
+        "Similarity",
+        "66.4",
+        "74.9"
+      ],
+      [
+        "PPR",
+        "66.7",
+        "75.1"
+      ],
+      [
+        "Flow diffusion",
+        "59.2",
+        "75.8"
+      ],
+      [
+        "QAFD-RAG",
+        "64.0",
+        "75.1"
+      ],
+      [
+        "HippoRAG 2",
+        "70.3",
+        "78.5"
+      ],
+      [
+        "GNN-Ret (own graph)",
+        "69.2",
+        "78.7"
+      ],
+      [
+        "GCER",
+        "71.1",
+        "80.3"
+      ]
+    ],
+    "credit": "논문 Table 3 · MuSiQue 2,417문항 · 단위: %",
+    "caption": "Recall은 정답 근거 중 검색한 비율, Complete는 필요한 근거를 모두 찾은 질문의 비율입니다. @5·@10은 문단 수, @1500t·@3000t는 토큰 제한을 뜻합니다."
+  },
+  {
+    "type": "table",
+    "placement": "validation",
+    "title": "토큰 예산을 고정한 근거 검색 성능",
+    "sources": [
+      "validation",
+      "result"
+    ],
+    "numeric": true,
+    "highlight": "GCER",
+    "columns": [
+      "방법",
+      "Recall@1500t",
+      "Recall@3000t",
+      "Complete@1500t",
+      "Complete@3000t"
+    ],
+    "rows": [
+      [
+        "Similarity",
+        "74.7",
+        "81.3",
+        "45.6",
+        "57.5"
+      ],
+      [
+        "PPR",
+        "76.8",
+        "83.6",
+        "49.2",
+        "62.1"
+      ],
+      [
+        "Flow diffusion",
+        "76.8",
+        "84.1",
+        "49.5",
+        "63.5"
+      ],
+      [
+        "QAFD-RAG",
+        "75.7",
+        "82.5",
+        "49.0",
+        "60.5"
+      ],
+      [
+        "HippoRAG 2",
+        "78.4",
+        "84.1",
+        "53.0",
+        "63.0"
+      ],
+      [
+        "GNN-Ret (own graph)",
+        "78.6",
+        "85.4",
+        "52.8",
+        "65.2"
+      ],
+      [
+        "GCER",
+        "80.0",
+        "86.3",
+        "56.2",
+        "67.6"
+      ]
+    ],
+    "credit": "논문 Table 3 · MuSiQue 2,417문항 · 단위: %",
+    "caption": "Recall은 정답 근거 중 검색한 비율, Complete는 필요한 근거를 모두 찾은 질문의 비율입니다. @5·@10은 문단 수, @1500t·@3000t는 토큰 제한을 뜻합니다."
+  },
+  {
+    "type": "table",
+    "placement": "validation",
+    "title": "비교 방법 대비 GCER의 차이와 95% 신뢰구간",
+    "sources": [
+      "validation",
+      "result"
+    ],
+    "numeric": true,
+    "columns": [
+      "비교 방법",
+      "Δ Recall@5",
+      "Δ Recall@10",
+      "Δ Recall@3000t",
+      "Δ Complete@3000t"
+    ],
+    "rows": [
+      [
+        "Similarity",
+        "+4.7 [3.9, 5.4]",
+        "+5.4 [4.6, 6.2]",
+        "+5.0 [4.4, 5.7]",
+        "+10.1 [8.7, 11.6]"
+      ],
+      [
+        "PPR",
+        "+4.3 [3.6, 5.0]",
+        "+5.3 [4.5, 6.0]",
+        "+2.7 [2.0, 3.5]",
+        "+5.4 [3.9, 7.0]"
+      ],
+      [
+        "Flow diffusion",
+        "+11.8 [10.8, 12.9]",
+        "+4.5 [3.7, 5.3]",
+        "+2.2 [1.5, 3.0]",
+        "+4.0 [2.4, 5.7]"
+      ],
+      [
+        "QAFD-RAG",
+        "+7.0 [6.0, 8.0]",
+        "+5.2 [4.4, 6.1]",
+        "+3.8 [3.1, 4.6]",
+        "+7.1 [5.5, 8.6]"
+      ],
+      [
+        "HippoRAG 2",
+        "+0.8 [0.1, 1.5]",
+        "+1.8 [1.1, 2.6]",
+        "+2.2 [1.6, 2.9]",
+        "+4.6 [3.3, 6.0]"
+      ],
+      [
+        "GNN-Ret (own graph)",
+        "+1.8 [1.2, 2.4]",
+        "+1.6 [1.0, 2.3]",
+        "+0.9 [0.4, 1.5]",
+        "+2.3 [1.2, 3.6]"
+      ]
+    ],
+    "credit": "논문 Table 4 · 단위: %p · 질문 단위 짝지은 부트스트랩",
+    "caption": "양수는 GCER의 값이 더 높다는 뜻입니다. 차이와 구간은 논문 값을 그대로 옮겼습니다. 반올림된 앞 표의 값을 빼면 일부 차이가 다를 수 있습니다."
+  },
+  {
+    "type": "table",
+    "placement": "validation",
+    "title": "5개 문단으로 생성한 답변의 정확도",
+    "sources": [
+      "validation",
+      "result",
+      "limitation"
+    ],
+    "numeric": true,
+    "highlight": "GCER",
+    "columns": [
+      "방법",
+      "EM@5",
+      "F1@5",
+      "ΔF1@5 [95% CI]"
+    ],
+    "rows": [
+      [
+        "Similarity",
+        "32.7",
+        "44.2",
+        "+5.4 [4.1, 6.7]"
+      ],
+      [
+        "PPR",
+        "33.3",
+        "44.8",
+        "+4.8 [3.5, 6.1]"
+      ],
+      [
+        "Flow diffusion",
+        "28.7",
+        "38.9",
+        "+10.6 [8.9, 12.4]"
+      ],
+      [
+        "QAFD-RAG",
+        "32.9",
+        "43.8",
+        "+5.8 [4.3, 7.3]"
+      ],
+      [
+        "HippoRAG 2",
+        "36.3",
+        "48.0",
+        "+1.6 [0.2, 3.0]"
+      ],
+      [
+        "GNN-Ret (own graph)",
+        "34.9",
+        "46.9",
+        "+2.6 [1.4, 3.8]"
+      ],
+      [
+        "GCER",
+        "37.9",
+        "49.5",
+        "—"
+      ]
+    ],
+    "credit": "논문 Table 6 · MuSiQue 2,417문항 · 단위: %",
+    "caption": "EM은 완전 일치율, F1은 답변 토큰의 일치 정도입니다. ΔF1은 GCER에서 해당 방법을 뺀 차이(%p), 대괄호는 95% 신뢰구간입니다. 3,000토큰에서는 PPR·Flow diffusion·HippoRAG 2·GNN-Ret과의 F1 차이 구간에 0이 포함됩니다."
+  },
+  {
+    "type": "table",
+    "placement": "validation",
+    "title": "3,000토큰으로 생성한 답변의 정확도",
+    "sources": [
+      "validation",
+      "result",
+      "limitation"
+    ],
+    "numeric": true,
+    "highlight": "GCER",
+    "columns": [
+      "방법",
+      "EM@3000t",
+      "F1@3000t",
+      "ΔF1@3000t [95% CI]"
+    ],
+    "rows": [
+      [
+        "Similarity",
+        "39.4",
+        "51.8",
+        "+2.0 [0.6, 3.4]"
+      ],
+      [
+        "PPR",
+        "39.4",
+        "52.5",
+        "+1.3 [−0.03, 2.7]"
+      ],
+      [
+        "Flow diffusion",
+        "40.5",
+        "53.1",
+        "+0.7 [−0.7, 2.1]"
+      ],
+      [
+        "QAFD-RAG",
+        "39.3",
+        "51.8",
+        "+2.1 [0.5, 3.5]"
+      ],
+      [
+        "HippoRAG 2",
+        "40.3",
+        "52.7",
+        "+1.1 [−0.3, 2.5]"
+      ],
+      [
+        "GNN-Ret (own graph)",
+        "41.6",
+        "53.8",
+        "+0.0 [−1.3, 1.3]"
+      ],
+      [
+        "GCER",
+        "41.0",
+        "53.8",
+        "—"
+      ]
+    ],
+    "credit": "논문 Table 6 · MuSiQue 2,417문항 · 단위: %",
+    "caption": "EM은 완전 일치율, F1은 답변 토큰의 일치 정도입니다. ΔF1은 GCER에서 해당 방법을 뺀 차이(%p), 대괄호는 95% 신뢰구간입니다. 3,000토큰에서는 PPR·Flow diffusion·HippoRAG 2·GNN-Ret과의 F1 차이 구간에 0이 포함됩니다."
+  },
+  {
+    "type": "image",
+    "placement": "outcome",
+    "title": "검색 문단 수에 따른 근거 재현율",
+    "sources": [
+      "result",
+      "validation"
+    ],
+    "src": "./assets/projects/gcer-recall-passages.png",
+    "width": 2000,
+    "height": 874,
+    "alt": "검색 문단 수 1~30개에 따른 Similarity 대비 근거 재현율 차이. GCER는 검은 실선이며, 첫 세 문단은 유사도 기반 앵커입니다.",
+    "credit": "논문 Figure 1(a)",
+    "caption": "세로축은 재현율 자체가 아니라 Similarity 검색 대비 차이(%p)입니다. 검은 선이 GCER이며, 처음 세 문단은 질문과 가장 유사한 앵커입니다."
+  },
+  {
+    "type": "image",
+    "placement": "outcome",
+    "title": "토큰 제한에 따른 완전 근거율",
+    "sources": [
+      "result",
+      "limitation"
+    ],
+    "src": "./assets/projects/gcer-complete-budget.png",
+    "width": 2000,
+    "height": 778,
+    "alt": "토큰 예산 0~5,000에서 Similarity 대비 완전 근거율 차이. GCER는 검은 실선, GNN-Ret은 주황 실선, HippoRAG 2는 파란 실선입니다.",
+    "credit": "논문 Figure 1(c) · 선의 범례는 위 그림과 동일",
+    "caption": "세로축은 Similarity 대비 차이(%p)입니다. GCER는 500~4,200토큰에서 가장 높고, 4,400토큰부터는 GNN-Ret이 0.5%p 미만의 차이로 앞섭니다."
+  }
+],
   "booth-layout": [{
-    type: "architecture", placement: "approach", title: "예측을 실제 배치 의사결정으로 연결", sources: ["process"],
-    lanes: [{ title: "배치안 도출", stages: [
-      { label: "예측", nodes: [{ title: "기업별 인기도 모델", text: "기업별 예상 인기도 산출" }] },
-      { label: "모델링", nodes: [{ title: "가중치가 있는 그래프", text: "인기도를 부스별 가중치로 설정" }] },
-      { label: "최적화", nodes: [{ title: "배치 문제 정식화", text: "부스 가중치를 활용한 배치안 탐색" }] },
-      { label: "검토", nodes: [{ title: "시뮬레이션 비교", text: "기존 배치안과 부스 방문도 비교" }] }
-    ] }], caption: "예측의 출력값이 다음 최적화 문제의 입력값이 되도록 설계했습니다."
+    type: "image", placement: "approach", replacesWorkflow: true,
+    title: "인기도 예측에서 배치안 비교까지", sources: ["process", "result"],
+    src: "./assets/projects/booth-optimization.svg", width: 347, height: 543,
+    alt: "기업별 인기도 예측으로 부스 가중치를 정하고, 그래프 최적화로 구한 배치안과 기존 배치안을 시뮬레이션으로 비교하는 구조.",
+    credit: "프로젝트 기록을 바탕으로 재구성한 분석 구조",
+    caption: "인기도 예측을 배치 의사결정의 입력으로 사용했습니다. 아래 비교는 기록된 방문도 향상률을 같은 기준으로 환산한 값입니다."
   }, {
     type: "bars", placement: "outcome", title: "시뮬레이션에서의 부스 방문도", sources: ["result"], unit: "지수", max: 120,
     rows: [{ label: "기존 배치", value: 100, display: "100", reference: true }, { label: "최적화 배치", value: 118, display: "118" }],
@@ -123,19 +485,21 @@ window.PROJECT_VISUALS = {
     caption: "예측 모형에서 관찰된 관계를 정책 검토의 근거로 사용했습니다. 비공개 자료 접근 제한으로 후속 실증은 수행하지 못했습니다."
   }],
   "wine-survey": [{
-    type: "architecture", placement: "approach", replacesWorkflow: true, title: "단맛 인식을 먼저 예측하는 단계적 분류", sources: ["process"],
-    lanes: [
-      { title: "목표변수 검토", stages: [
-        { label: "소비자 응답", nodes: [{ title: "Dry · Sweet · Medium", text: "같은 단맛도 사람마다 분류 기준이 다름" }, { title: "Sweetness 평가", text: "상대적으로 일관된 응답 패턴 확인" }] },
-        { label: "설계 판단", nodes: [{ title: "Sweetness를 중간 목표로", text: "불일치한 범주 응답을 바로 예측하지 않음" }] }
-      ] },
-      { title: "모델 구조", stages: [
-        { label: "1단계", nodes: [{ title: "단맛 인식 모델", text: "소비자가 와인을 얼마나 달게 느끼는지 예측" }] },
-        { label: "2단계", nodes: [{ title: "Decision Tree", text: "예측한 단맛을 최종 분류로 연결" }] },
-        { label: "출력", nodes: [{ title: "Dry · Sweet · Medium", text: "조건별 분기 규칙으로 범주 결정" }] }
-      ] }
-    ], caption: "핵심은 특정 알고리즘의 선택보다 목표변수의 신뢰성을 검토하고 예측 순서를 바꾼 데 있습니다."
-  }],
+    "type": "image",
+    "placement": "approach",
+    "replacesWorkflow": true,
+    "title": "분류 기준의 불일치에서 두 단계 모델로",
+    "sources": [
+        "process",
+        "result"
+    ],
+    "src": "./assets/projects/wine-model.svg",
+    "width": 569,
+    "height": 482,
+    "alt": "Sweetness를 중간 목표로 선택해 단맛 예측과 Decision Tree의 DSM 분류를 연결한 구조.",
+    "credit": "프로젝트 수행 내용을 바탕으로 재구성한 구조도",
+    "caption": "핵심은 특정 알고리즘의 선택보다 목표변수의 신뢰성을 검토하고 예측 순서를 바꾼 데 있습니다."
+}],
   "weather-study": [{
     type: "table", placement: "approach", title: "학습 참여를 바꾸기 위한 팀 운영 설계", sources: ["problem", "process", "result"],
     columns: ["운영 방식", "구성원이 하는 일", "운영자의 역할"],
@@ -143,49 +507,75 @@ window.PROJECT_VISUALS = {
     caption: "운영 방식을 바꾼 뒤 발표 준비를 통한 학습과 실제 분석으로 이어졌습니다. 119 신고와 지하철 혼잡도 두 부문에서 입선했습니다."
   }],
   "khd": [{
-    type: "architecture", placement: "approach", title: "폐쇄망에서 직접 구현한 신호 분류 흐름", sources: ["process"],
-    lanes: [{ title: "신호에서 분류까지", stages: [
-      { label: "데이터", nodes: [{ title: "EDF 신호", text: "불균형에 대응한 균등 샘플링" }] },
-      { label: "특징 추출", nodes: [{ title: "웨이블릿 변환", text: "신호의 특징을 모델 입력으로 변환" }] },
-      { label: "분류", nodes: [{ title: "Random Forest", text: "추출한 특징으로 장애 분류" }] },
-      { label: "사용 목적", nodes: [{ title: "1차 선별", text: "전문가의 영상 검토를 보조" }] }
-    ] }], caption: "준비한 Docker 환경이 현장에서 작동하지 않아, 필요한 분석 함수를 직접 정의해 사용했습니다."
-  }, {
+    "type": "image",
+    "placement": "approach",
+    "replacesWorkflow": true,
+    "title": "신호 특징 추출과 장애 선별 모델",
+    "sources": [
+        "process",
+        "result"
+    ],
+    "src": "./assets/projects/sleep-screening.svg",
+    "width": 378,
+    "height": 587,
+    "alt": "EDF 신호의 균등 샘플링, 웨이블릿 특징 추출, Random Forest 분류와 장애 유형·유무의 평가 구조.",
+    "credit": "프로젝트 수행 내용을 바탕으로 재구성한 구조도",
+    "caption": "준비한 Docker 환경이 현장에서 작동하지 않아, 필요한 분석 함수를 직접 정의해 사용했습니다."
+}, {
     type: "bars", placement: "outcome", title: "대회 평가에서 확인한 두 분류 과제의 정확도", sources: ["result"], unit: "%", max: 100,
     rows: [{ label: "수면 장애 유형 구분", value: 69, display: "69%", evidence: "69%" }, { label: "수면 장애 존재 여부", value: 97, display: "97%", evidence: "97%" }],
     caption: "분류 대상이 다른 두 과제의 결과입니다. 유형 구분과 장애 유무 선별을 구분해 모델의 역할을 해석했습니다."
   }],
   "care-demand": [{
-    type: "architecture", placement: "approach", title: "수요·인력 예측을 지역별 위험도로 연결", sources: ["process"],
-    lanes: [{ title: "연도별 자료 분석", stages: [
-      { label: "자료 구성", nodes: [{ title: "2012–2023년", text: "12개 연도 · 행정구역 변동 보간" }] },
-      { label: "예측", nodes: [{ title: "요양보호사 수", text: "재가·시설 구분을 반영한 계층적 예측" }, { title: "장기요양급여자 수", text: "ETS 기반 수요 예측" }] },
-      { label: "집계와 비교", nodes: [{ title: "Bottom-up", text: "집계 방식 비교 후 선택" }] },
-      { label: "위험도", nodes: [{ title: "요양 방치 지수", text: "노인 수 ÷ 요양보호사 수" }] }
-    ] }], caption: "짧은 연 단위 자료의 조건에 맞춰 예측 방법을 선택하고, 인력 구성과 의료 접근성까지 비교했습니다."
-  }, {
+    "type": "image",
+    "placement": "approach",
+    "replacesWorkflow": true,
+    "title": "수요와 재가·시설 인력 예측의 결합",
+    "sources": [
+        "process",
+        "result"
+    ],
+    "src": "./assets/projects/care-demand.svg",
+    "width": 684,
+    "height": 592,
+    "alt": "ETS로 수요와 인력을 예측하고 Bottom-up으로 집계해 지역별 요양 방치 지수를 비교한 구조.",
+    "credit": "프로젝트 수행 내용을 바탕으로 재구성한 구조도",
+    "caption": "짧은 연 단위 자료의 조건에 맞춰 예측 방법을 선택하고, 인력 구성과 의료 접근성까지 비교했습니다."
+}, {
     type: "bars", placement: "outcome", title: "위험·안전 지역의 재가 요양보호사 비중", sources: ["result"], unit: "%", max: 100,
     rows: [{ label: "위험 지역", value: 96.8, display: "96.8%", evidence: "96.8%" }, { label: "안전 지역", value: 68.5, display: "68.5%", evidence: "68.5%" }],
     caption: "각 집단의 요양보호사 중 재가 인력 비중입니다. 인력의 총규모뿐 아니라 재가·시설 구성과 의료 접근성을 함께 검토했습니다."
   }],
   "sports-location": [{
-    type: "architecture", placement: "approach", title: "예산 조건을 바꾸며 비교하는 입지 최적화", sources: ["process"],
-    lanes: [{ title: "정책 시나리오 → 배치 대안", stages: [
-      { label: "입력", nodes: [{ title: "인구·수요", text: "인구 분포와 수요의 시간적 변화" }, { title: "시설·접근성·예산", text: "시설 위치와 재정 시나리오" }] },
-      { label: "수요 변화", nodes: [{ title: "Trend Filtering", text: "시간에 따른 지역 수요 변화 반영" }] },
-      { label: "입지 최적화", nodes: [{ title: "MCLP", text: "예산 시나리오별 최적 입지 후보 도출" }] },
-      { label: "사용자 도구", nodes: [{ title: "웹 시뮬레이션", text: "예산을 바꾸고 대안별 결과 비교" }] }
-    ] }], caption: "한 번의 배치안 제시에 그치지 않고, 정책 담당자가 재정 조건을 바꾸며 대안을 비교할 수 있도록 구성했습니다."
-  }],
+    "type": "image",
+    "placement": "approach",
+    "replacesWorkflow": true,
+    "title": "예산을 바꿔가며 비교하는 입지 최적화",
+    "sources": [
+        "process"
+    ],
+    "src": "./assets/projects/sports-location.svg",
+    "width": 538,
+    "height": 539,
+    "alt": "수요 변화와 기존 시설 접근성, 예산 제약을 MCLP에 입력하고 웹 도구에서 결과를 비교하는 구조.",
+    "credit": "프로젝트 수행 내용을 바탕으로 재구성한 구조도",
+    "caption": "Trend Filtering으로 수요 변화를 반영하고, MCLP로 예산 조건별 입지 대안을 구했습니다."
+}],
   "kamp": [{
-    type: "architecture", placement: "approach", title: "센서 데이터에서 현장 담당자의 해석까지", sources: ["process"],
-    lanes: [{ title: "예측과 설명을 연결한 도구", stages: [
-      { label: "데이터 이해", nodes: [{ title: "센서 분포·이상값", text: "현장 담당자에게 공정 변수의 의미 확인" }] },
-      { label: "예측", nodes: [{ title: "전처리 + 예측 모델", text: "이상값을 고려한 학습" }] },
-      { label: "설명", nodes: [{ title: "LLM 설명 기능", text: "LangChain·GPT API로 결과를 풀어 설명" }] },
-      { label: "사용", nodes: [{ title: "웹 분석 화면", text: "주요 변수 입력 → 예측·설명 확인" }] }
-    ] }], caption: "공정의 의미는 현장 담당자의 설명을 바탕으로 파악했습니다. 모델의 내부 구조를 몰라도 결과를 확인할 수 있도록 구현 범위를 정했습니다."
-  }],
+    "type": "image",
+    "placement": "approach",
+    "replacesWorkflow": true,
+    "title": "센서 분석 결과를 현장 설명으로 연결",
+    "sources": [
+        "process"
+    ],
+    "src": "./assets/projects/manufacturing-tool.svg",
+    "width": 433,
+    "height": 600,
+    "alt": "센서 데이터와 공정 담당자의 설명을 전처리에 반영하고, 예측 결과를 LangChain과 GPT API의 설명 기능 및 웹 화면으로 전달하는 구조.",
+    "credit": "프로젝트 수행 내용을 바탕으로 재구성한 구조도",
+    "caption": "분석 결과와 현장 담당자가 이해하는 설명을 같은 화면에서 확인하도록 구성했습니다."
+}],
   "english-survey": [{
     type: "table", placement: "outcome", title: "설문 해석에 필요한 질문과 분석 근거", sources: ["process", "result"],
     columns: ["확인할 질문", "사용한 분석", "담당자에게 설명한 내용"],
@@ -193,36 +583,59 @@ window.PROJECT_VISUALS = {
     caption: "설문 집계에 앞서 측정 구조와 신뢰도를 검토하고, 레벨반 운영에 필요한 해석을 담당자에게 전달했습니다."
   }],
   "lab-rooms": [{
-    type: "architecture", placement: "approach", title: "관리 부담을 줄인 서버리스 예약 구조", sources: ["process"],
-    lanes: [{ title: "예약·조회·취소 요청", stages: [
-      { label: "모바일", nodes: [{ title: "PWA", text: "주간 일정·예약·상세·취소 화면" }] },
-      { label: "서버 기능", nodes: [{ title: "Pages Functions", text: "공유 PIN 검증 · 예약 조건 확인" }] },
-      { label: "일정 저장", nodes: [{ title: "Google Calendar", text: "서비스 계정으로 두 미팅룸 일정 관리" }] },
-      { label: "화면 반영", nodes: [{ title: "일정 캐시 갱신", text: "예약 결과와 최신 일정 표시" }] }
-    ] }], caption: "프런트엔드는 Cloudflare Pages에 배포했습니다. 졸업 후에도 별도 서버 관리 부담 없이 운영할 수 있도록 익숙한 캘린더 기능을 활용했습니다."
-  }],
+  "type": "image",
+  "placement": "approach",
+  "replacesWorkflow": true,
+  "title": "모바일 예약 화면과 Google Calendar의 연결",
+  "sources": [
+    "process"
+  ],
+  "src": "./assets/projects/lab-rooms-system.svg",
+  "width": 629,
+  "height": 635,
+  "alt": "PWA에서 예약 요청을 받아 Pages Functions가 PIN과 예약 조건을 확인하고 Google Calendar 일정을 읽거나 변경하는 구조.",
+  "credit": "예약·조회·취소 API 구현을 바탕으로 재구성",
+  "caption": "매주 종이 시간표를 출력하던 일을 모바일 예약으로 바꿨습니다. 일정 저장에는 Google Calendar를 활용해 졸업 이후의 별도 서버 관리 부담을 줄였습니다."
+}],
   "autoresearch": [{
-    type: "architecture", placement: "approach", title: "지식그래프와 실험 실행 하네스의 연결", sources: ["process"],
-    lanes: [{ title: "지식 참조부터 실행·평가·기록까지", stages: [
-      { label: "지식 연결", nodes: [{ title: "옵시디언 지식그래프", text: "통계 이론·검증 방법·모델링 전략 참조" }, { title: "실험 이력", text: "과거 설정·점수·실패 원인 참조" }] },
-      { label: "가설", nodes: [{ title: "베이스라인과 개선안", text: "과제와 데이터 구조를 분석해 제안" }] },
-      { label: "하네스: 실행·평가", nodes: [{ title: "실험 실행과 지표 비교", text: "가설을 실제 실행하고 평가 결과 수집" }] },
-      { label: "하네스: 기록", nodes: [{ title: "설정·점수·실패 원인", text: "후속 가설과 함께 다음 반복에 제공" }] }
-    ] }], loop: "하네스에 기록한 실험 결과 → 다음 가설의 입력",
-    caption: "지식그래프를 에이전트에 연결하고, 실험 실행·평가·기록을 담당하는 하네스를 구성했습니다. 사람은 과적합 위험과 연구 방향을 관리했습니다."
-  }, {
+  "type": "image",
+  "placement": "approach",
+  "replacesWorkflow": true,
+  "title": "지식그래프 검색과 실험 하네스의 연결",
+  "sources": [
+    "process"
+  ],
+  "src": "./assets/projects/autoresearch-harness.svg",
+  "width": 368,
+  "height": 794,
+  "alt": "문서 본문 및 위키링크·역링크 검색 결과와 이전 실험 기록을 컨텍스트로 구성하고 실행·결과 기록을 반복하는 구조.",
+  "credit": "지식 검색 모듈과 실험 루프 구현을 바탕으로 재구성",
+  "caption": "지식그래프는 가설의 근거를 찾는 데 사용하고, 하네스는 허용된 실험 도구를 실행해 결과와 실패를 기록합니다. 기록은 다음 실험의 입력으로 돌아갑니다."
+}, {
     type: "table", placement: "outcome", title: "같은 실험 하네스를 적용한 두 과제", sources: ["result"],
     columns: ["과제", "데이터·문제", "결과"],
     rows: [["구조물 안정성", "비전 기반 물리 추론", "484팀 중 37위"], ["스마트 창고", "정형 시계열 회귀", "607팀 중 72위"]],
     caption: "대회와 평가 기준이 달라 순위를 성능 지표처럼 직접 비교하지 않습니다. 서로 다른 문제에 같은 실험·기록 구조를 적용한 사례입니다."
   }],
   "worldquant": [{
+    type: "table", placement: "outcome", title: "같은 알파 계열의 실험 결과 비교", sources: ["process", "result"], numeric: true,
+    columns: ["실험", "Sharpe", "Fitness", "Returns", "Drawdown"],
+    rows: [["A413 · 기존 후보", "1.63", "1.60", "12.73%", "7.67%"], ["A420 · 확인 조건 수정", "1.73", "1.74", "12.67%", "9.00%"], ["A422 · 가격 조건 추가", "0.38", "0.20", "3.68%", "14.66%"]],
+    credit: "2026.05.14 연구 기록 · WorldQuant BRAIN · Delay 1 · IS 시뮬레이션",
+    caption: "A420은 Sharpe와 Fitness가 높아졌지만 낙폭도 커졌습니다. 가격 조건을 더한 A422는 성과가 악화됐습니다. 기록된 시뮬레이션 값이며 실거래 수익이나 미사용 기간의 검증 결과가 아닙니다."
+  }, {
     type: "table", placement: "approach", title: "알파 후보를 선택할 때 함께 본 기준", sources: ["process", "result"],
     columns: ["검토 대상", "지표·방법", "확인하려던 문제"],
     rows: [["위험 대비 성과", "Sharpe · drawdown", "수익률만 높고 위험은 큰 신호인지"], ["거래 부담", "turnover · 거래비용", "매매 빈도가 실제 효율을 낮추는지"], ["거래 효율", "fitness · margin", "수익성과 거래 효율의 균형"], ["중복·과적합", "alpha correlation · 기간별 비교", "유사 신호 중복과 특정 기간에 대한 과적합"]],
     caption: "수익률 하나로 후보를 고르지 않고 위험, 거래 부담, 신호 중복과 기간별 안정성을 함께 검토했습니다."
   }],
   "media-trust": [{
+    type: "image", placement: "approach", title: "많이 이용하는 경로와 신뢰하는 경로의 차이", sources: ["process", "result"],
+    src: "./assets/projects/media-use-trust.png", width: 1512, height: 864,
+    alt: "뉴스 경로별 이용률과 5점 척도 신뢰도의 산점도. SNS·온라인 동영상·메신저는 이용률이 50% 이상이지만 평균 신뢰도는 3.2점 미만입니다.",
+    credit: "언론통계 공모전 제출 보고서 · 뉴스 이용률과 신뢰도",
+    caption: "동영상·SNS·메신저는 많이 이용하지만 신뢰도는 상대적으로 낮았습니다. 이 경로를 피하도록 권하기보다, 소비 화면에서 원문 출처를 확인하도록 돕는 방안을 제안했습니다."
+  }, {
     type: "composition", placement: "outcome", title: "출처 확인 지원의 우선 적용 대상으로 분류한 청소년", sources: ["process", "result"],
     total: 2674, selected: 1470, selectedLabel: "우선 적용군", otherLabel: "그 외 응답자",
     conditions: ["5개 정보 경로 중 3개 이상에 이용·접촉 응답", "뉴스 사이트·언론사 직접접속 이용 응답 없음"],

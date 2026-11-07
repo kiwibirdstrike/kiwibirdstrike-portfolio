@@ -1,0 +1,41 @@
+digraph LGAimers {
+  graph [rankdir=TB, bgcolor="white", pad=0.22, nodesep=0.38, ranksep=0.52,
+         fontname="Apple SD Gothic Neo", fontsize=18];
+  node [fontname="Apple SD Gothic Neo", fontsize=18, shape=plain,
+        fontcolor="#242424"];
+  edge [fontname="Apple SD Gothic Neo", fontsize=14, color="#737373",
+        arrowsize=0.7, penwidth=1.1];
+
+  input [label="투구 단위 입력\n118개 피처 · 선수 임베딩 · 상황 정보"];
+  labels [label="공식 train에서 라벨 복원\n성공 / 실패 유형 3개"];
+  features [shape=box, margin=0.22, label="공통 전처리·특징 구성\n정규화 · 범주 사전 · 임베딩"];
+  input -> features;
+
+  scalar [shape=box, margin=0.22,
+          label="기존 경로\n스칼라 출력\n성공 확률 잔차 예측"];
+  mse [label="제곱오차\n(squared error)"];
+  ce [shape=box, margin=0.22,
+      label="제가 제안·구현한 분기\n4개 로짓 출력\nsuccess · reverse_any\nmiddle_only · other"];
+  crossentropy [label="교차엔트로피\n(cross-entropy)"];
+  softmax [shape=box, margin=0.22, label="Softmax\n클래스별 확률"];
+  success [label="성공 확률\nclass 0 확률"];
+
+  features -> scalar;
+  features -> ce;
+  labels -> ce [style=dashed, label="학습 라벨"];
+  scalar -> mse [style=dashed, label="학습 손실"];
+  ce -> crossentropy [style=dashed, label="학습 손실"];
+  ce -> softmax;
+  softmax -> success;
+
+  {rank=same; scalar; ce}
+  {rank=same; mse; crossentropy; softmax}
+  scalar -> blend [label="성공 확률"];
+  success -> blend [label="성공 확률"];
+  blend [shape=box, margin=0.22, label="성공 확률 결합\n별도 학습 후 비교·블렌딩"];
+  blend -> output;
+  output [label="최종 제구 성공 확률"];
+
+  note [label="제가 다룬 범위\n실패를 하나의 범주로 두지 않고\n실패 방향을 3개로 분해해 학습 목표를 재구성", fontcolor="#555555"];
+  note -> ce [style=dotted, arrowhead=none, constraint=false];
+}

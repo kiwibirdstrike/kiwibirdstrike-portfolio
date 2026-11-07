@@ -1,0 +1,17 @@
+digraph Wine {
+  graph [rankdir=TB, bgcolor="white", pad=0.3, nodesep=0.5, ranksep=0.6];
+  node [fontname="Apple SD Gothic Neo", fontsize=19, shape=plain, fontcolor="#242424"];
+  edge [fontname="Apple SD Gothic Neo", fontsize=14, color="#737373", arrowsize=0.7];
+  survey [label="소비자 응답"];
+  dsm [label="Dry / Sweet / Medium\n같은 단맛에도 서로 다른 분류 기준", fontcolor="#777777"];
+  sweetness [label="Sweetness\n상대적으로 일관된 응답 패턴"];
+  survey -> dsm; survey -> sweetness;
+  {rank=same; dsm; sweetness}
+  model [shape=box, margin=0.22, label="단맛 인식 모델\n와인별로 느끼는 단맛 예측"];
+  sweetness -> model [label="중간 목표변수로 선택"];
+  tree [shape=box, margin=0.22, label="Decision Tree"];
+  model -> tree [label="예측한 단맛"];
+  dry [label="Dry"]; sweet [label="Sweet"]; medium [label="Medium"];
+  tree -> dry; tree -> sweet; tree -> medium;
+  {rank=same; dry; sweet; medium}
+}

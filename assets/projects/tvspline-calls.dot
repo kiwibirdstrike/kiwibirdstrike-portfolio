@@ -1,0 +1,17 @@
+digraph TVSpline {
+  graph [rankdir=TB, bgcolor="white", pad=0.3, nodesep=0.35, ranksep=0.65];
+  node [fontname="Apple SD Gothic Neo", fontsize=18, shape=plain, fontcolor="#242424"];
+  edge [fontname="Apple SD Gothic Neo", fontsize=13, color="#737373", arrowsize=0.65];
+  user [label="사용자 입력\nformula · data · method"];
+  entry [shape=box, margin=0.2, label="tvspline()"];
+  user -> entry;
+  mean [label="평균"]; quantile [label="분위수"]; density [label="밀도"]; additive [label="가법"]; index [label="단일지수"]; poly [label="Polygram"];
+  entry -> {mean quantile density additive index poly};
+  {rank=same; mean; quantile; density; additive; index; poly}
+  common [shape=box, margin=0.2, label="공통 유틸리티 · Rcpp 연산"];
+  {mean quantile density additive index poly} -> common;
+  output [label="모형별 적합 결과\n공통 인터페이스로 활용"];
+  common -> output;
+  tests [label="테스트\n입력·출력과 동작 검증", fontcolor="#555555"];
+  tests -> entry [style=dashed, label="검증", constraint=false];
+}

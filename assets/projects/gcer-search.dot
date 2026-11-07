@@ -1,0 +1,26 @@
+digraph GCER {
+  graph [rankdir=TB, bgcolor="white", pad=0.3, ranksep=0.65, nodesep=0.65];
+  node [fontname="Apple SD Gothic Neo", fontsize=18, shape=plain, fontcolor="#242424"];
+  edge [fontname="Apple SD Gothic Neo", fontsize=13, color="#737373", arrowsize=0.7];
+  query [label="질문 q"];
+  sim [shape=box, margin=0.2, label="NV-Embed-v2\n질문–문단 유사도"];
+  query -> sim;
+  anchors [label="유사도 상위 3문단\n방문 집합 V 초기화"];
+  sim -> anchors;
+  corpus [shape=cylinder, margin=0.2, label="OpenIE 문단 그래프\n연결자 빈도 가중"];
+  candidates [shape=box, margin=0.2, label="후보 집합\n방문 이웃 100 + 전역 유사도 100"];
+  anchors -> candidates; corpus -> candidates;
+  score [shape=box, margin=0.2, label="후보 점수\n기저 관련성 + λ × 이웃 근거 통계량(max)"];
+  candidates -> score;
+  fit [label="학습 질문 1,000개\nκ = 0.16 · λ = 10.6"];
+  fit -> corpus [style=dashed]; fit -> score [style=dashed];
+  select [label="최고 점수 문단 방문\nV와 이웃 신호 갱신"];
+  score -> select;
+  select -> candidates [label="반복 · 최대 100문단", constraint=false];
+  context [label="검색 문단 순위\n문단 수 / 토큰 예산으로 문맥 선택"];
+  select -> context;
+  reader [shape=box, margin=0.2, label="공통 LLM 판독기\nLlama-3.3-70B-Instruct"];
+  context -> reader;
+  answer [label="답변 EM · F1 평가"];
+  reader -> answer;
+}

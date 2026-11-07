@@ -1,0 +1,18 @@
+digraph Booth {
+  graph [rankdir=TB, bgcolor="white", pad=0.25, nodesep=0.55, ranksep=0.6];
+  node [shape=plain, fontname="Apple SD Gothic Neo", fontsize=19, fontcolor="#242424"];
+  edge [color="#777777", arrowsize=0.7];
+  companies [label="기업별 정보"];
+  prediction [shape=box, margin=0.2, label="기업별 인기도 예측"];
+  weights [label="예측 인기도 → 부스별 가중치"];
+  optimization [shape=box, margin=0.2, label="가중 그래프 기반 배치 최적화"];
+  before [label="기존 배치안"];
+  after [label="최적화 배치안"];
+  simulation [shape=box, margin=0.2, label="배치안별 방문도 시뮬레이션"];
+  result [label="기존 대비 방문도 18% 증가"];
+  companies -> prediction -> weights -> optimization -> after;
+  {rank=same; before; after}
+  before -> simulation;
+  after -> simulation;
+  simulation -> result;
+}

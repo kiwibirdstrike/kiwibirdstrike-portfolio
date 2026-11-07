@@ -1,0 +1,45 @@
+digraph PortModel {
+  graph [rankdir=TB, bgcolor="white", pad=0.2, nodesep=0.36, ranksep=0.52,
+         fontname="Apple SD Gothic Neo", fontsize=18];
+  node [fontname="Apple SD Gothic Neo", fontsize=18, shape=plain,
+        fontcolor="#242424"];
+  edge [fontname="Apple SD Gothic Neo", fontsize=16, color="#737373",
+        arrowsize=0.7, penwidth=1.1];
+
+  input [label="입항·출항 기록\n선박명 · 국적 · 선종 · 총톤수"];
+  split [shape=box, margin=0.2, label="이름 표기 유형으로 분기\n한글 / 비한글"];
+  input -> split;
+
+  h_search [shape=box, margin=0.2,
+            label="한글 후보 검색\n정규화 · 자모 · 표기 변형"];
+  nh_search [shape=box, margin=0.2,
+             label="비한글 후보 검색\n정규화 · 문자 유사도 · 톤수"];
+  {rank=same; h_search; nh_search}
+  split -> h_search;
+  split -> nh_search;
+
+  ce_h [shape=box, margin=0.2, label="한글 CE\n후보별 문맥 점수"];
+  ce_nh [shape=box, margin=0.2, label="비한글 CE\n후보별 문맥 점수"];
+  {rank=same; ce_h; ce_nh}
+  h_search -> ce_h;
+  nh_search -> ce_nh;
+
+  recover_h [shape=box, margin=0.2,
+             label="조건부 후보 복구\n톤수 범위·이름 점수로 재검색"];
+  recover_nh [shape=box, margin=0.2,
+              label="조건부 후보 복구\n확신 낮은 행만 후보 확장"];
+  {rank=same; recover_h; recover_nh}
+  ce_h -> recover_h;
+  ce_nh -> recover_nh;
+
+  qwen [shape=box, margin=0.2,
+        label="비한글 추가 리랭크\nQwen3-Reranker 후보 재평가"];
+  recover_h -> output;
+  recover_nh -> qwen;
+  qwen -> output;
+  output [shape=box, margin=0.2, label="최종 선박 ID"];
+
+  noise [label="학습 데이터 노이즈 별도 구성\n오타 · 표기 변형 · 톤수 교란", fontcolor="#555555"];
+  noise -> ce_h [style=dashed, arrowhead=none, constraint=false];
+  noise -> ce_nh [style=dashed, arrowhead=none, constraint=false];
+}

@@ -1,0 +1,18 @@
+digraph Location {
+  graph [rankdir=TB, bgcolor="white", pad=0.3, ranksep=0.65, nodesep=0.6];
+  node [fontname="Apple SD Gothic Neo", fontsize=19, shape=plain, fontcolor="#242424"];
+  edge [fontname="Apple SD Gothic Neo", fontsize=14, color="#737373", arrowsize=0.7];
+  pop [label="지역별 인구 분포\n시간에 따른 수요 변화"];
+  facilities [label="기존 시설 위치\n접근성"];
+  trend [shape=box, margin=0.2, label="Trend Filtering\n수요 변화 반영"];
+  pop -> trend;
+  mclp [shape=box, margin=0.2, label="MCLP\n입지 최적화"];
+  trend -> mclp; facilities -> mclp;
+  budget [label="정책 담당자\n예산 시나리오 설정"];
+  budget -> mclp [label="제약 조건"];
+  output [label="입지 후보 · 배치 대안"];
+  mclp -> output;
+  web [label="웹 시뮬레이션\n조건별 결과 비교"];
+  output -> web;
+  web -> budget [style=dashed, label="예산 변경", constraint=false];
+}

@@ -58,7 +58,7 @@ for (const project of projects) {
   if (!visuals[project.id]?.length) throw new Error('Missing visual: ' + project.id);
   for (const visual of visuals[project.id]) {
     const fail = () => { throw new Error('Invalid visual: ' + project.id + ' / ' + visual.title); };
-    if (!visual.title || !visual.caption || !['approach', 'outcome'].includes(visual.placement) || !visual.sources?.length || visual.sources.some(key => !project[key])) fail();
+    if (!visual.title || !visual.caption || !['approach', 'validation', 'outcome'].includes(visual.placement) || (visual.placement === 'validation' && !project.validation) || !visual.sources?.length || visual.sources.some(key => !project[key])) fail();
     const source = visual.sources.map(key => JSON.stringify(project[key])).join(' ');
     if (visual.type === 'image') {
       if (!visual.alt || !visual.credit || !(visual.width > 0) || !(visual.height > 0) || !visual.src.startsWith('./assets/projects/') || !statSync(new URL('../' + visual.src, import.meta.url)).isFile()) fail();

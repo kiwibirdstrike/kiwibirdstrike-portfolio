@@ -149,6 +149,7 @@ figcaption { font-size: var(--text-small); color: var(--muted); margin-top: 12px
 .visual-title { font-size: 1.375rem; line-height: 1.5; margin: 0 0 24px; }
 .paper-figure-link { display: block; max-width: 100%; width: fit-content; margin-inline: auto; }
 .paper-figure-link img { display: block; width: 100%; height: auto; max-height: 680px; object-fit: contain; }
+.paper-figure-link img[src$=".svg"] { max-height: none; }
 .paper-figure-source { font-size: var(--text-small); color: var(--muted); margin: 16px 0; }
 .project-visual figcaption { padding-top: 16px; border-top: 1px solid var(--line); }
 .system-lane + .system-lane { margin-top: 32px; }
@@ -169,6 +170,11 @@ figcaption { font-size: var(--text-small); color: var(--muted); margin-top: 12px
 .evidence-table thead th { background: var(--surface); font-weight: 600; border-top: 1px solid var(--line); }
 .evidence-table tbody th { font-weight: 500; }
 .evidence-table td { color: var(--muted); }
+.table-scroll { overflow-x: auto; }
+.numeric-table { table-layout: auto; min-width: 640px; font-variant-numeric: tabular-nums; }
+.numeric-table th:not(:first-child), .numeric-table td { text-align: end; }
+.numeric-table td { white-space: nowrap; }
+.table-highlight th, .table-highlight td { font-weight: 600; color: var(--ink); border-block: 1px solid var(--ink); }
 .visual-unit { font-size: var(--text-small); color: var(--muted); margin: 0 0 16px; }
 .bar-axis { display: flex; justify-content: space-between; border-bottom: 1px solid var(--line); font-size: var(--text-small); color: var(--muted); padding-bottom: 6px; }
 .bar-rows, .composition-legend { padding: 0; margin: 20px 0; list-style: none; }

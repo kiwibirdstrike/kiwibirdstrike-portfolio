@@ -1,0 +1,31 @@
+digraph AutoResearchHarness {
+  graph [rankdir=TB, bgcolor="white", pad=0.2, nodesep=0.38, ranksep=0.55,
+         fontname="Apple SD Gothic Neo", fontsize=18];
+  node [fontname="Apple SD Gothic Neo", fontsize=18, shape=plain,
+        fontcolor="#242424"];
+  edge [fontname="Apple SD Gothic Neo", fontsize=16, color="#737373",
+        arrowsize=0.7, penwidth=1.1];
+
+  question [label="연구 질문·가설"];
+  knowledge [shape=box, margin=0.2,
+             label="지식 그래프 검색\nMarkdown 본문 + wikilink / backlink"];
+  context [shape=box, margin=0.2,
+           label="Context 구성\n관련 지식·이전 결과·실패 기록"];
+  planner [shape=box, margin=0.2,
+           label="실험 계획\n모형·특징·검증 전략 선택"];
+  harness [shape=box, margin=0.2,
+           label="실험 하네스\n허용된 도구로 실행"];
+  record [shape=box, margin=0.2,
+          label="Run record\ncontext · run · record 저장"];
+  result [label="실험 결과·로그"];
+  history [label="누적 이력\n성공·실패·다음 판단"];
+
+  question -> knowledge;
+  knowledge -> context;
+  context -> planner;
+  planner -> harness;
+  harness -> result;
+  result -> record;
+  record -> history;
+  history -> context [style=dashed, label="다음 반복", constraint=false];
+}

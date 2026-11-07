@@ -128,7 +128,7 @@ function visualFigure(visual, index) {
     }
     if (visual.loop) figure.append(element("p", "system-loop", `↶ ${visual.loop}`));
   } else if (visual.type === "table") {
-    const table = element("table", "evidence-table");
+    const table = element("table", `evidence-table${visual.numeric ? " numeric-table" : ""}`);
     table.setAttribute("aria-labelledby", heading.id);
     const head = element("thead");
     const header = element("tr");
@@ -141,6 +141,7 @@ function visualFigure(visual, index) {
     const body = element("tbody");
     for (const values of visual.rows) {
       const row = element("tr");
+      if (values[0] === visual.highlight) row.className = "table-highlight";
       values.forEach((value, column) => {
         const cell = element(column === 0 ? "th" : "td", "", value);
         if (column === 0) cell.setAttribute("scope", "row");
@@ -149,7 +150,13 @@ function visualFigure(visual, index) {
       body.append(row);
     }
     table.append(head, body);
-    figure.append(table);
+    const scroll = element("div", "table-scroll");
+    scroll.setAttribute("tabindex", "0");
+    scroll.setAttribute("role", "region");
+    scroll.setAttribute("aria-labelledby", heading.id);
+    scroll.append(table);
+    figure.append(scroll);
+    if (visual.credit) figure.append(element("p", "paper-figure-source", visual.credit));
   } else if (visual.type === "bars") {
     const axis = element("div", "bar-axis");
     axis.setAttribute("aria-hidden", "true");
@@ -257,7 +264,7 @@ function renderProject(project) {
   decision.append(element("h3", "case-subheading", "핵심 판단"), prose(project.decision));
   sections.approach.append(decision);
   if (project.workflow && !visuals.some(visual => visual.replacesWorkflow)) sections.approach.append(workflowFigure(project.workflow));
-  if (project.architectureDiagram) sections.approach.append(architectureFigure(project));
+  if (project.architectureDiagram && !visuals.some(visual => visual.replacesArchitecture)) sections.approach.append(architectureFigure(project));
   visuals.forEach((visual, index) => {
     if (visual.placement === "approach") sections.approach.append(visualFigure(visual, index));
   });
@@ -286,6 +293,9 @@ function renderProject(project) {
     sections.approach.append(technical);
   }
   if (project.validation) sections.validation.append(prose(project.validation));
+  visuals.forEach((visual, index) => {
+    if (visual.placement === "validation") sections.validation.append(visualFigure(visual, index));
+  });
   visuals.forEach((visual, index) => {
     if (visual.placement === "outcome") sections.outcome.append(visualFigure(visual, index));
   });

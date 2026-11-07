@@ -1,0 +1,17 @@
+digraph Manufacturing {
+  graph [rankdir=TB, bgcolor="white", pad=0.3, ranksep=0.65, nodesep=0.7];
+  node [fontname="Apple SD Gothic Neo", fontsize=19, shape=plain, fontcolor="#242424"];
+  edge [fontname="Apple SD Gothic Neo", fontsize=14, color="#737373", arrowsize=0.7];
+  sensors [label="제조 센서 데이터\n변수 분포 · 센서 이상값"];
+  expert [label="현장 담당자\n공정 변수의 의미 설명"];
+  clean [shape=box, margin=0.2, label="데이터 검토 · 전처리"];
+  sensors -> clean; expert -> clean [label="공정 맥락 반영"];
+  model [shape=box, margin=0.2, label="예측 모델"];
+  clean -> model;
+  result [label="예측 결과 · 분석 내용"];
+  model -> result;
+  llm [shape=box, margin=0.2, label="LangChain · GPT API\n분석 결과 설명"];
+  result -> llm;
+  screen [label="웹 분석 도구\n담당자가 예측과 설명을 함께 확인"];
+  llm -> screen; result -> screen;
+}

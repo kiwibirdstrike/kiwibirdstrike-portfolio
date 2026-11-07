@@ -1,0 +1,28 @@
+digraph LabRoomsSystem {
+  graph [rankdir=TB, bgcolor="white", pad=0.2, nodesep=0.38, ranksep=0.55,
+         fontname="Apple SD Gothic Neo", fontsize=18];
+  node [fontname="Apple SD Gothic Neo", fontsize=18, shape=plain,
+        fontcolor="#242424"];
+  edge [fontname="Apple SD Gothic Neo", fontsize=16, color="#737373",
+        arrowsize=0.7, penwidth=1.1];
+
+  user [label="모바일 사용자"];
+  pwa [shape=box, margin=0.2,
+       label="PWA 화면\n주간 시간표 · 예약 · 취소\n107실 / 115실 선택"];
+  api [shape=box, margin=0.2,
+      label="Cloudflare Pages Functions\n/api/schedule · /api/book · /api/cancel"];
+  guard [shape=box, margin=0.2,
+         label="예약 처리\nPIN 확인 · 겹침 검사 · 반복 생성"];
+  auth [label="Service Account\nCalendar access token"];
+  calendar [shape=box, margin=0.2,
+            label="Google Calendar API\nRoom A / Room B calendar"];
+  events [label="일정 조회·생성·삭제"];
+
+  user -> pwa;
+  pwa -> api [label="HTTP"];
+  api -> guard;
+  auth -> guard [style=dashed, label="인증"];
+  guard -> calendar;
+  calendar -> events;
+  events -> pwa [style=dashed, label="주간 일정"];
+}

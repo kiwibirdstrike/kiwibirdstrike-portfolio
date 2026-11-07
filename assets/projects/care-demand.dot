@@ -1,0 +1,20 @@
+digraph Care {
+  graph [rankdir=TB, bgcolor="white", pad=0.3, ranksep=0.65, nodesep=0.65];
+  node [fontname="Apple SD Gothic Neo", fontsize=19, shape=plain, fontcolor="#242424"];
+  edge [fontname="Apple SD Gothic Neo", fontsize=14, color="#737373", arrowsize=0.7];
+  data [label="2012–2023년 시군구 자료\n행정구역 변동·결측 보간"];
+  demand [shape=box, margin=0.2, label="ETS\n장기요양급여자 수 예측"];
+  home [shape=box, margin=0.2, label="ETS\n재가 요양보호사 수"];
+  facility [shape=box, margin=0.2, label="ETS\n시설 요양보호사 수"];
+  data -> demand; data -> home; data -> facility;
+  {rank=same; demand; home; facility}
+  bottom [label="Bottom-up 집계\n방식 비교 후 선택 · WMAPE 5.60"];
+  home -> bottom; facility -> bottom;
+  demand -> comparison;
+  bottom -> comparison;
+  comparison [label="지역별 수요·인력 비교"];
+  index [shape=box, margin=0.2, label="요양 방치 지수\n노인 수 ÷ 요양보호사 수"];
+  comparison -> index;
+  groups [label="위험·안전 지역\n재가·시설 구성과 의료 접근성 비교"];
+  index -> groups;
+}
