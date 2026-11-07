@@ -1,7 +1,7 @@
 const data = window.PORTFOLIO_DATA;
 const target = document.querySelector("#project-detail-page");
 const id = new URLSearchParams(window.location.search).get("id");
-const project = data.featuredProjects.find((item) => item.id === id);
+const project = [...data.featuredProjects, ...data.otherProjects].find((item) => item.id === id);
 
 function element(tag, className, text) {
   const node = document.createElement(tag);
@@ -46,6 +46,19 @@ function technicalSection(number, title, items) {
   items.forEach((item) => list.append(element("li", "", item)));
   section.append(heading, list);
   return section;
+}
+
+function workflowFigure(workflow) {
+  const figure = element("figure", "workflow-figure");
+  figure.append(element("h2", "", workflow.title));
+  const steps = element("ol", `workflow-steps${workflow.parallel ? " workflow-parallel" : ""}`);
+  for (const [index, step] of workflow.steps.entries()) {
+    const item = element("li");
+    item.append(element("span", "workflow-number", String(index + 1).padStart(2, "0")), element("h3", "", step.title), element("p", "", step.note));
+    steps.append(item);
+  }
+  figure.append(steps, element("figcaption", "", workflow.caption));
+  return figure;
 }
 
 function architectureFigure(project) {
@@ -102,16 +115,20 @@ function renderProject(project) {
 
   const intro = element("p", "project-page-lead", project.summary);
   const details = element("dl", "project-details project-page-details");
-  details.append(
-    detailBlock("문제", project.problem),
-    detailBlock("역할", project.role),
-    detailBlock("프로세스", project.process),
-    detailBlock("검증", project.validation),
-    detailBlock("결과", project.result),
-    detailBlock("한계와 확장", project.limitation)
-  );
+  for (const [label, value] of [
+    ["해결하려던 문제", project.problem],
+    ["내 역할과 목표", project.role],
+    ["핵심 판단", project.decision],
+    ["수행 과정", project.process],
+    ["검증", project.validation],
+    ["결과와 배운 점", project.result],
+    ["한계와 확장", project.limitation]
+  ]) {
+    if (value && (!Array.isArray(value) || value.length)) details.append(detailBlock(label, value));
+  }
 
   target.append(header, intro);
+  if (project.workflow) target.append(workflowFigure(project.workflow));
   if (project.architectureDiagram) {
     target.append(architectureFigure(project));
   }

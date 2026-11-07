@@ -93,8 +93,8 @@ function projectArticle(project, index) {
   }
   const details = element("dl", "project-details");
   details.append(
-    detailBlock("역할", project.role),
-    detailBlock("성과", project.result)
+    detailBlock("내 역할", project.roleSummary),
+    detailBlock("핵심 판단", project.decision || project.summary)
   );
   body.append(details);
 
@@ -109,10 +109,9 @@ function projectArticle(project, index) {
 }
 
 function renderProjects() {
-  const filters = data.tracks.map(({ id, title }) => ({ id, label: title }));
+  const filters = [{ id: "all", label: "전체" }, ...data.tracks.filter(track => data.featuredProjects.some(project => project.track === track.id)).map(({ id, title }) => ({ id, label: title }))];
   const bar = document.querySelector("#filter-bar");
   const target = document.querySelector("#featured-projects");
-  const defaultFilter = filters[0].id;
 
   filters.forEach(({ id, label }, index) => {
     const button = element("button", index === 0 ? "filter active" : "filter", label);
@@ -122,11 +121,8 @@ function renderProjects() {
     bar.append(button);
   });
 
-  const trackCounts = {};
-  data.featuredProjects.forEach((project) => {
-    trackCounts[project.track] = (trackCounts[project.track] || 0) + 1;
-    const article = projectArticle(project, trackCounts[project.track] - 1);
-    article.hidden = project.track !== defaultFilter;
+  data.featuredProjects.forEach((project, index) => {
+    const article = projectArticle(project, index);
     target.append(article);
   });
 
@@ -142,7 +138,7 @@ function renderProjects() {
     });
 
     target.querySelectorAll(".project").forEach((project) => {
-      project.hidden = project.dataset.track !== selected;
+      project.hidden = selected !== "all" && project.dataset.track !== selected;
     });
   });
 }
@@ -151,8 +147,8 @@ function renderTimeline() {
   const target = document.querySelector("#timeline");
   const legend = element("div", "timeline-legend");
   legend.append(
-    element("span", "legend-data", "AI·퀀트·데이터 분석"),
-    element("span", "legend-bio", "통계 방법론·바이오의료")
+    element("span", "legend-data", "현장 분석·서비스 구현"),
+    element("span", "legend-bio", "통계·연구·협업")
   );
   target.append(legend);
 
@@ -176,20 +172,15 @@ function renderArchive() {
   data.otherProjects.forEach((project) => {
     const article = element("article", "archive-item");
     const title = element("h3");
-    if (project.links?.length) {
-      const link = element("a", "", `${project.title} ↗`);
-      link.href = project.links[0].href;
-      link.target = "_blank";
-      link.rel = "noreferrer";
-      title.append(link);
-    } else {
-      title.textContent = project.title;
-    }
+    const link = element("a", "", `${project.title} ↗`);
+    link.href = `./project.html?id=${encodeURIComponent(project.id)}`;
+    title.append(link);
     article.append(
       element("span", "archive-category", project.category),
       title,
       element("time", "", project.period),
-      element("p", "", project.result)
+      element("p", "", project.summary),
+      element("p", "archive-role", `내 역할 · ${project.roleSummary}`)
     );
     target.append(article);
   });

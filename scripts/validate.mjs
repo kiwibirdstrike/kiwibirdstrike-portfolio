@@ -1,7 +1,7 @@
 import { readFileSync, statSync } from "node:fs";
 import vm from "node:vm";
 
-const requiredFiles = ["index.html", "portfolio.css", "site.js", "portfolio-content.js", ".nojekyll"];
+const requiredFiles = ["index.html", "portfolio.css", "site.js", "portfolio-content.js", ".nojekyll", "project.html", "project-page.js"];
 const requiredKeys = [
   "profile",
   "tracks",
@@ -52,44 +52,20 @@ function inspect(value, path = "portfolio") {
 
 inspect(data);
 
-if (data.otherProjects.some((project) => project.title === "언론 통계 분석 경진대회")) {
-  throw new Error("Removed project still appears in the project archive");
-}
-
-const jobis = data.featuredProjects.find((project) => project.id === "jobis");
-if (!jobis) throw new Error("Missing JOBIS project");
-
-const requiredTechnicalKeys = [
-  "architecture",
-  "dataFlow",
-  "implementation",
-  "decisions",
-  "experiments"
-];
-
-for (const key of requiredTechnicalKeys) {
-  if (!Array.isArray(jobis.technicalDetails?.[key]) || jobis.technicalDetails[key].length === 0) {
-    throw new Error(`Missing JOBIS technical detail: ${key}`);
+const projects = [...data.featuredProjects, ...data.otherProjects];
+if (projects.length !== 21 || new Set(projects.map(p => p.id)).size !== 21) throw new Error('Expected 21 unique projects');
+for (const p of projects) {
+  for (const key of ['id', 'title', 'summary', 'roleSummary', 'period', 'problem', 'role', 'process', 'result']) {
+    if (!p[key] || (Array.isArray(p[key]) && !p[key].length)) throw new Error('Missing ' + key + ' on ' + p.id);
   }
+  if (p.workflow && (p.workflow.steps.length !== 4 || !p.workflow.caption)) throw new Error('Invalid workflow: ' + p.id);
 }
-
-if (!Array.isArray(jobis.architectureDiagram) || jobis.architectureDiagram.length !== 3) {
-  throw new Error("JOBIS architecture diagram must contain three stages");
-}
-
-for (const [index, stage] of jobis.architectureDiagram.entries()) {
-  if (!stage.title || !Array.isArray(stage.nodes) || stage.nodes.length < 3) {
-    throw new Error(`Invalid JOBIS architecture stage: ${index + 1}`);
-  }
-  for (const node of stage.nodes) {
-    if (!node.label || !node.note) {
-      throw new Error(`Invalid JOBIS architecture node in stage: ${stage.title}`);
-    }
-  }
+for (const id of ['quant-agent','imputation','digital-bio']) {
+  if (projects.some(p => p.id === id)) throw new Error('Removed project remains: ' + id);
 }
 
 const trackIds = new Set(data.tracks.map((track) => track.id));
-for (const project of data.featuredProjects) {
+for (const project of projects) {
   if (!trackIds.has(project.track)) throw new Error(`Unknown track on project: ${project.id}`);
   if (project.architectureDiagram && (!project.architectureTitle || !project.architectureCaption)) {
     throw new Error(`Architecture diagram needs a title and caption: ${project.id}`);
