@@ -123,7 +123,10 @@ function renderProjects() {
   const bar = document.querySelector("#filter-bar");
   const target = document.querySelector("#project-archive");
   const result = document.querySelector("#filter-result");
-  result.textContent = `${data.projects.length}개 프로젝트`;
+  const more = document.querySelector("#load-more");
+  const groups = [];
+  let selectedCategory = "all";
+  let visibleLimit = 5;
   const filters = [{ id: "all", title: "전체" }, ...data.categories];
   for (const { id, title } of filters) {
     const count = data.projects.filter(p => id === "all" || p.category === id).length;
@@ -141,11 +144,35 @@ function renderProjects() {
     heading.id = `category-${category.id}`;
     section.setAttribute("aria-labelledby", heading.id);
     section.append(heading);
-    data.projects.filter(p => p.category === category.id).forEach((project) => {
-      section.append(projectArticle(project));
-    });
+    const articles = data.projects.filter(p => p.category === category.id).map(projectArticle);
+    articles.forEach(article => section.append(article));
+    groups.push({ category: category.id, section, articles });
     target.append(section);
   }
+  function updateVisibleProjects() {
+    let visibleCount = 0;
+    for (const group of groups) {
+      let groupCount = 0;
+      for (const article of group.articles) {
+        const show = selectedCategory === "all"
+          ? visibleCount < visibleLimit
+          : group.category === selectedCategory;
+        article.hidden = !show;
+        if (show) { visibleCount += 1; groupCount += 1; }
+      }
+      group.section.hidden = groupCount === 0;
+    }
+    more.hidden = selectedCategory !== "all" || visibleCount === data.projects.length;
+    return visibleCount;
+  }
+  updateVisibleProjects();
+  more.addEventListener("click", () => {
+    const firstNewArticle = groups.flatMap(group => group.articles).find(article => article.hidden);
+    visibleLimit += 5;
+    updateVisibleProjects();
+    result.textContent = "프로젝트를 추가로 표시했습니다.";
+    firstNewArticle.querySelector(".project-title-link").focus();
+  });
   bar.addEventListener("click", event => {
     const button = event.target.closest("[data-filter]");
     if (!button) return;
@@ -153,12 +180,11 @@ function renderProjects() {
       item.classList.toggle("active", item === button);
       item.setAttribute("aria-pressed", String(item === button));
     }
-    for (const section of target.querySelectorAll(".archive-group")) {
-      section.hidden = button.dataset.filter !== "all" && section.dataset.category !== button.dataset.filter;
-    }
+    selectedCategory = button.dataset.filter;
+    visibleLimit = 5;
+    updateVisibleProjects();
     const selected = data.categories.find(category => category.id === button.dataset.filter);
-    const count = data.projects.filter(project => !selected || project.category === selected.id).length;
-    result.textContent = `${selected?.title || "전체"} · ${count}개 프로젝트`;
+    result.textContent = `${selected?.title || "전체"} 프로젝트를 표시했습니다.`;
   });
 }
 

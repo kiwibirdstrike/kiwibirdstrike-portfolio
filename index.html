@@ -10,9 +10,9 @@
       content="데이터와 계산으로 문제를 구체화하고, 결과를 검증하며 AI 에이전트로 분석과 개발의 범위를 넓히는 이주성의 포트폴리오"
     >
     <title>이주성 | 연구와 프로젝트</title>
-    <link rel="stylesheet" href="./portfolio.css?v=20261107-8">
-    <script src="./portfolio-content.js?v=20261107-8" defer></script>
-    <script src="./site.js?v=20261107-8" defer></script>
+    <link rel="stylesheet" href="./portfolio.css?v=20261107-10">
+    <script src="./portfolio-content.js?v=20261107-10" defer></script>
+    <script src="./site.js?v=20261107-10" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#top">본문으로 건너뛰기</a>
@@ -46,7 +46,6 @@
             <div class="process-return process-return-field"><span>현장 피드백으로 목표·구현 조정</span></div>
           </nav>
           <ol class="skills-list" id="skills-list"></ol>
-          <p class="skills-feedback">검증 결과와 현장 피드백에 따라 앞 단계의 데이터·문제 정의·방법론을 다시 조정합니다.</p>
         </section>
       </section>
 
@@ -60,16 +59,19 @@
         <div class="archive-layout">
           <div class="archive-navigation">
             <div class="filter-bar" id="filter-bar" role="group" aria-label="프로젝트 분야 필터"></div>
-            <p class="filter-result" id="filter-result" role="status"></p>
+            <p class="sr-only" id="filter-result" role="status"></p>
           </div>
-          <div id="project-archive"></div>
+          <div>
+            <div id="project-archive"></div>
+            <button class="load-more" id="load-more" type="button" aria-controls="project-archive">더 보기</button>
+          </div>
         </div>
       </section>
 
     </main>
 
     <footer class="site-footer section-shell">
-      <p>이주성 · 연구와 프로젝트</p>
+      <p>이주성 포트폴리오</p>
       <a href="#top">처음으로</a>
     </footer>
   </body>
