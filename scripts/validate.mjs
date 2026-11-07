@@ -51,6 +51,11 @@ function inspect(value, path = "portfolio") {
 inspect(data);
 
 const projects = data.projects;
+for (const skill of data.profile.skills) {
+  if (!skill.category || !skill.question || !skill.items || !skill.example || !projects.some(p => p.id === skill.projectId)) {
+    throw new Error('Incomplete capability stage or invalid project link');
+  }
+}
 if (projects.length !== 21 || new Set(projects.map(p => p.id)).size !== 21) throw new Error('Expected 21 unique projects');
 for (const p of projects) {
   for (const key of ['id', 'title', 'summary', 'roleSummary', 'period', 'problem', 'role', 'process', 'result']) {

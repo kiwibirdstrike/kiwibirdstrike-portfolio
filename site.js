@@ -22,9 +22,17 @@ function renderProfile() {
   document.querySelector("#hero-lead").textContent = data.profile.lead;
 
   const skills = document.querySelector("#skills-list");
-  data.profile.skills.forEach(({ category, items }) => {
-    const row = element("div", "skill-row");
-    row.append(element("dt", "", category), element("dd", "", items));
+  data.profile.skills.forEach(({ category, question, items, example, projectId }, index) => {
+    const row = element("li", "skill-row");
+    const stage = element("div", "skill-stage");
+    const number = element("span", "skill-number", String(index + 1).padStart(2, "0"));
+    number.setAttribute("aria-hidden", "true");
+    stage.append(number, element("h3", "", category));
+    const reasoning = element("div", "skill-reasoning");
+    reasoning.append(element("p", "skill-question", question), element("p", "skill-description", items));
+    const evidence = element("a", "skill-example", example);
+    evidence.href = `./project.html?id=${encodeURIComponent(projectId)}`;
+    row.append(stage, reasoning, evidence);
     skills.append(row);
   });
 

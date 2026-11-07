@@ -44,12 +44,19 @@ h1,h2,h3,h4 { text-wrap: balance; }
 .hero-links a { min-height: 24px; }
 .hero h1 { font-size: clamp(1.75rem, 3vw, 2.25rem); line-height: 1.45; letter-spacing: -.02em; font-weight: 600; margin: 0; white-space: pre-line; }
 .hero-lead { max-width: 65ch; font-size: var(--text-body); line-height: 1.8; margin: 20px 0 24px; color: var(--muted); }
-.skills { margin-top: 36px; max-width: 760px; }
+.skills { margin-top: 48px; }
 .skills h2 { font-size: 1.25rem; font-weight: 600; margin: 0 0 16px; }
-.skills-list { margin: 0; font-size: var(--text-label); }
-.skill-row { display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 16px; padding-block: 10px; }
-.skill-row dt { font-weight: 500; }
-.skill-row dd { margin: 0; color: var(--muted); }
+.skills-intro, .skills-feedback { color: var(--muted); font-size: var(--text-label); }
+.skills-list { list-style: none; padding: 0; margin: 28px 0 0; }
+.skill-row { position: relative; display: grid; grid-template-columns: 160px minmax(0, 1.6fr) minmax(0, 1fr); gap: 32px; padding-block: 0 36px; }
+.skill-row:not(:last-child)::before { content: ''; position: absolute; inset-inline-start: 15px; top: 36px; bottom: 4px; border-inline-start: 1px solid var(--line); }
+.skill-stage { display: flex; align-items: baseline; gap: 12px; }
+.skill-number { display: inline-flex; justify-content: center; min-width: 32px; color: var(--accent); font-size: var(--text-small); font-variant-numeric: tabular-nums; }
+.skill-stage h3 { margin: 0; font-size: var(--text-label); font-weight: 600; }
+.skill-question { margin: 0 0 8px; font-weight: 500; font-size: var(--text-body); }
+.skill-description { margin: 0; color: var(--muted); font-size: var(--text-label); }
+.skill-example { align-self: start; color: var(--accent); font-size: var(--text-small); }
+.skills-feedback { border-top: 1px solid var(--line); padding-top: 16px; margin-top: 0; }
 .projects-section { padding-block: 32px 56px; border-top: 1px solid var(--line); }
 .section-heading { margin-block-end: 32px; }
 .section-heading h2 { font-size: 1.375rem; font-weight: 600; letter-spacing: -.02em; line-height: 1.5; margin: 0 0 8px; }
@@ -140,6 +147,8 @@ figcaption { font-size: var(--text-small); color: var(--muted); margin-top: 12px
   .filter, .print-button { transition: background-color 120ms ease-out; }
 }
 @media (max-width: 800px) {
+  .skill-row { grid-template-columns: 1fr; gap: 12px; padding-inline-start: 44px; }
+  .skill-number { position: absolute; inset-inline-start: 0; }
   .archive-layout { grid-template-columns: 1fr; gap: 28px; }
   .archive-navigation { position: static; }
   .filter-bar { flex-direction: row; flex-wrap: wrap; gap: 8px; }
@@ -156,7 +165,6 @@ figcaption { font-size: var(--text-small); color: var(--muted); margin-top: 12px
   .profile-meta { display: block; }
   .profile-meta span { display: block; margin-top: 8px; }
   .hero-lead { margin-block: 16px 20px; }
-  .skill-row { grid-template-columns: 1fr; gap: 4px; }
   .filter { padding: 8px 10px; }
   .archive-group { margin-bottom: 32px; }
   .project { padding-block: 24px; }
