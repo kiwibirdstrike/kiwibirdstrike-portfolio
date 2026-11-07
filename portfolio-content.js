@@ -5,10 +5,13 @@ window.PORTFOLIO_DATA = {
     "eyebrow": "STATISTICS · MODELING · DEVELOPMENT",
     "title": "통계학을 공부하고,\n현장의 문제를 풀고 있습니다.",
     "lead": "조성자료 모형과 근거 검색을 연구합니다. 선박 식별 모델을 학습하고, 화재 데이터를 분석하고, 연구 코드를 패키지와 서비스로 구현해 왔습니다.",
-    "principles": [
-      "무엇을 예측할지부터 확인합니다. 와인 설문에서는 사람마다 다른 분류 기준을 검토하고 단맛 모델링부터 다시 시작했습니다.",
-      "현장의 제약을 설계에 반영합니다. 폐쇄망에서는 필요한 함수를 직접 구현했고, 예약 서비스는 졸업 후의 관리까지 고려했습니다.",
-      "피드백을 다음 질문으로 연결합니다. 화재 분석은 일반 현황에서 출발해 음성군의 화학적 요인 공장화재와 예방 대책으로 이어졌습니다."
+    "skills": [
+      { "category": "언어", "items": "Python · R · C++ 기초" },
+      { "category": "분석·연구", "items": "통계적 검정 · 설문 분석 · 공간 분석 · 조성자료 모형" },
+      { "category": "모델링", "items": "의사결정나무 · XGBoost · 교차 인코더 · 손실함수 설계 · 시계열 모델링" },
+      { "category": "LLM 활용", "items": "LangChain · GPT API · RAG · 근거 추출 및 응답 평가" },
+      { "category": "서비스 구현", "items": "Next.js · FastAPI · PostgreSQL · PWA · API 연동" },
+      { "category": "개발 환경", "items": "Git·GitHub · Docker · Cloud Run · Vercel · R 패키지 개발" }
     ],
     "links": [
       {

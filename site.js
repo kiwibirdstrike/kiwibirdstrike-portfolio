@@ -21,8 +21,12 @@ function renderProfile() {
   document.querySelector("#hero-title").textContent = data.profile.title;
   document.querySelector("#hero-lead").textContent = data.profile.lead;
 
-  const principles = document.querySelector("#hero-principles");
-  data.profile.principles.forEach((item) => principles.append(element("li", "", item)));
+  const skills = document.querySelector("#skills-list");
+  data.profile.skills.forEach(({ category, items }) => {
+    const row = element("div", "skill-row");
+    row.append(element("dt", "", category), element("dd", "", items));
+    skills.append(row);
+  });
 
   document.querySelector("#profile-name").textContent = data.profile.name;
   document.querySelector("#profile-education").textContent = data.profile.education;
