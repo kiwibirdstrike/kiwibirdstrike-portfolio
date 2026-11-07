@@ -7,7 +7,6 @@ const requiredKeys = [
   "tracks",
   "categories",
   "projects",
-  "credentials"
 ];
 const forbiddenKeys = new Set([
   "birthDate",
@@ -106,6 +105,9 @@ for (const pattern of privatePatterns) {
 }
 
 const html = readFileSync(new URL("../index.html", import.meta.url), "utf8");
+if ("credentials" in data || html.includes('credentials-list') || html.includes('credentials-title')) {
+  throw new Error("Removed credentials section remains");
+}
 if (html.includes('id="history"') || html.includes('id="featured-projects"') || !html.includes('id="project-archive"')) {
   throw new Error("Expected a single categorized archive without the history section");
 }

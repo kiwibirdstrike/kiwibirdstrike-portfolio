@@ -3,8 +3,8 @@ window.PORTFOLIO_DATA = {
     "name": "이주성",
     "education": "충북대학교 정보통계학과 학사 · 석사과정",
     "eyebrow": "STATISTICS · MODELING · DEVELOPMENT",
-    "title": "통계로 분석하고,\n모델을 설계하고,\n서비스로 구현합니다.",
-    "lead": "데이터의 기준을 다시 정의하는 일부터 모델 학습, 현장에서 사용할 도구의 구현까지. 통계학을 바탕으로 연구와 실무의 문제를 다루는 이주성입니다.",
+    "title": "통계학을 공부하고,\n현장의 문제를 풀고 있습니다.",
+    "lead": "조성자료 모형과 근거 검색을 연구합니다. 선박 식별 모델을 학습하고, 화재 데이터를 분석하고, 연구 코드를 패키지와 서비스로 구현해 왔습니다.",
     "principles": [
       "무엇을 예측할지부터 확인합니다. 와인 설문에서는 사람마다 다른 분류 기준을 검토하고 단맛 모델링부터 다시 시작했습니다.",
       "현장의 제약을 설계에 반영합니다. 폐쇄망에서는 필요한 함수를 직접 구현했고, 예약 서비스는 졸업 후의 관리까지 고려했습니다.",
@@ -45,28 +45,6 @@ window.PORTFOLIO_DATA = {
       "title": "투자 신호 검증",
       "summary": "시장 데이터에서 가설을 세우고 위험 대비 성과, 거래비용, 신호 중복과 편향을 함께 살펴봅니다.",
       "evidence": "WorldQuant · 통계적 검정·백테스트 학습"
-    }
-  ],
-  "credentials": [
-    {
-      "type": "석사학위논문",
-      "title": "GCER: Auto-Logistic Modeling for Multi-Hop Evidence Retrieval",
-      "meta": "충북대학교 정보통계학과 · 2027.02 졸업 예정"
-    },
-    {
-      "type": "논문",
-      "title": "Efficient curve fitting with penalized B-splines for oceanographic and ecological applications",
-      "meta": "Scientific Reports · 공동저자 · 2025.07"
-    },
-    {
-      "type": "자격",
-      "title": "빅데이터분석기사 · SQLD · 사회조사분석사 2급",
-      "meta": "데이터 분석 및 조사 방법론"
-    },
-    {
-      "type": "논문 투고·발표",
-      "title": "ILR-Based Polygram Logistic Regression",
-      "meta": "Journal of Classification 투고 · IMS-APRM 2026 및 한국통계학회 발표"
     }
   ],
   "categories": [

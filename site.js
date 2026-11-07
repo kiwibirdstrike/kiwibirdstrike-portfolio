@@ -18,7 +18,6 @@ function appendLinks(target, links) {
 }
 
 function renderProfile() {
-  document.querySelector("#hero-eyebrow").textContent = data.profile.eyebrow;
   document.querySelector("#hero-title").textContent = data.profile.title;
   document.querySelector("#hero-lead").textContent = data.profile.lead;
 
@@ -47,29 +46,31 @@ function detailBlock(label, value) {
   return block;
 }
 
-function projectArticle(project, index) {
+function projectArticle(project) {
   const article = element("article", "project");
   article.dataset.track = project.track;
 
   const header = element("div", "project-header");
   const identity = element("div", "project-identity");
-  identity.append(
-    element("span", "project-count", String(index + 1).padStart(2, "0")),
-    element("p", "project-period", project.period),
-    element("h4", "", project.title),
-    element("p", "project-subtitle", project.subtitle)
-  );
+  const title = element("h4");
+  const titleLink = element("a", "project-title-link", project.title);
+  titleLink.href = `./project.html?id=${encodeURIComponent(project.id)}`;
+  const arrow = element("span", "project-arrow", "↗");
+  arrow.setAttribute("aria-hidden", "true");
+  titleLink.append(arrow);
+  title.append(titleLink);
+  identity.append(title, element("p", "project-period", project.period));
   const status = element("span", `status status-${project.track}`, project.status);
   const actions = element("div", "project-header-actions");
-  const detailLink = element("a", "project-detail-link", "상세 보기 ↗");
-  detailLink.href = `./project.html?id=${encodeURIComponent(project.id)}`;
-  actions.append(status, detailLink);
+  actions.append(status);
   header.append(identity, actions);
 
   const body = element("div", "project-body");
   body.append(element("p", "project-summary", project.summary));
   const expandable = element("details", "project-expand");
-  expandable.append(element("summary", "", "내 역할과 핵심 판단"));
+  const disclosure = element("summary", "", "역할과 판단");
+  disclosure.setAttribute("aria-label", `${project.title} — 역할과 판단`);
+  expandable.append(disclosure, element("p", "project-subtitle", project.subtitle));
   if (project.media) {
     const figure = element("figure", "project-media");
     const image = element("img");
@@ -100,10 +101,13 @@ function projectArticle(project, index) {
 function renderProjects() {
   const bar = document.querySelector("#filter-bar");
   const target = document.querySelector("#project-archive");
+  const result = document.querySelector("#filter-result");
+  result.textContent = `${data.projects.length}개 프로젝트`;
   const filters = [{ id: "all", title: "전체" }, ...data.categories];
   for (const { id, title } of filters) {
     const count = data.projects.filter(p => id === "all" || p.category === id).length;
-    const button = element("button", id === "all" ? "filter active" : "filter", `${title} · ${count}`);
+    const button = element("button", id === "all" ? "filter active" : "filter");
+    button.append(element("span", "filter-label", title), element("span", "filter-count", count));
     button.type = "button";
     button.dataset.filter = id;
     button.setAttribute("aria-pressed", String(id === "all"));
@@ -116,8 +120,8 @@ function renderProjects() {
     heading.id = `category-${category.id}`;
     section.setAttribute("aria-labelledby", heading.id);
     section.append(heading);
-    data.projects.filter(p => p.category === category.id).forEach((project, index) => {
-      section.append(projectArticle(project, index));
+    data.projects.filter(p => p.category === category.id).forEach((project) => {
+      section.append(projectArticle(project));
     });
     target.append(section);
   }
@@ -131,25 +135,14 @@ function renderProjects() {
     for (const section of target.querySelectorAll(".archive-group")) {
       section.hidden = button.dataset.filter !== "all" && section.dataset.category !== button.dataset.filter;
     }
-  });
-}
-
-function renderCredentials() {
-  const target = document.querySelector("#credentials-list");
-  data.credentials.forEach((item) => {
-    const article = element("article", "credential");
-    article.append(
-      element("span", "", item.type),
-      element("h3", "", item.title),
-      element("p", "", item.meta)
-    );
-    target.append(article);
+    const selected = data.categories.find(category => category.id === button.dataset.filter);
+    const count = data.projects.filter(project => !selected || project.category === selected.id).length;
+    result.textContent = `${selected?.title || "전체"} · ${count}개 프로젝트`;
   });
 }
 
 renderProfile();
 renderProjects();
-renderCredentials();
 
 document.querySelector("#print-button").addEventListener("click", () => window.print());
 
