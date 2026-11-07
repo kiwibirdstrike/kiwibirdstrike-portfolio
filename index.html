@@ -9,16 +9,16 @@
       name="description"
       content="통계 모델링을 바탕으로 근거 검색, LLM 에이전트, 퀀트 검증을 연구하고 구현해 온 이주성의 마스터 포트폴리오"
     >
-    <title>이주성 | Master Portfolio</title>
-    <link rel="stylesheet" href="./portfolio.css?v=20261107-2">
-    <script src="./portfolio-content.js?v=20261107-2" defer></script>
-    <script src="./site.js?v=20261107-2" defer></script>
+    <title>이주성 — Statistics, Models & Systems</title>
+    <link rel="stylesheet" href="./portfolio.css?v=20261107-3">
+    <script src="./portfolio-content.js?v=20261107-3" defer></script>
+    <script src="./site.js?v=20261107-3" defer></script>
   </head>
   <body>
     <header class="site-header">
       <a class="brand" href="#top" aria-label="포트폴리오 처음으로">JU SEONG<span>.</span></a>
       <nav class="site-nav" aria-label="주요 메뉴">
-        <a href="#tracks">관심 분야</a>
+        <a href="#tracks">접근 방식</a>
         <a href="#projects">프로젝트</a>
         <button class="print-button" type="button" id="print-button">PDF 저장</button>
       </nav>
@@ -37,26 +37,35 @@
           <p class="eyebrow" id="hero-eyebrow"></p>
           <h1 id="hero-title"></h1>
           <p class="hero-lead" id="hero-lead"></p>
-          <ul class="hero-principles" id="hero-principles"></ul>
+          <a class="hero-cta" href="#projects">프로젝트 살펴보기 <span aria-hidden="true">↗</span></a>
         </div>
+        <aside class="hero-diagram" aria-label="분석, 모델링, 구현으로 이어지는 작업 방식">
+          <p class="diagram-label">FROM QUESTION TO SYSTEM</p>
+          <div class="diagram-stage"><span>01 / UNDERSTAND</span><strong>분석</strong><p>데이터의 기준과 문제를 확인합니다.</p></div>
+          <div class="diagram-stage"><span>02 / MODEL</span><strong>모델링</strong><p>목표에 맞춰 모형과 학습을 설계합니다.</p></div>
+          <div class="diagram-stage"><span>03 / BUILD</span><strong>구현</strong><p>분석을 사용할 수 있는 도구로 만듭니다.</p></div>
+          <p class="diagram-caption">통계학을 바탕으로, 현장의 질문까지.</p>
+        </aside>
       </section>
 
       <section class="section-band tracks-band" id="tracks" aria-labelledby="tracks-title">
         <div class="section-shell">
           <div class="section-heading">
             <div>
-              <h2 id="tracks-title">관심 분야</h2>
-              <p>지금까지 해온 경험과 앞으로 더 깊게 다루고 싶은 분야입니다.</p>
+              <p class="eyebrow">01 / APPROACH</p>
+              <h2 id="tracks-title">일을 풀어가는 방식.</h2>
+              <p>방법을 고르기 전에 문제를 살피고, 실행할 수 있는 결과까지 연결합니다.</p>
             </div>
           </div>
-          <div class="track-grid" id="track-grid"></div>
+          <ul class="hero-principles" id="hero-principles"></ul>
         </div>
       </section>
 
       <section class="section-shell projects-section" id="projects" aria-labelledby="projects-title">
         <div class="section-heading">
           <div>
-            <h2 id="projects-title">프로젝트 아카이브</h2>
+            <p class="eyebrow">02 / PROJECT ARCHIVE</p>
+            <h2 id="projects-title">프로젝트 아카이브.</h2>
             <p>해결하려던 문제와 직접 내린 판단을 중심으로 정리했습니다. 각 프로젝트에서 상세 과정과 결과를 볼 수 있습니다.</p>
           </div>
         </div>
@@ -68,6 +77,7 @@
         <div class="section-shell">
           <div class="section-heading">
             <div>
+              <p class="eyebrow">03 / RESEARCH & CREDENTIALS</p>
               <h2 id="credentials-title">논문·학회·자격</h2>
               <p>방법론을 이해하고 검증 가능한 결과물로 연결한 기록입니다.</p>
             </div>

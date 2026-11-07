@@ -32,20 +32,6 @@ function renderProfile() {
   appendLinks(links, data.profile.links);
 }
 
-function renderTracks() {
-  const target = document.querySelector("#track-grid");
-  data.tracks.forEach((track) => {
-    const article = element("article", `track track-${track.id}`);
-    article.dataset.track = track.id;
-    article.append(
-      element("h3", "", track.title),
-      element("p", "", track.summary),
-      element("small", "", track.evidence)
-    );
-    target.append(article);
-  });
-}
-
 function detailBlock(label, value) {
   const block = element("div", "project-detail");
   block.append(element("dt", "", label));
@@ -82,21 +68,24 @@ function projectArticle(project, index) {
 
   const body = element("div", "project-body");
   body.append(element("p", "project-summary", project.summary));
+  const expandable = element("details", "project-expand");
+  expandable.append(element("summary", "", "내 역할과 핵심 판단"));
   if (project.media) {
     const figure = element("figure", "project-media");
     const image = element("img");
     image.src = project.media.src;
     image.alt = project.media.alt;
-    image.loading = "eager";
+    image.loading = "lazy";
     figure.append(image, element("figcaption", "", project.media.alt));
-    body.append(figure);
+    expandable.append(figure);
   }
   const details = element("dl", "project-details");
   details.append(
     detailBlock("내 역할", project.roleSummary),
     detailBlock("핵심 판단", project.decision || project.summary)
   );
-  body.append(details);
+  expandable.append(details);
+  body.append(expandable);
 
   if (project.links.length) {
     const links = element("div", "project-links");
@@ -159,7 +148,6 @@ function renderCredentials() {
 }
 
 renderProfile();
-renderTracks();
 renderProjects();
 renderCredentials();
 
