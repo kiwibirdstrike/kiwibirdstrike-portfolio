@@ -22,8 +22,17 @@ function renderProfile() {
   document.querySelector("#hero-lead").textContent = data.profile.lead;
 
   const skills = document.querySelector("#skills-list");
+  const processNodes = document.querySelector("#process-nodes");
   data.profile.skills.forEach(({ category, question, items, example, projectId }, index) => {
+    const node = element("li", "process-node");
+    const link = element("a", "process-link");
+    link.href = `#process-stage-${index + 1}`;
+    link.append(element("span", "process-number", String(index + 1).padStart(2, "0")), element("span", "", category));
+    node.append(link);
+    processNodes.append(node);
     const row = element("li", "skill-row");
+    row.id = `process-stage-${index + 1}`;
+    row.setAttribute("tabindex", "-1");
     const stage = element("div", "skill-stage");
     const number = element("span", "skill-number", String(index + 1).padStart(2, "0"));
     number.setAttribute("aria-hidden", "true");
