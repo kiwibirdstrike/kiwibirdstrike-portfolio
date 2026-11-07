@@ -70,7 +70,7 @@ function projectArticle(project, index) {
   identity.append(
     element("span", "project-count", String(index + 1).padStart(2, "0")),
     element("p", "project-period", project.period),
-    element("h3", "", project.title),
+    element("h4", "", project.title),
     element("p", "project-subtitle", project.subtitle)
   );
   const status = element("span", `status status-${project.track}`, project.status);
@@ -109,80 +109,39 @@ function projectArticle(project, index) {
 }
 
 function renderProjects() {
-  const filters = [{ id: "all", label: "전체" }, ...data.tracks.filter(track => data.featuredProjects.some(project => project.track === track.id)).map(({ id, title }) => ({ id, label: title }))];
   const bar = document.querySelector("#filter-bar");
-  const target = document.querySelector("#featured-projects");
-
-  filters.forEach(({ id, label }, index) => {
-    const button = element("button", index === 0 ? "filter active" : "filter", label);
+  const target = document.querySelector("#project-archive");
+  const filters = [{ id: "all", title: "전체" }, ...data.categories];
+  for (const { id, title } of filters) {
+    const count = data.projects.filter(p => id === "all" || p.category === id).length;
+    const button = element("button", id === "all" ? "filter active" : "filter", `${title} · ${count}`);
     button.type = "button";
     button.dataset.filter = id;
-    button.setAttribute("aria-pressed", index === 0 ? "true" : "false");
+    button.setAttribute("aria-pressed", String(id === "all"));
     bar.append(button);
-  });
-
-  data.featuredProjects.forEach((project, index) => {
-    const article = projectArticle(project, index);
-    target.append(article);
-  });
-
-  bar.addEventListener("click", (event) => {
+  }
+  for (const category of data.categories) {
+    const section = element("section", "archive-group");
+    section.dataset.category = category.id;
+    const heading = element("h3", "archive-group-title", category.title);
+    heading.id = `category-${category.id}`;
+    section.setAttribute("aria-labelledby", heading.id);
+    section.append(heading);
+    data.projects.filter(p => p.category === category.id).forEach((project, index) => {
+      section.append(projectArticle(project, index));
+    });
+    target.append(section);
+  }
+  bar.addEventListener("click", event => {
     const button = event.target.closest("[data-filter]");
     if (!button) return;
-    const selected = button.dataset.filter;
-
-    bar.querySelectorAll(".filter").forEach((item) => {
-      const active = item === button;
-      item.classList.toggle("active", active);
-      item.setAttribute("aria-pressed", String(active));
-    });
-
-    target.querySelectorAll(".project").forEach((project) => {
-      project.hidden = selected !== "all" && project.dataset.track !== selected;
-    });
-  });
-}
-
-function renderTimeline() {
-  const target = document.querySelector("#timeline");
-  const legend = element("div", "timeline-legend");
-  legend.append(
-    element("span", "legend-data", "현장 분석·서비스 구현"),
-    element("span", "legend-bio", "통계·연구·협업")
-  );
-  target.append(legend);
-
-  data.timeline.forEach((item) => {
-    const side = item.track === "stats" ? "bio" : "data";
-    const row = element("article", `timeline-item timeline-side-${side}`);
-    const content = element("div", "timeline-content");
-    content.append(
-      element("time", "", item.date),
-      element("h3", "", item.title),
-      element("p", "", item.note),
-      element("span", "timeline-category", item.category)
-    );
-    row.append(element("span", "timeline-marker"), content);
-    target.append(row);
-  });
-}
-
-function renderArchive() {
-  const target = document.querySelector("#archive-grid");
-  data.otherProjects.forEach((project) => {
-    const article = element("article", "archive-item");
-    const title = element("h3");
-    const link = element("a", "", `${project.title} ↗`);
-    link.href = `./project.html?id=${encodeURIComponent(project.id)}`;
-    title.append(link);
-    article.append(
-      element("span", "archive-category", project.category),
-      title,
-      element("time", "", project.period),
-      element("p", "", project.summary),
-      element("p", "archive-role", `내 역할 · ${project.roleSummary}`)
-    );
-    target.append(article);
+    for (const item of bar.querySelectorAll(".filter")) {
+      item.classList.toggle("active", item === button);
+      item.setAttribute("aria-pressed", String(item === button));
+    }
+    for (const section of target.querySelectorAll(".archive-group")) {
+      section.hidden = button.dataset.filter !== "all" && section.dataset.category !== button.dataset.filter;
+    }
   });
 }
 
@@ -202,8 +161,6 @@ function renderCredentials() {
 renderProfile();
 renderTracks();
 renderProjects();
-renderTimeline();
-renderArchive();
 renderCredentials();
 
 document.querySelector("#print-button").addEventListener("click", () => window.print());

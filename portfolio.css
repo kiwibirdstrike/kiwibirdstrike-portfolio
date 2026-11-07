@@ -455,7 +455,10 @@ button {
 }
 
 .hero h1 { white-space: pre-line; }
-.archive-role { font-size: 0.85rem; }
+.archive-group { margin-top: 48px; }
+.archive-group[hidden] { display: none; }
+.archive-group-title { margin: 0; padding: 18px 0; border-bottom: 2px solid var(--ink); font-size: 1.5rem; }
+.project-identity h4 { margin: 12px 0; font-size: clamp(1.4rem, 3vw, 2rem); line-height: 1.45; }
 .project-page-details .project-detail { padding: 32px 0; }
 .project-page-details li { line-height: 1.95; margin-bottom: 12px; }
 .workflow-figure { margin: 0 0 64px; padding: 28px; background: var(--surface); border: 1px solid var(--line); }
@@ -874,7 +877,7 @@ button {
 
 .archive-item p {
   grid-column: 3;
-  grid-row: 1 / span 2;
+  grid-row: auto;
   margin: 0;
   color: var(--muted);
   font-size: 0.9rem;

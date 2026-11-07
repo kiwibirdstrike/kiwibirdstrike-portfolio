@@ -1,7 +1,7 @@
 const data = window.PORTFOLIO_DATA;
 const target = document.querySelector("#project-detail-page");
 const id = new URLSearchParams(window.location.search).get("id");
-const project = [...data.featuredProjects, ...data.otherProjects].find((item) => item.id === id);
+const project = data.projects.find((item) => item.id === id);
 
 function element(tag, className, text) {
   const node = document.createElement(tag);
@@ -107,6 +107,7 @@ function renderProject(project) {
   back.href = "./index.html#projects";
   header.append(
     back,
+    element("p", "eyebrow", data.categories.find(category => category.id === project.category).title),
     element("p", "project-period", project.period),
     element("h1", "project-page-title", project.title),
     element("p", "project-page-subtitle", project.subtitle),

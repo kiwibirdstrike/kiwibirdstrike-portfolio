@@ -47,7 +47,51 @@ window.PORTFOLIO_DATA = {
       "evidence": "WorldQuant · 통계적 검정·백테스트 학습"
     }
   ],
-  "featuredProjects": [
+  "credentials": [
+    {
+      "type": "석사학위논문",
+      "title": "GCER: Auto-Logistic Modeling for Multi-Hop Evidence Retrieval",
+      "meta": "충북대학교 정보통계학과 · 2027.02 졸업 예정"
+    },
+    {
+      "type": "논문",
+      "title": "Efficient curve fitting with penalized B-splines for oceanographic and ecological applications",
+      "meta": "Scientific Reports · 공동저자 · 2025.07"
+    },
+    {
+      "type": "자격",
+      "title": "빅데이터분석기사 · SQLD · 사회조사분석사 2급",
+      "meta": "데이터 분석 및 조사 방법론"
+    },
+    {
+      "type": "논문 투고·발표",
+      "title": "ILR-Based Polygram Logistic Regression",
+      "meta": "Journal of Classification 투고 · IMS-APRM 2026 및 한국통계학회 발표"
+    }
+  ],
+  "categories": [
+    {
+      "id": "research",
+      "title": "연구 논문"
+    },
+    {
+      "id": "modeling",
+      "title": "모델링"
+    },
+    {
+      "id": "analysis",
+      "title": "데이터 분석·통계 자문"
+    },
+    {
+      "id": "development",
+      "title": "서비스·소프트웨어 개발"
+    },
+    {
+      "id": "leadership",
+      "title": "팀 운영"
+    }
+  ],
+  "projects": [
     {
       "id": "port-matching",
       "title": "사람마다 다른 선박 표기를 연결하는 AI",
@@ -95,7 +139,8 @@ window.PORTFOLIO_DATA = {
           }
         ],
         "caption": "학습에는 오타·단어 누락·톤수 오차를 주입했습니다. 대회 결과: 468팀 중 7위."
-      }
+      },
+      "category": "modeling"
     },
     {
       "id": "eumseong-fire",
@@ -145,7 +190,8 @@ window.PORTFOLIO_DATA = {
           }
         ],
         "caption": "공장 수가 많아서 생기는 차이와 특정 화재 원인의 차이를 구분했습니다. 예방 목표는 제안이며 달성 실적이 아닙니다."
-      }
+      },
+      "category": "analysis"
     },
     {
       "id": "jobis",
@@ -212,7 +258,8 @@ window.PORTFOLIO_DATA = {
           }
         ],
         "caption": "두 단계의 역할을 나눠 오류 위치를 추적했습니다. 자동 추출 이후 사람이 확인해야 하는 비용도 검토했습니다."
-      }
+      },
+      "category": "development"
     },
     {
       "id": "lg-aimers-9",
@@ -260,7 +307,8 @@ window.PORTFOLIO_DATA = {
         ],
         "caption": "02와 03은 서로 독립적으로 학습하는 두 모델입니다. 각 예측을 결합해 공동 학습 방식과 비교했습니다. 온라인 1,087팀 중 15위, 본선 33팀 중 22위.",
         "parallel": true
-      }
+      },
+      "category": "modeling"
     },
     {
       "id": "tvspline",
@@ -317,7 +365,8 @@ window.PORTFOLIO_DATA = {
           }
         ],
         "caption": "기존 연구 코드를 읽고 정리하면서 R 패키지 구조와 C++ 문법을 익혔습니다."
-      }
+      },
+      "category": "development"
     },
     {
       "id": "polygram",
@@ -353,7 +402,8 @@ window.PORTFOLIO_DATA = {
           "href": "https://github.com/kiwibirdstrike/PolygramLCR"
         }
       ],
-      "cardResult": "Journal of Classification 투고"
+      "cardResult": "Journal of Classification 투고",
+      "category": "research"
     },
     {
       "id": "gcer",
@@ -470,10 +520,9 @@ window.PORTFOLIO_DATA = {
       ],
       "links": [],
       "roleSummary": "문제 정의·모형 유도·구현·비교 실험·원고 작성",
-      "cardResult": "석사학위논문"
-    }
-  ],
-  "otherProjects": [
+      "cardResult": "석사학위논문",
+      "category": "research"
+    },
     {
       "id": "booth-layout",
       "title": "취업박람회 부스 배치 최적화",
@@ -498,7 +547,7 @@ window.PORTFOLIO_DATA = {
       ],
       "links": [],
       "cardResult": "최우수상",
-      "category": "최우수상"
+      "category": "modeling"
     },
     {
       "id": "lh-vacancy",
@@ -524,7 +573,7 @@ window.PORTFOLIO_DATA = {
       ],
       "links": [],
       "cardResult": "71팀 중 3위 · 장려상",
-      "category": "71팀 중 3위 · 장려상"
+      "category": "analysis"
     },
     {
       "id": "wine-survey",
@@ -550,7 +599,7 @@ window.PORTFOLIO_DATA = {
       ],
       "links": [],
       "cardResult": "산업체 설문 분석",
-      "category": "산업체 설문 분석",
+      "category": "modeling",
       "workflow": {
         "title": "분류 기준부터 다시 검토한 모델링",
         "steps": [
@@ -598,7 +647,7 @@ window.PORTFOLIO_DATA = {
       ],
       "links": [],
       "cardResult": "대표·운영자 · 2개 부문 입선",
-      "category": "대표·운영자 · 2개 부문 입선"
+      "category": "leadership"
     },
     {
       "id": "khd",
@@ -626,7 +675,7 @@ window.PORTFOLIO_DATA = {
       ],
       "links": [],
       "cardResult": "26팀 중 5위 · 우수상",
-      "category": "26팀 중 5위 · 우수상"
+      "category": "modeling"
     },
     {
       "id": "care-demand",
@@ -652,7 +701,7 @@ window.PORTFOLIO_DATA = {
       ],
       "links": [],
       "cardResult": "팀장 · 정책 제안",
-      "category": "팀장 · 정책 제안"
+      "category": "modeling"
     },
     {
       "id": "sports-location",
@@ -682,7 +731,7 @@ window.PORTFOLIO_DATA = {
       ],
       "links": [],
       "cardResult": "우수상",
-      "category": "우수상"
+      "category": "modeling"
     },
     {
       "id": "kamp",
@@ -708,7 +757,7 @@ window.PORTFOLIO_DATA = {
       ],
       "links": [],
       "cardResult": "분석·모델링·웹 구현",
-      "category": "분석·모델링·웹 구현"
+      "category": "development"
     },
     {
       "id": "english-survey",
@@ -734,7 +783,7 @@ window.PORTFOLIO_DATA = {
       ],
       "links": [],
       "cardResult": "설문 설계·통계 자문",
-      "category": "설문 설계·통계 자문"
+      "category": "analysis"
     },
     {
       "id": "lab-rooms",
@@ -760,7 +809,7 @@ window.PORTFOLIO_DATA = {
       ],
       "links": [],
       "cardResult": "공용 운영에 적용",
-      "category": "공용 운영에 적용"
+      "category": "development"
     },
     {
       "id": "autoresearch",
@@ -786,7 +835,7 @@ window.PORTFOLIO_DATA = {
       ],
       "links": [],
       "cardResult": "두 DACON 과제에 적용",
-      "category": "두 DACON 과제에 적용"
+      "category": "development"
     },
     {
       "id": "worldquant",
@@ -813,7 +862,7 @@ window.PORTFOLIO_DATA = {
       ],
       "links": [],
       "cardResult": "국내 99위 / 3,099명",
-      "category": "국내 99위 / 3,099명"
+      "category": "modeling"
     },
     {
       "id": "media-trust",
@@ -839,7 +888,7 @@ window.PORTFOLIO_DATA = {
       ],
       "links": [],
       "cardResult": "312팀 중 6위",
-      "category": "312팀 중 6위"
+      "category": "analysis"
     },
     {
       "id": "fire-law-search",
@@ -864,66 +913,7 @@ window.PORTFOLIO_DATA = {
       "links": [],
       "roleSummary": "법령 근거 검색 구조 설계·구현",
       "cardResult": "개인 개발 중",
-      "category": "개인 개발 중"
-    }
-  ],
-  "timeline": [
-    {
-      "date": "2024–2025",
-      "title": "분석을 의사결정으로",
-      "note": "취업박람회 부스 배치, 지식산업센터 공실, 요양 수요와 공공체육시설 입지 문제를 다뤘습니다.",
-      "track": "analytics",
-      "category": "예측·최적화·정책 제안"
-    },
-    {
-      "date": "2025",
-      "title": "사람과 현장을 이해하는 분석",
-      "note": "와인·영어 설문을 분석하고, 학습 소모임을 운영했습니다. 폐쇄망과 제조 현장의 제약 안에서도 결과물을 만들었습니다.",
-      "track": "stats",
-      "category": "통계 자문·팀 운영"
-    },
-    {
-      "date": "2025–2026",
-      "title": "연구 코드를 함께 쓸 수 있는 구조로",
-      "note": "6개 논문의 코드를 TVspline으로 통합하며 패키지 구조와 테스트를 익혔습니다. 조성자료 모형은 학회 발표와 저널 투고로 이어졌습니다.",
-      "track": "stats",
-      "category": "연구·소프트웨어"
-    },
-    {
-      "date": "2026.03–06",
-      "title": "모델과 실험을 서비스로 연결",
-      "note": "공공레이더의 기획·통합과 파싱을 맡고, AutoResearch에서 실험 기록을 다음 가설에 반영하는 흐름을 구성했습니다.",
-      "track": "llm",
-      "category": "서비스·연구 자동화"
-    },
-    {
-      "date": "2026.06–11",
-      "title": "입력과 학습 방식을 다시 설계",
-      "note": "LG Aimers에서 분류 목표를 나누어 학습했고, 항만 공모전에서는 현장 입력 오류를 노이즈로 구성했습니다. 화재 분석은 담당자 피드백으로 확장했습니다.",
-      "track": "llm",
-      "category": "모델링·현장 피드백"
-    }
-  ],
-  "credentials": [
-    {
-      "type": "석사학위논문",
-      "title": "GCER: Auto-Logistic Modeling for Multi-Hop Evidence Retrieval",
-      "meta": "충북대학교 정보통계학과 · 2027.02 졸업 예정"
-    },
-    {
-      "type": "논문",
-      "title": "Efficient curve fitting with penalized B-splines for oceanographic and ecological applications",
-      "meta": "Scientific Reports · 공동저자 · 2025.07"
-    },
-    {
-      "type": "자격",
-      "title": "빅데이터분석기사 · SQLD · 사회조사분석사 2급",
-      "meta": "데이터 분석 및 조사 방법론"
-    },
-    {
-      "type": "논문 투고·발표",
-      "title": "ILR-Based Polygram Logistic Regression",
-      "meta": "Journal of Classification 투고 · IMS-APRM 2026 및 한국통계학회 발표"
+      "category": "development"
     }
   ]
 };

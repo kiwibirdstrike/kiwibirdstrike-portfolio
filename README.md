@@ -4,7 +4,7 @@
 
 ## 수정과 확인
 
-1. `portfolio-content.js`에서 소개와 프로젝트 내용을 수정합니다. 대표 프로젝트와 아카이브 모두 `project.html?id=…` 상세 페이지를 사용합니다.
+1. `portfolio-content.js`에서 소개, `categories` 분류와 `projects` 내용을 수정합니다. 모든 프로젝트는 하나의 아카이브와 `project.html?id=…` 상세 페이지를 사용합니다.
 2. `node scripts/validate.mjs`를 실행합니다.
 3. `python3 -m http.server 4173`으로 로컬에서 확인합니다.
 

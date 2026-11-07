@@ -5,9 +5,8 @@ const requiredFiles = ["index.html", "portfolio.css", "site.js", "portfolio-cont
 const requiredKeys = [
   "profile",
   "tracks",
-  "timeline",
-  "featuredProjects",
-  "otherProjects",
+  "categories",
+  "projects",
   "credentials"
 ];
 const forbiddenKeys = new Set([
@@ -52,7 +51,7 @@ function inspect(value, path = "portfolio") {
 
 inspect(data);
 
-const projects = [...data.featuredProjects, ...data.otherProjects];
+const projects = data.projects;
 if (projects.length !== 21 || new Set(projects.map(p => p.id)).size !== 21) throw new Error('Expected 21 unique projects');
 for (const p of projects) {
   for (const key of ['id', 'title', 'summary', 'roleSummary', 'period', 'problem', 'role', 'process', 'result']) {
@@ -71,11 +70,14 @@ for (const project of projects) {
     throw new Error(`Architecture diagram needs a title and caption: ${project.id}`);
   }
 }
-for (const item of data.timeline) {
-  if (!trackIds.has(item.track)) throw new Error(`Unknown track on timeline item: ${item.title}`);
+const categoryIds = new Set(data.categories.map(c => c.id));
+for (const p of projects) {
+  if (!categoryIds.has(p.category)) throw new Error('Unknown category: ' + p.id);
 }
+if (projects.find(p => p.id === 'port-matching').category !== 'modeling') throw new Error('Ship matching must be modeling');
+if (projects.find(p => p.id === 'gcer').category !== 'research') throw new Error('GCER must be research');
 
-const gcer = data.featuredProjects.find((project) => project.id === "gcer");
+const gcer = data.projects.find((project) => project.id === "gcer");
 if (!gcer) throw new Error("Missing GCER thesis project");
 if (
   !Array.isArray(gcer.technicalSections) ||
@@ -104,6 +106,9 @@ for (const pattern of privatePatterns) {
 }
 
 const html = readFileSync(new URL("../index.html", import.meta.url), "utf8");
+if (html.includes('id="history"') || html.includes('id="featured-projects"') || !html.includes('id="project-archive"')) {
+  throw new Error("Expected a single categorized archive without the history section");
+}
 if (!html.includes('name="robots" content="noindex, nofollow"')) {
   throw new Error("Missing noindex metadata");
 }
