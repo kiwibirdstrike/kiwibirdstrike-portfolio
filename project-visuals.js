@@ -204,16 +204,16 @@ window.PROJECT_VISUALS = {
     ] }], caption: "프런트엔드는 Cloudflare Pages에 배포했습니다. 졸업 후에도 별도 서버 관리 부담 없이 운영할 수 있도록 익숙한 캘린더 기능을 활용했습니다."
   }],
   "autoresearch": [{
-    type: "architecture", placement: "approach", title: "실험의 기억을 다음 가설로 돌려보내는 연구 루프", sources: ["process"],
-    lanes: [{ title: "반복 실험", stages: [
-      { label: "연구 컨텍스트", nodes: [{ title: "분석 지식과 실험 기록", text: "옵시디언의 이론·검증 방법·과거 이력" }] },
+    type: "architecture", placement: "approach", title: "지식그래프와 실험 실행 하네스의 연결", sources: ["process"],
+    lanes: [{ title: "지식 참조부터 실행·평가·기록까지", stages: [
+      { label: "지식 연결", nodes: [{ title: "옵시디언 지식그래프", text: "통계 이론·검증 방법·모델링 전략 참조" }, { title: "실험 이력", text: "과거 설정·점수·실패 원인 참조" }] },
       { label: "가설", nodes: [{ title: "베이스라인과 개선안", text: "과제와 데이터 구조를 분석해 제안" }] },
-      { label: "실험·평가", nodes: [{ title: "실행과 지표 비교", text: "가설을 실험하고 성능 확인" }] },
-      { label: "기억 갱신", nodes: [{ title: "설정·점수·실패 이유", text: "후속 가설과 함께 기록" }] }
-    ] }], loop: "갱신한 실험 기록 → 다음 반복의 연구 컨텍스트",
-    caption: "사람은 과적합 위험과 연구 방향을 관리하고, 에이전트는 축적된 지식을 읽어 반복 실험을 구체화하도록 구성했습니다."
+      { label: "하네스: 실행·평가", nodes: [{ title: "실험 실행과 지표 비교", text: "가설을 실제 실행하고 평가 결과 수집" }] },
+      { label: "하네스: 기록", nodes: [{ title: "설정·점수·실패 원인", text: "후속 가설과 함께 다음 반복에 제공" }] }
+    ] }], loop: "하네스에 기록한 실험 결과 → 다음 가설의 입력",
+    caption: "지식그래프를 에이전트에 연결하고, 실험 실행·평가·기록을 담당하는 하네스를 구성했습니다. 사람은 과적합 위험과 연구 방향을 관리했습니다."
   }, {
-    type: "table", placement: "outcome", title: "같은 연구 구조를 적용한 두 과제", sources: ["result"],
+    type: "table", placement: "outcome", title: "같은 실험 하네스를 적용한 두 과제", sources: ["result"],
     columns: ["과제", "데이터·문제", "결과"],
     rows: [["구조물 안정성", "비전 기반 물리 추론", "484팀 중 37위"], ["스마트 창고", "정형 시계열 회귀", "607팀 중 72위"]],
     caption: "대회와 평가 기준이 달라 순위를 성능 지표처럼 직접 비교하지 않습니다. 서로 다른 문제에 같은 실험·기록 구조를 적용한 사례입니다."
