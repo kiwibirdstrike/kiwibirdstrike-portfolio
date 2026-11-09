@@ -498,7 +498,7 @@ window.PROJECT_VISUALS = {
     "height": 482,
     "alt": "Sweetness를 중간 목표로 선택해 단맛 예측과 Decision Tree의 DSM 분류를 연결한 구조.",
     "credit": "프로젝트 수행 내용을 바탕으로 재구성한 구조도",
-    "caption": "핵심은 특정 알고리즘의 선택보다 목표변수의 신뢰성을 검토하고 예측 순서를 바꾼 데 있습니다."
+    "caption": "응답자마다 DSM 분류 기준이 달라, 일관된 패턴을 보인 sweetness를 먼저 예측한 뒤 분류했습니다."
 }],
   "weather-study": [{
     type: "table", placement: "approach", title: "학습 참여를 바꾸기 위한 팀 운영 설계", sources: ["problem", "process", "result"],
