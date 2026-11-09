@@ -221,6 +221,15 @@ figcaption { font-size: var(--text-small); color: var(--muted); margin-top: 12px
 .technical-list{color:var(--muted);font-size:var(--text-body);padding-left:22px}
 .technical-list li{margin-top:18px;line-height:2}
 
+.timeline-section { padding-block: 64px; border-top: 1px solid var(--line); }
+.timeline-year { display: grid; grid-template-columns: 112px minmax(0, 1fr); gap: 32px; margin-top: 48px; }
+.timeline-year h3 { margin: 0; font-size: 1.75rem; font-weight: 500; font-variant-numeric: tabular-nums; }
+.timeline-list { list-style: none; margin: 0; padding: 0; border-inline-start: 1px solid var(--line); }
+.timeline-item { position: relative; padding-block: 0 32px; padding-inline-start: 28px; }
+.timeline-item:last-child { padding-bottom: 0; }
+.timeline-item::before { content: ""; position: absolute; inset-inline-start: -5px; top: 12px; width: 9px; height: 9px; border-radius: 50%; background: var(--accent); }
+.timeline-period, .timeline-category { margin: 0; color: var(--muted); font-size: var(--text-small); }
+.timeline-link { display: inline-block; padding-block: 4px; font-size: var(--text-body); }
 @media (hover: hover) {
   .filter:not(.active):hover { background: var(--surface); color: var(--ink); }
   a:hover, summary:hover { color: var(--accent); }
@@ -255,6 +264,9 @@ figcaption { font-size: var(--text-small); color: var(--muted); margin-top: 12px
   .filter { width: auto; flex: 0 1 auto; max-width: 100%; }
 }
 @media (max-width: 600px) {
+  .timeline-year { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+  .timeline-list { margin-inline-start: 5px; }
+  .timeline-section { padding-block: 40px; }
   .evidence-table { font-size: var(--text-small); }
   .evidence-table th, .evidence-table td { padding: 12px 8px; }
   .composition-legend { grid-template-columns: 1fr; }

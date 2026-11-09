@@ -49,6 +49,16 @@ const more = roots['#load-more'];
 const articles = archive.querySelectorAll('.project');
 const visible = () => articles.filter(article => !article.hidden);
 const select = id => filters.handlers.click({ target: filters.children.find(button => button.dataset.filter === id) });
+const timelineItems = roots['#project-timeline'].querySelectorAll('.timeline-item');
+assert.deepEqual(timelineItems.map(item => item.dataset.projectId), [
+  'booth-layout', 'lh-vacancy', 'wine-survey', 'weather-study', 'khd',
+  'care-demand', 'sports-location', 'kamp', 'tvspline', 'english-survey',
+  'lab-rooms', 'polygram', 'autoresearch', 'worldquant', 'jobis',
+  'lg-aimers-9', 'media-trust', 'eumseong-fire', 'gcer', 'port-matching'
+]);
+for (const item of timelineItems) {
+  assert.equal(item.querySelector('.timeline-link').href, `./project.html?id=${item.dataset.projectId}`);
+}
 
 assert.equal(visible().length, 5);
 assert.equal(more.hidden, false);
@@ -66,6 +76,7 @@ for (const category of context.window.PORTFOLIO_DATA.categories) {
   for (const section of archive.children) assert.equal(section.hidden, section.dataset.category !== category.id);
 }
 select('all');
+assert.equal(roots['#project-timeline'].querySelectorAll('.timeline-item').length, 20);
 assert.equal(visible().length, 5);
 assert.equal(more.hidden, false);
 for (const section of archive.children) {

@@ -233,8 +233,42 @@ function renderProjects() {
   });
 }
 
+function renderTimeline() {
+  const timeline = document.querySelector("#project-timeline");
+  const projects = data.projects.map(project => {
+    const [, year, month, day] = project.period.match(/^(\d{4})(?:년\s*|\.)(\d{1,2})(?:(?:월\s*|\.)(\d{1,2}))?/);
+    return { project, year, start: Number(year) * 10000 + Number(month) * 100 + Number(day || 0) };
+  }).sort((a, b) => a.start - b.start);
+  let currentYear;
+  let list;
+  for (const { project, year } of projects) {
+    if (year !== currentYear) {
+      const group = element("section", "timeline-year");
+      const heading = element("h3", "", year);
+      heading.id = `timeline-year-${year}`;
+      group.setAttribute("aria-labelledby", heading.id);
+      list = element("ol", "timeline-list");
+      group.append(heading, list);
+      timeline.append(group);
+      currentYear = year;
+    }
+    const item = element("li", "timeline-item");
+    item.dataset.projectId = project.id;
+    const link = element("a", "timeline-link", project.title);
+    link.href = `./project.html?id=${encodeURIComponent(project.id)}`;
+    const category = data.categories.find(category => category.id === project.category);
+    item.append(
+      element("p", "timeline-period", project.period),
+      link,
+      element("p", "timeline-category", category.title)
+    );
+    list.append(item);
+  }
+}
+
 renderProfile();
 renderProjects();
+renderTimeline();
 
 function scrollToCurrentHash() {
   if (!window.location.hash) return;
