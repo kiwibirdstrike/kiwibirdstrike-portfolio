@@ -232,6 +232,8 @@ figcaption { font-size: var(--text-small); color: var(--muted); margin-top: 12px
 .technical-list li{margin-top:18px;line-height:2}
 
 .timeline-section { padding-block: 64px; border-top: 1px solid var(--line); }
+.timeline-section > .section-heading { text-align: center; }
+#project-timeline { max-width: 680px; margin-inline: auto; }
 .timeline-year { display: grid; grid-template-columns: 112px minmax(0, 1fr); gap: 32px; margin-top: 48px; }
 .timeline-year h3 { margin: 0; font-size: 1.75rem; font-weight: 500; font-variant-numeric: tabular-nums; }
 .timeline-list { list-style: none; margin: 0; padding: 0; border-inline-start: 1px solid var(--line); }
