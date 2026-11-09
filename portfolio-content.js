@@ -57,7 +57,7 @@ window.PORTFOLIO_DATA = {
     },
     {
       "id": "modeling",
-      "title": "모델링"
+      "title": "예측·최적화 모델"
     },
     {
       "id": "analysis",
@@ -65,7 +65,7 @@ window.PORTFOLIO_DATA = {
     },
     {
       "id": "development",
-      "title": "서비스·소프트웨어 개발"
+      "title": "서비스·도구 개발"
     },
     {
       "id": "leadership",
@@ -596,7 +596,7 @@ window.PORTFOLIO_DATA = {
       ],
       "links": [],
       "cardResult": "산업체 설문 분석",
-      "category": "modeling",
+      "category": "analysis",
       "workflow": {
         "title": "분류 기준부터 다시 검토한 모델링",
         "steps": [
@@ -701,7 +701,7 @@ window.PORTFOLIO_DATA = {
       ],
       "links": [],
       "cardResult": "팀장 · 정책 제안",
-      "category": "modeling"
+      "category": "analysis"
     },
     {
       "id": "sports-location",
