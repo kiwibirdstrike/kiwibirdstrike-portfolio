@@ -236,8 +236,6 @@ function renderProjects() {
 renderProfile();
 renderProjects();
 
-document.querySelector("#print-button").addEventListener("click", () => window.print());
-
 function scrollToCurrentHash() {
   if (!window.location.hash) return;
   document.querySelector(window.location.hash)?.scrollIntoView({ block: window.location.hash.startsWith("#process-stage-") ? "center" : "start" });
