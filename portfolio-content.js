@@ -302,7 +302,7 @@ window.PORTFOLIO_DATA = {
     {
       "id": "tvspline",
       "story": {"problem":"흩어진 6개 모형의 연구 코드","approach":"호출 구조 정리와 공통 기능 통합","outcome":"설치 가능한 R 패키지 완성"},
-      "title": "6개 논문의 연구 코드를 하나의 R 패키지로",
+      "title": "R 패키지 제작",
       "track": "stats",
       "status": "TVspline 1.0.0",
       "summary": "흩어진 연구 코드의 호출 관계를 시각화하고 중복 기능을 통합해, 6개 모형을 같은 방식으로 사용할 수 있게 만들었습니다.",
