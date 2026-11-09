@@ -29,7 +29,7 @@ window.PORTFOLIO_DATA = {
       "id": "llm",
       "title": "AI·서비스 구현",
       "summary": "모델의 입력과 판단 과정을 설계하고, 실행 환경과 운영 조건에 맞춰 서비스로 연결합니다.",
-      "evidence": "선박 매칭 · 공공레이더 · AutoResearch · 미팅룸 PWA"
+      "evidence": "선박 매칭 · 공공레이더 · AutoResearch · 미팅 예약 프로그램"
     },
     {
       "id": "stats",
@@ -791,13 +791,13 @@ window.PORTFOLIO_DATA = {
     {
       "id": "lab-rooms",
       "story": {"problem":"매주 출력하는 종이 예약표","approach":"관리 부담을 고려한 캘린더·PWA","outcome":"공용 미팅룸 모바일 예약"},
-      "title": "졸업 후의 운영까지 고려한 예약 PWA",
+      "title": "미팅 예약 프로그램",
       "track": "llm",
       "status": "공용 운영에 적용",
       "summary": "매주 출력하던 종이 예약표를 모바일 예약으로 전환했습니다. 졸업 후에도 관리할 수 있도록 Google Calendar와 서버리스 구성을 선택했습니다.",
       "roleSummary": "운영 요구 확인·모바일 화면·캘린더 연동·배포",
       "decision": "졸업 후의 관리 부담을 줄이기 위해, 일정은 Google Calendar로 관리하고 모바일 화면은 PWA로 제공했습니다.",
-      "subtitle": "연구실 공용 미팅룸 예약 PWA",
+      "subtitle": "연구실 공용 미팅룸 예약 프로그램",
       "period": "2026년 2월 19일 → 2026년 4월 8일",
       "problem": [
         "여러 연구실이 함께 사용하는 공용 미팅룸을 종이 예약표에 수기로 예약하고 있었습니다. 매주 예약표를 새로 출력해야 하는 관리 작업이 번거로워 웹 기반 예약 시스템을 제안했습니다. 학과장님께 말씀드리자, 제가 졸업한 이후에도 관리할 수 있는 시스템이면 좋겠다는 의견을 주셨습니다."
