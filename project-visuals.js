@@ -303,7 +303,7 @@ window.PROJECT_VISUALS = {
         "+2.3 [1.2, 3.6]"
       ]
     ],
-    "credit": "논문 Table 4 · 단위: %p · 질문 단위 짝지은 부트스트랩",
+    "credit": "논문 Table 4 · 단위: %p · 질문 단위 paired bootstrap",
     "caption": "양수는 GCER의 값이 더 높다는 뜻입니다. 차이와 구간은 논문 값을 그대로 옮겼습니다. 반올림된 앞 표의 값을 빼면 일부 차이가 다를 수 있습니다."
   },
   {
@@ -437,7 +437,7 @@ window.PROJECT_VISUALS = {
   {
     "type": "image",
     "placement": "outcome",
-    "title": "검색 문단 수에 따른 근거 재현율",
+    "title": "검색 문단 수에 따른 Recall",
     "sources": [
       "result",
       "validation"
@@ -445,14 +445,14 @@ window.PROJECT_VISUALS = {
     "src": "./assets/projects/gcer-recall-passages.png",
     "width": 2000,
     "height": 874,
-    "alt": "검색 문단 수 1~30개에 따른 Similarity 대비 근거 재현율 차이. GCER는 검은 실선이며, 첫 세 문단은 유사도 기반 앵커입니다.",
+    "alt": "검색 문단 수 1~30개에 따른 Similarity 대비 Recall 차이. GCER는 검은 실선이며, 첫 세 문단은 유사도 기반 앵커입니다.",
     "credit": "논문 Figure 1(a)",
-    "caption": "세로축은 재현율 자체가 아니라 Similarity 검색 대비 차이(%p)입니다. 검은 선이 GCER이며, 처음 세 문단은 질문과 가장 유사한 앵커입니다."
+    "caption": "세로축은 Recall 자체가 아니라 Similarity 검색 대비 차이(%p)입니다. 검은 선이 GCER이며, 처음 세 문단은 질문과 가장 유사한 앵커입니다."
   },
   {
     "type": "image",
     "placement": "outcome",
-    "title": "토큰 제한에 따른 완전 근거율",
+    "title": "토큰 제한에 따른 Complete",
     "sources": [
       "result",
       "limitation"
@@ -460,7 +460,7 @@ window.PROJECT_VISUALS = {
     "src": "./assets/projects/gcer-complete-budget.png",
     "width": 2000,
     "height": 778,
-    "alt": "토큰 예산 0~5,000에서 Similarity 대비 완전 근거율 차이. GCER는 검은 실선, GNN-Ret은 주황 실선, HippoRAG 2는 파란 실선입니다.",
+    "alt": "토큰 예산 0~5,000에서 Similarity 대비 Complete 차이. GCER는 검은 실선, GNN-Ret은 주황 실선, HippoRAG 2는 파란 실선입니다.",
     "credit": "논문 Figure 1(c) · 선의 범례는 위 그림과 동일",
     "caption": "세로축은 Similarity 대비 차이(%p)입니다. GCER는 500~4,200토큰에서 가장 높고, 4,400토큰부터는 GNN-Ret이 0.5%p 미만의 차이로 앞섭니다."
   }
@@ -516,9 +516,9 @@ window.PROJECT_VISUALS = {
         "result"
     ],
     "src": "./assets/projects/sleep-screening.svg",
-    "width": 378,
+    "width": 390,
     "height": 587,
-    "alt": "EDF 신호의 균등 샘플링, 웨이블릿 특징 추출, Random Forest 분류와 장애 유형·유무의 평가 구조.",
+    "alt": "EDF 신호의 균등 샘플링, Wavelet transform을 통한 특징 추출, Random Forest 분류와 장애 유형·유무의 평가 구조.",
     "credit": "프로젝트 수행 내용을 바탕으로 재구성한 구조도",
     "caption": "준비한 Docker 환경이 현장에서 작동하지 않아, 필요한 분석 함수를 직접 정의해 사용했습니다."
 }, {
@@ -608,7 +608,7 @@ window.PROJECT_VISUALS = {
   "src": "./assets/projects/autoresearch-harness.svg",
   "width": 368,
   "height": 794,
-  "alt": "문서 본문 및 위키링크·역링크 검색 결과와 이전 실험 기록을 컨텍스트로 구성하고 실행·결과 기록을 반복하는 구조.",
+  "alt": "문서 본문 및 wikilink·backlink 검색 결과와 이전 실험 기록을 컨텍스트로 구성하고 실행·결과 기록을 반복하는 구조.",
   "credit": "지식 검색 모듈과 실험 루프 구현을 바탕으로 재구성",
   "caption": "지식그래프는 가설의 근거를 찾는 데 사용하고, 하네스는 허용된 실험 도구를 실행해 결과와 실패를 기록합니다. 기록은 다음 실험의 입력으로 돌아갑니다."
 }, {

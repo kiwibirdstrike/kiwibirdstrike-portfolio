@@ -4,7 +4,7 @@ digraph Sleep {
   edge [fontname="Apple SD Gothic Neo", fontsize=14, color="#737373", arrowsize=0.7];
   edf [label="EDF 수면 신호"];
   sample [label="균등 샘플링\n클래스 불균형 대응"];
-  wavelet [shape=box, margin=0.22, label="웨이블릿 변환\n신호 특징 추출"];
+  wavelet [shape=box, margin=0.22, label="Wavelet transform\n신호 특징 추출"];
   rf [shape=box, margin=0.22, label="Random Forest\n장애 분류"];
   edf -> sample -> wavelet -> rf;
   type [label="장애 유형 구분\n정확도 69%"];

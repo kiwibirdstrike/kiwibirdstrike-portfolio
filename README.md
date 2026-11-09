@@ -6,6 +6,8 @@
 
 분류는 사용 기술이 아니라 프로젝트의 주된 목적과 산출물을 기준으로 하나만 선택합니다.
 
+기술명·제품명·모델명·지표명은 원문 표기를 유지합니다. 예: Cross-Encoder, Decision Tree, Random Forest, Wavelet transform, Obsidian, Recall, Complete. 설명 문장은 한국어로 쓰되, compositional data처럼 사용자가 지정한 전문용어는 풀어 번역하지 않습니다. 본문·표·그림의 용어를 일치시키고, 원본 논문 그림의 표기는 보존합니다.
+
 | 분류 | 기준 | 프로젝트 |
 | --- | --- | --- |
 | 연구 논문 | 방법론 제안과 논문 | ILR Polygram, GCER |
