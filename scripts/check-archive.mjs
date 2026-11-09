@@ -58,6 +58,11 @@ assert.deepEqual(timelineItems.map(item => item.dataset.projectId), [
 ]);
 for (const item of timelineItems) {
   assert.equal(item.querySelector('.timeline-link').href, `./project.html?id=${item.dataset.projectId}`);
+  const project = context.window.PORTFOLIO_DATA.projects.find(project => project.id === item.dataset.projectId);
+  assert.equal(item.dataset.category, project.category);
+  assert.equal(filters.children.find(button => button.dataset.filter === project.category).dataset.category, project.category);
+  const category = context.window.PORTFOLIO_DATA.categories.find(category => category.id === project.category);
+  assert.equal(item.querySelector('.timeline-category').textContent, category.title);
 }
 
 assert.equal(visible().length, 5);

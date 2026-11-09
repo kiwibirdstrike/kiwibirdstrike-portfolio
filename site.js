@@ -179,6 +179,7 @@ function renderProjects() {
     button.append(element("span", "filter-label", title), element("span", "filter-count", count));
     button.type = "button";
     button.dataset.filter = id;
+    button.dataset.category = id;
     button.setAttribute("aria-pressed", String(id === "all"));
     bar.append(button);
   }
@@ -254,6 +255,7 @@ function renderTimeline() {
     }
     const item = element("li", "timeline-item");
     item.dataset.projectId = project.id;
+    item.dataset.category = project.category;
     const link = element("a", "timeline-link", project.title);
     link.href = `./project.html?id=${encodeURIComponent(project.id)}`;
     const category = data.categories.find(category => category.id === project.category);
